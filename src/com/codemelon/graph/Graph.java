@@ -1,44 +1,28 @@
 /**
- * Graph class supporting insertion and removal of both vertices and
- * edges.
- * Integers are used as vertex identifiers.
- * The graph is implemented as a map of integer labels to vertices,
- * which themselves contain lists of their adjacencies.
+ * 
  */
 package com.codemelon.graph;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 import com.codemelon.graph.vertex.Vertex;
 
 /**
  * @author Marshall Farrier
- * @version 11-23-2012
+ * @version 11-24-2012
  */
-public class Graph {
-	private ConcurrentHashMap<Integer, Vertex> vertices;
-	public Graph() {
-		vertices = new ConcurrentHashMap<Integer, Vertex>();
-	}
-	public Graph(int initialVertices) {
-		vertices = new ConcurrentHashMap<Integer, Vertex>(initialVertices);
-	}
+public class Graph extends DiGraph{
+	public Graph() { super(); }
+	public Graph(int initialVertices) { super(initialVertices); }
 	/**
-	 * Inserts v if there is no vertex associated with the given label.
-	 * If there is already a vertex with this label, the method
-	 * does not insert the new vertex but returns the vertex to which
-	 * the label maps.
-	 * @param label
-	 * @param v
-	 * @return
+	 * This needs locking to avoid synchronization problems
 	 */
-	public Vertex insert(int label, Vertex v) {
-		return vertices.putIfAbsent(label, v);
-	}
+	@Override
 	public boolean insertEdge(int from, int to) {
-		return vertices.get(from).addAdjacency(vertices.get(to));
+		if (!insertEdge(from, to)) { return false; }
+		return insertEdge(to, from);
 	}
+	@Override
 	public boolean removeEdge(int from, int to) {
-		return vertices.get(from).removeAdjacency(vertices.get(to));
+		if (!removeEdge(from, to)) { return false; }
+		return removeEdge(to, from);
 	}
 }
