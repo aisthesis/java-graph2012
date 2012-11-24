@@ -9,6 +9,8 @@ package com.codemelon.graph;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.codemelon.graph.vertex.Vertex;
+
 /**
  * @author Marshall Farrier
  * @version 11-23-2012
@@ -20,9 +22,6 @@ public class Graph {
 	}
 	public Graph(int initialVertices) {
 		vertices = new ConcurrentHashMap<Integer, Vertex>(initialVertices);
-		for (int i = 0; i < initialVertices; i++) {
-			vertices.put(i, new Vertex());
-		}
 	}
 	/**
 	 * Inserts v if there is no vertex associated with the given label.
