@@ -16,6 +16,7 @@ import com.codemelon.graph.common.Color;
  * @version 11-24-2012
  */
 public class VertexTest {
+	private static final int MANY = 1000;
 	private Vertex v;
 	@Before
 	public void setUp() {
@@ -31,8 +32,11 @@ public class VertexTest {
 	 */
 	@Test
 	public void testVertex() {
+		Color c = Color.BLACK;
+		Vertex u = new Vertex(c);
 		assertTrue("No initial adjacencies", !v.hasAdjacencies());
-		assertEquals("Color is initially white", Color.WHITE, v.color);
+		assertEquals("Color is initially white using default constructor.", Color.WHITE, v.color);
+		assertEquals("Color is initialized properly when specified in constructor.", c, u.color);	
 	}
 
 	/**
@@ -40,8 +44,8 @@ public class VertexTest {
 	 */
 	@Test
 	public void testAddAdjacency() {
-		v.addAdjacency(new Vertex());
-		assertEquals("1 adjacency after adding vertex", 1, v.adjacencies());
+		addAnonymousAdjacencies(MANY);
+		assertEquals("Correct count after adding many vertices", MANY, v.adjacencies());
 	}
 
 	/**
@@ -52,7 +56,7 @@ public class VertexTest {
 		Vertex u = new Vertex();
 		v.addAdjacency(u);
 		v.removeAdjacency(u);
-		fail("Not yet implemented");
+		assertTrue("Adding, then removing an adjacency leaves no adjacencies.", !v.hasAdjacencies());
 	}
 
 	/**
@@ -60,7 +64,9 @@ public class VertexTest {
 	 */
 	@Test
 	public void testClearAdjacencies() {
-		fail("Not yet implemented");
+		addAnonymousAdjacencies(MANY);
+		v.clearAdjacencies();
+		assertTrue("Clearing adjacencies results in empty adjacency map.", !v.hasAdjacencies());
 	}
 
 	/**
@@ -68,7 +74,9 @@ public class VertexTest {
 	 */
 	@Test
 	public void testContainsAdjacency() {
-		fail("Not yet implemented");
+		Vertex u = new Vertex();
+		v.addAdjacency(u);
+		assertTrue("Adjacency map contains added adjacency.", v.containsAdjacency(u));
 	}
 
 	/**
@@ -76,7 +84,8 @@ public class VertexTest {
 	 */
 	@Test
 	public void testAdjacencies() {
-		fail("Not yet implemented");
+		addAnonymousAdjacencies(MANY);
+		assertEquals("Correct adjacency count after adding many vertices.", MANY, v.adjacencies());
 	}
 
 	/**
@@ -84,7 +93,23 @@ public class VertexTest {
 	 */
 	@Test
 	public void testHasAdjacencies() {
-		fail("Not yet implemented");
+		v.addAdjacency(new Vertex());
+		assertTrue("Vertex has adjacencies after adding 1.", v.hasAdjacencies());
 	}
-
+	
+	/**
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#color}.
+	 */
+	@Test
+	public void testColor() {
+		Color c = Color.GRAY;
+		v.color = c;
+		assertEquals("Color modified appropriately.", c, v.color);
+	}
+	
+	private void addAnonymousAdjacencies(int vertexCount) {
+		for (int i = 0; i < vertexCount; i++) {
+			v.addAdjacency(new Vertex());
+		}
+	}
 }

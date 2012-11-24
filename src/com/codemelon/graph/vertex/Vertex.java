@@ -17,8 +17,12 @@ public class Vertex {
 	public Color color;
 	
 	public Vertex() {
+		this(Color.WHITE);
+	}
+	
+	public Vertex(Color color) {
 		adjacencies = new ConcurrentHashMap<Vertex, Data>();
-		color = Color.WHITE;
+		this.color = color;
 	}
 	
 	/**
