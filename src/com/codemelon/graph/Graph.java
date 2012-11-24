@@ -3,8 +3,6 @@
  */
 package com.codemelon.graph;
 
-import com.codemelon.graph.vertex.Vertex;
-
 /**
  * @author Marshall Farrier
  * @version 11-24-2012
