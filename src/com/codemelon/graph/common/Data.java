@@ -1,9 +1,8 @@
 /**
  * 
  */
-package com.codemelon.graph.vertex;
+package com.codemelon.graph.common;
 
-import com.codemelon.graph.common.Color;
 
 /**
  * @author Marshall Farrier

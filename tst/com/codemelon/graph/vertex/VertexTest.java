@@ -13,11 +13,11 @@ import org.junit.Test;
  * @author Marshall Farrier
  * @version 11-24-2012
  */
-public class SimpleVertexTest {
-	private SimpleVertex v;
+public class VertexTest {
+	private Vertex v;
 	@Before
 	public void setUp() {
-		v = new SimpleVertex();
+		v = new Vertex();
 	}
 	@After
 	public void tearDown() {
@@ -25,24 +25,24 @@ public class SimpleVertexTest {
 	}
 
 	/**
-	 * Test method for com.codemelon.graph.vertex.SimpleVertex#SimpleVertex()
+	 * Test method for com.codemelon.graph.vertex.Vertex#Vertex()
 	 */
 	@Test
-	public void testSimpleVertex() {
+	public void testVertex() {
 		assertTrue("No initial adjacencies", !v.hasAdjacencies());
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.SimpleVertex#addAdjacency(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#addAdjacency(com.codemelon.graph.vertex.Vertex)}.
 	 */
 	@Test
 	public void testAddAdjacency() {
-		v.addAdjacency(new SimpleVertex());
+		v.addAdjacency(new Vertex());
 		assertEquals("1 adjacency after adding vertex", 1, v.adjacencies());
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.SimpleVertex#addAllAdjacencies(java.util.Collection)}.
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#addAllAdjacencies(java.util.Collection)}.
 	 */
 	@Test
 	public void testAddAllAdjacencies() {
@@ -50,7 +50,7 @@ public class SimpleVertexTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.SimpleVertex#removeAdjacency(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#removeAdjacency(com.codemelon.graph.vertex.Vertex)}.
 	 */
 	@Test
 	public void testRemoveAdjacency() {
@@ -58,7 +58,7 @@ public class SimpleVertexTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.SimpleVertex#clearAdjacencies()}.
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#clearAdjacencies()}.
 	 */
 	@Test
 	public void testClearAdjacencies() {
@@ -66,7 +66,7 @@ public class SimpleVertexTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.SimpleVertex#containsAdjacency(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#containsAdjacency(com.codemelon.graph.vertex.Vertex)}.
 	 */
 	@Test
 	public void testContainsAdjacency() {
@@ -74,7 +74,7 @@ public class SimpleVertexTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.SimpleVertex#adjacencies()}.
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#adjacencies()}.
 	 */
 	@Test
 	public void testAdjacencies() {
@@ -82,7 +82,7 @@ public class SimpleVertexTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.SimpleVertex#hasAdjacencies()}.
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#hasAdjacencies()}.
 	 */
 	@Test
 	public void testHasAdjacencies() {
