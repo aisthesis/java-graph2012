@@ -1,35 +1,30 @@
 /**
- * Vertex class containing a set of
- * adjacent vertices.
+ * Vertex class containing a map of other vertices to edge data.
+ * 
  */
 package com.codemelon.graph.vertex;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Marshall Farrier
  * @version 11-23-2012
  */
 public class SimpleVertex implements Vertex {
-	private Set<Vertex> adjacencies;
+	private ConcurrentHashMap<Vertex, Data> adjacencies;
 	public SimpleVertex() {
-		adjacencies = Collections.synchronizedSet(new HashSet<Vertex>());
+		adjacencies = new ConcurrentHashMap<Vertex, Data>();
 	}
 	@Override
 	public boolean addAdjacency(Vertex v) {
-		return adjacencies.add(v);
-	}
-	@Override
-	public boolean addAllAdjacencies(Collection<Vertex> c) {
-		return adjacencies.addAll(c);
+		if (adjacencies.containsKey(v)) { return false; }
+		adjacencies.put(v,  new Data());
+		return true;
 	}
 	@Override
 	public boolean removeAdjacency(Vertex v) {
-		return adjacencies.remove(v);
+		if (!adjacencies.containsKey(v)) { return false; }
+		adjacencies.remove(v);
+		return true;
 	}
 	@Override
 	public void clearAdjacencies() {
@@ -37,7 +32,7 @@ public class SimpleVertex implements Vertex {
 	}
 	@Override
 	public boolean containsAdjacency(Vertex v) {
-		return adjacencies.contains(v);
+		return adjacencies.containsKey(v);
 	}
 	@Override
 	public int adjacencies() {

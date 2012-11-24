@@ -3,8 +3,6 @@
  */
 package com.codemelon.graph.vertex;
 
-import java.util.Collection;
-
 /**
  * @author Marshall Farrier
  * @version 11/24/2012
@@ -16,13 +14,6 @@ public interface Vertex {
 	 * @return true if the adjacency list did not already contain v
 	 */
 	public boolean addAdjacency(Vertex v);
-	/**
-	 * Adds all of the vertices in the specified Collection to the adjacency set
-	 * of the calling vertex.
-	 * @param c Collection containing vertices to be added to the adjacency set
-	 * @return true if the adjacency list changed as a result of the operation
-	 */
-	public boolean addAllAdjacencies(Collection<Vertex> c);
 	/**
 	 * Removes the specified vertex from the adjacency set
 	 * @param v vertex to be removed

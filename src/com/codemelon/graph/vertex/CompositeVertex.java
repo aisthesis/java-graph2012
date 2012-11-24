@@ -7,7 +7,7 @@ package com.codemelon.graph.vertex;
  * @author Marshall Farrier
  * @version 11-24-2012
  */
-public class CompositeVertex<T> extends SimpleVertex implements Vertex {
+public class CompositeVertex<T extends Data> extends SimpleVertex implements Vertex {
 	public T data;
 	public CompositeVertex() {
 		this(null);
