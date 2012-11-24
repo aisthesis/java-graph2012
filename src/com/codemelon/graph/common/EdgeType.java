@@ -8,5 +8,5 @@ package com.codemelon.graph.common;
  * @version 11-24-2012
  */
 public enum EdgeType {
-	TREE, BACK, FORWARD, CROSS;
+	UNKNOWN, TREE, BACK, FORWARD, CROSS;
 }

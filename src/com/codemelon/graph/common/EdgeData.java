@@ -1,5 +1,7 @@
 /**
- * 
+ * Since there is no guarantee that an edge must map to 
+ * a unique EdgeData, it is advantageous for this class to
+ * be immutable.
  */
 package com.codemelon.graph.common;
 
@@ -9,7 +11,14 @@ package com.codemelon.graph.common;
  * @version 11-24-2012
  */
 public class EdgeData {
-	public Color color;
-	public EdgeData() { color = Color.WHITE; }
-	public EdgeData(Color c) { color = c; }
+	private Color color;
+	private EdgeType edgeType;
+	public EdgeData() { this(Color.WHITE, EdgeType.UNKNOWN); }
+	public EdgeData(Color c) { this(c, EdgeType.UNKNOWN); }
+	public EdgeData(Color c, EdgeType et) {
+		color = c;
+		edgeType = et;
+	}
+	public Color color() { return color; }
+	public EdgeType edgeType() { return edgeType; }
 }

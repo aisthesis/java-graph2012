@@ -15,6 +15,12 @@ import com.codemelon.graph.common.EdgeData;
 public class Vertex {
 	private ConcurrentHashMap<Vertex, EdgeData> adjacencies;
 	public Color color;
+	public Vertex parent;
+	public int distance;	// for BFS, etc.
+	// for DFS
+	public int discoveryTime;
+	public int finishTime;
+	public int treeNumber;	// to identify components after DFS
 	
 	public Vertex() {
 		this(Color.WHITE);
@@ -23,6 +29,11 @@ public class Vertex {
 	public Vertex(Color color) {
 		adjacencies = new ConcurrentHashMap<Vertex, EdgeData>();
 		this.color = color;
+		parent = null;
+		distance = -1;
+		discoveryTime = -1;
+		finishTime = -1;
+		treeNumber = -1;
 	}
 	
 	/**
