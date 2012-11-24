@@ -5,6 +5,8 @@ package com.codemelon.graph.vertex;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -12,13 +14,22 @@ import org.junit.Test;
  * @version 11-24-2012
  */
 public class SimpleVertexTest {
+	private SimpleVertex v;
+	@Before
+	public void setUp() {
+		v = new SimpleVertex();
+	}
+	@After
+	public void tearDown() {
+		v.clearAdjacencies();
+	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.SimpleVertex#SimpleVertex()}.
+	 * Test method for com.codemelon.graph.vertex.SimpleVertex#SimpleVertex()
 	 */
 	@Test
 	public void testSimpleVertex() {
-		fail("Not yet implemented");
+		assertTrue("No initial adjacencies", !v.hasAdjacencies());
 	}
 
 	/**
@@ -26,7 +37,8 @@ public class SimpleVertexTest {
 	 */
 	@Test
 	public void testAddAdjacency() {
-		fail("Not yet implemented");
+		v.addAdjacency(new SimpleVertex());
+		assertEquals("1 adjacency after adding vertex", 1, v.adjacencies());
 	}
 
 	/**
