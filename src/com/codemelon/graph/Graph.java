@@ -39,4 +39,7 @@ public class Graph {
 	public boolean insertEdge(int from, int to) {
 		return vertices.get(from).addAdjacency(vertices.get(to));
 	}
+	public boolean removeEdge(int from, int to) {
+		return vertices.get(from).removeAdjacency(vertices.get(to));
+	}
 }
