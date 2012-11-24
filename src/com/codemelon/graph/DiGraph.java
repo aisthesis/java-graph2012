@@ -1,9 +1,15 @@
 /**
  * Graph class supporting insertion and removal of both vertices and
  * edges.
- * Integers are used as vertex identifiers.
- * The graph is implemented as a map of integer labels to vertices,
- * which themselves contain lists of their adjacencies.
+ * Labeling for vertices is assumed to occur outside of this class.
+ * The advantage is that various checks on vertices can then occur
+ * much faster than they would if we had to run through the values in 
+ * a hash.
+ * Before inserting or removing an edge, we need to check whether the
+ * graph contains its vertices.
+ * And when inserting a vertex, we need to check that it isn't already present.
+ * Both of these checks would be cumbersome if we implemented the graph
+ * as a map of a label to a vertex.
  */
 package com.codemelon.graph;
 
@@ -11,8 +17,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.codemelon.graph.vertex.Vertex;
 
 /**
