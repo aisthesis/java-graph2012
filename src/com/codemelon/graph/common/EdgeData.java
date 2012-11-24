@@ -8,8 +8,8 @@ package com.codemelon.graph.common;
  * @author Marshall Farrier
  * @version 11-24-2012
  */
-public class Data {
+public class EdgeData {
 	public Color color;
-	public Data() { color = Color.WHITE; }
-	public Data(Color c) { color = c; }
+	public EdgeData() { color = Color.WHITE; }
+	public EdgeData(Color c) { color = c; }
 }

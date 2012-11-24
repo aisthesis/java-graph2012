@@ -6,14 +6,14 @@ package com.codemelon.graph.vertex;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.common.Data;
+import com.codemelon.graph.common.EdgeData;
 
 /**
  * @author Marshall Farrier
  * @version 11-23-2012
  */
 public class Vertex {
-	private ConcurrentHashMap<Vertex, Data> adjacencies;
+	private ConcurrentHashMap<Vertex, EdgeData> adjacencies;
 	public Color color;
 	
 	public Vertex() {
@@ -21,7 +21,7 @@ public class Vertex {
 	}
 	
 	public Vertex(Color color) {
-		adjacencies = new ConcurrentHashMap<Vertex, Data>();
+		adjacencies = new ConcurrentHashMap<Vertex, EdgeData>();
 		this.color = color;
 	}
 	
@@ -32,7 +32,7 @@ public class Vertex {
 	 */
 	public boolean addAdjacency(Vertex v) {
 		if (adjacencies.containsKey(v)) { return false; }
-		adjacencies.put(v,  new Data());
+		adjacencies.put(v, new EdgeData());
 		return true;
 	}
 	

@@ -10,9 +10,6 @@ package com.codemelon.graph;
 public class Graph extends DiGraph{
 	public Graph() { super(); }
 	public Graph(int initialVertices) { super(initialVertices); }
-	/**
-	 * This needs locking to avoid synchronization problems
-	 */
 	@Override
 	public boolean insertEdge(int from, int to) {
 		if (!insertEdge(from, to)) { return false; }
@@ -23,4 +20,6 @@ public class Graph extends DiGraph{
 		if (!removeEdge(from, to)) { return false; }
 		return removeEdge(to, from);
 	}
+	@Override
+	public long edges() { return super.edges() / 2; }
 }

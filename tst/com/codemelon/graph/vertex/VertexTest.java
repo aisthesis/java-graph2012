@@ -34,16 +34,25 @@ public class VertexTest {
 	public void testVertex() {
 		Color c = Color.BLACK;
 		Vertex u = new Vertex(c);
-		assertTrue("No initial adjacencies", !v.hasAdjacencies());
+		assertFalse("No initial adjacencies", v.hasAdjacencies());
 		assertEquals("Color is initially white using default constructor.", Color.WHITE, v.color);
 		assertEquals("Color is initialized properly when specified in constructor.", c, u.color);	
 	}
-
+	
 	/**
 	 * Test method for {@link com.codemelon.graph.vertex.Vertex#addAdjacency(com.codemelon.graph.vertex.Vertex)}.
 	 */
 	@Test
-	public void testAddAdjacency() {
+	public void testAddDuplicateAdjacency() {
+		Vertex u = new Vertex();
+		v.addAdjacency(u);
+		assertFalse("Method returns false when adjacency already exists", v.addAdjacency(u));
+	}
+	/**
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#addAdjacency(com.codemelon.graph.vertex.Vertex)}.
+	 */
+	@Test
+	public void testAddManyAdjacencies() {
 		addAnonymousAdjacencies(MANY);
 		assertEquals("Correct count after adding many vertices", MANY, v.adjacencies());
 	}
@@ -55,8 +64,9 @@ public class VertexTest {
 	public void testRemoveAdjacency() {
 		Vertex u = new Vertex();
 		v.addAdjacency(u);
-		v.removeAdjacency(u);
-		assertTrue("Adding, then removing an adjacency leaves no adjacencies.", !v.hasAdjacencies());
+		assertTrue("Returns true when adjacency exists", v.removeAdjacency(u));
+		assertFalse("Adding, then removing an adjacency leaves no adjacencies.", v.hasAdjacencies());
+		assertFalse("Returns false when adjacency doesn't exist", v.removeAdjacency(new Vertex()));
 	}
 
 	/**
@@ -66,7 +76,7 @@ public class VertexTest {
 	public void testClearAdjacencies() {
 		addAnonymousAdjacencies(MANY);
 		v.clearAdjacencies();
-		assertTrue("Clearing adjacencies results in empty adjacency map.", !v.hasAdjacencies());
+		assertFalse("Clearing adjacencies results in empty adjacency map.", v.hasAdjacencies());
 	}
 
 	/**
