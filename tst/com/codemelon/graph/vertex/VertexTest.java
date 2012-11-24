@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.codemelon.graph.common.Color;
+
 /**
  * @author Marshall Farrier
  * @version 11-24-2012
@@ -30,6 +32,7 @@ public class VertexTest {
 	@Test
 	public void testVertex() {
 		assertTrue("No initial adjacencies", !v.hasAdjacencies());
+		assertEquals("Color is initially white", Color.WHITE, v.color);
 	}
 
 	/**
@@ -42,18 +45,13 @@ public class VertexTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#addAllAdjacencies(java.util.Collection)}.
-	 */
-	@Test
-	public void testAddAllAdjacencies() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * Test method for {@link com.codemelon.graph.vertex.Vertex#removeAdjacency(com.codemelon.graph.vertex.Vertex)}.
 	 */
 	@Test
 	public void testRemoveAdjacency() {
+		Vertex u = new Vertex();
+		v.addAdjacency(u);
+		v.removeAdjacency(u);
 		fail("Not yet implemented");
 	}
 
