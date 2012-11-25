@@ -13,7 +13,7 @@ import com.codemelon.graph.common.EdgeData;
  * @author Marshall Farrier
  * @version 11-23-2012
  */
-public class Vertex {
+public class Vertex implements Comparable<Vertex> {
 	private ConcurrentHashMap<Vertex, EdgeData> adjacencies;
 	public int label;
 	public Color color;
@@ -137,5 +137,13 @@ public class Vertex {
 	 */
 	public boolean hasAdjacencies() {
 		return !adjacencies.isEmpty();
+	}
+	@Override
+	public int compareTo(Vertex v) {
+		return this.label - v.label;
+	}
+	@Override
+	public boolean equals(Object o) {
+		return this.label == ((Vertex) o).label;
 	}
 }
