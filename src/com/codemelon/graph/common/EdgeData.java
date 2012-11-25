@@ -15,6 +15,7 @@ public class EdgeData {
 	private EdgeType edgeType;
 	public EdgeData() { this(Color.WHITE, EdgeType.UNKNOWN); }
 	public EdgeData(Color c) { this(c, EdgeType.UNKNOWN); }
+	public EdgeData(EdgeType et) { this(Color.WHITE, et); }
 	public EdgeData(Color c, EdgeType et) {
 		color = c;
 		edgeType = et;
