@@ -3,6 +3,7 @@
  * 
  */
 package com.codemelon.graph.vertex;
+import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.codemelon.graph.common.Color;
@@ -79,8 +80,12 @@ public class Vertex {
 	 * Returns the number of vertices in the adjacency set
 	 * @return the number of vertices in this adjacency set (its cardinality)
 	 */
-	public int adjacencies() {
+	public int adjacencyCount() {
 		return adjacencies.size();
+	}
+	
+	public Enumeration<Vertex> getAdjacencies() {
+		return adjacencies.keys();
 	}
 
 	/**

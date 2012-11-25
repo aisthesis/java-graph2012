@@ -55,7 +55,7 @@ public class VertexTest {
 	@Test
 	public void testAddManyAdjacencies() {
 		addAnonymousAdjacencies(MANY);
-		assertEquals("Correct count after adding many vertices", MANY, v.adjacencies());
+		assertEquals("Correct count after adding many vertices", MANY, v.adjacencyCount());
 	}
 
 	/**
@@ -91,12 +91,12 @@ public class VertexTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#adjacencies()}.
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#adjacencyCount()}.
 	 */
 	@Test
 	public void testAdjacencies() {
 		addAnonymousAdjacencies(MANY);
-		assertEquals("Correct adjacency count after adding many vertices.", MANY, v.adjacencies());
+		assertEquals("Correct adjacency count after adding many vertices.", MANY, v.adjacencyCount());
 	}
 
 	/**

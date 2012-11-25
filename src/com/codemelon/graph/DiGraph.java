@@ -17,6 +17,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
@@ -96,6 +98,10 @@ public class DiGraph {
 		}
 		return from.containsAdjacency(to);
 	}
+	
+	public boolean containsVertex(Vertex v) {
+		return vertices.contains(v);
+	}
 	/**
 	 * Number of vertices in the graph
 	 * @return number of vertices in the graph
@@ -108,4 +114,53 @@ public class DiGraph {
 	 * @return number of edges in the graph
 	 */
 	public long edges() { return edges; }
+	/**
+	 * Sets all vertices in the graph to the given color
+	 * @param c color to which all vertices will be set
+	 */
+	public void setVertexColor(Color c) {
+		for (Vertex v : vertices) {
+			v.color = c;
+		}
+	}
+	public void resetVertexDistance(int distance) {
+		for (Vertex v : vertices) {
+			v.distance = distance;
+		}
+	}
+	public void resetVertexDistance() {
+		resetVertexDistance(-1);
+	}
+	public void resetVertexDiscoveryTime(int discoveryTime) {
+		for (Vertex v : vertices) {
+			v.discoveryTime = discoveryTime;
+		}
+	}
+	public void resetVertexDiscoveryTime() {
+		resetVertexDiscoveryTime(-1);
+	}
+	public void resetVertexFinishTime(int finishTime) {
+		for (Vertex v : vertices) {
+			v.finishTime = finishTime;
+		}
+	}
+	public void resetVertexFinishTime() {
+		resetVertexFinishTime(-1);
+	}
+	public void resetVertexTreeNumber(int treeNumber) {
+		for (Vertex v : vertices) {
+			v.treeNumber = treeNumber;
+		}
+	}
+	public void resetVertexTreeNumber() {
+		resetVertexTreeNumber(-1);
+	}
+	
+	public DiGraph breadthFirstSearch(Vertex v) {
+		if (!vertices.contains(v)) {
+			throw new IllegalArgumentException("Invalid vertex!");
+		}
+		DiGraph result = new DiGraph();
+		return result;
+	}
 }
