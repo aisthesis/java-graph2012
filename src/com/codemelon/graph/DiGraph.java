@@ -24,11 +24,12 @@ import com.codemelon.graph.vertex.Vertex;
  * @version 11-23-2012
  */
 public class DiGraph {
+	private static final int DEFAULT_INITIAL_CAPACITY = 16;
 	private Set<Vertex> vertices;
 	private long edges;
 	
 	public DiGraph() {
-		this(0);
+		this(DEFAULT_INITIAL_CAPACITY);
 	}
 	public DiGraph(int initialCapacity) {
 		vertices = Collections.synchronizedSet(new HashSet<Vertex>(initialCapacity));
@@ -51,7 +52,7 @@ public class DiGraph {
 	 * @param v vertex to be inserted
 	 * @return true if the graph did not already contained the specified vertex
 	 */
-	public boolean insert(Vertex v) {
+	public boolean addVertex(Vertex v) {
 		return vertices.add(v);
 	}
  	/**
@@ -61,7 +62,7 @@ public class DiGraph {
 	 * @param to target vertex
 	 * @return true if the edge was not previously present in the graph
 	 */
-	public boolean insertEdge(Vertex from, Vertex to) {
+	public boolean addEdge(Vertex from, Vertex to) {
 		if (!vertices.contains(from) || !vertices.contains(to)) {
 			throw new IllegalArgumentException("Cannot add edge for vertex not present in graph!");
 		}
@@ -87,6 +88,13 @@ public class DiGraph {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean hasEdge(Vertex from, Vertex to) {
+		if (!vertices.contains(from) || !vertices.contains(to)) {
+			throw new IllegalArgumentException("One or more vertices not present in graph!");
+		}
+		return from.containsAdjacency(to);
 	}
 	/**
 	 * Number of vertices in the graph
