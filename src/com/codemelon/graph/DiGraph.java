@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -130,6 +131,11 @@ public class DiGraph {
 			v.color = c;
 		}
 	}
+	public void resetVertexParents() {
+		for (Vertex v : vertices) {
+			v.parent = null;
+		}
+	}
 	public void resetVertexColor() {
 		resetVertexColor(VertexConstants.INITIAL_COLOR);
 	}
@@ -191,6 +197,29 @@ public class DiGraph {
 	public void breadthFirstSearch(Vertex v) {
 		if (!vertices.contains(v)) {
 			throw new IllegalArgumentException("Invalid vertex!");
+		}
+		resetVertexColor();
+		resetVertexDistance();
+		resetVertexParents();
+		LinkedList<Vertex> queue = new LinkedList<Vertex>();
+		v.color = Color.GRAY;
+		v.distance = 0;
+		queue.add(v);
+		Vertex t, u;
+		Enumeration<Vertex> adjacencyEnumeration;
+		while (!queue.isEmpty()) {
+			u = queue.removeFirst();
+			adjacencyEnumeration = u.getAdjacencies();
+			while (adjacencyEnumeration.hasMoreElements()) {
+				t = adjacencyEnumeration.nextElement();
+				if (t.color == Color.WHITE) {
+					t.color = Color.GRAY;
+					t.distance = u.distance + 1;
+					t.parent = u;
+					queue.addLast(t);
+				}
+			}
+			u.color = Color.BLACK;
 		}
 	}
 }
