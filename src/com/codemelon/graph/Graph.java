@@ -34,5 +34,9 @@ public class Graph extends DiGraph{
 		return super.removeEdge(to, from);
 	}
 	@Override
-	public long edges() { return super.edges() / 2L; }
+	public long edgeCount() { return super.edgeCount() / 2L; }
+	@Override
+	public DiGraph transpose() {
+		throw new UnsupportedOperationException("Transpose operation trivial on undirected graph!");
+	}
 }

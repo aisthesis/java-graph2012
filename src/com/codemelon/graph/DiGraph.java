@@ -13,13 +13,17 @@
  */
 package com.codemelon.graph;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.VertexConstants;
 
 /**
  * @author Marshall Farrier
@@ -102,26 +106,32 @@ public class DiGraph {
 	public boolean containsVertex(Vertex v) {
 		return vertices.contains(v);
 	}
+	public ArrayList<Vertex> getVertices() {
+		return new ArrayList<Vertex>(vertices);
+	}
 	/**
 	 * Number of vertices in the graph
 	 * @return number of vertices in the graph
 	 */
-	public int vertices() {
+	public int vertexCount() {
 		return vertices.size();
 	}
 	/**
 	 * Number of edges in the graph
 	 * @return number of edges in the graph
 	 */
-	public long edges() { return edges; }
+	public long edgeCount() { return edges; }
 	/**
 	 * Sets all vertices in the graph to the given color
 	 * @param c color to which all vertices will be set
 	 */
-	public void setVertexColor(Color c) {
+	public void resetVertexColor(Color c) {
 		for (Vertex v : vertices) {
 			v.color = c;
 		}
+	}
+	public void resetVertexColor() {
+		resetVertexColor(VertexConstants.INITIAL_COLOR);
 	}
 	public void resetVertexDistance(int distance) {
 		for (Vertex v : vertices) {
@@ -129,7 +139,7 @@ public class DiGraph {
 		}
 	}
 	public void resetVertexDistance() {
-		resetVertexDistance(-1);
+		resetVertexDistance(VertexConstants.INITIAL_DISTANCE);
 	}
 	public void resetVertexDiscoveryTime(int discoveryTime) {
 		for (Vertex v : vertices) {
@@ -137,7 +147,7 @@ public class DiGraph {
 		}
 	}
 	public void resetVertexDiscoveryTime() {
-		resetVertexDiscoveryTime(-1);
+		resetVertexDiscoveryTime(VertexConstants.INITIAL_DISCOVERY_TIME);
 	}
 	public void resetVertexFinishTime(int finishTime) {
 		for (Vertex v : vertices) {
@@ -145,7 +155,7 @@ public class DiGraph {
 		}
 	}
 	public void resetVertexFinishTime() {
-		resetVertexFinishTime(-1);
+		resetVertexFinishTime(VertexConstants.INITIAL_FINISH_TIME);
 	}
 	public void resetVertexTreeNumber(int treeNumber) {
 		for (Vertex v : vertices) {
@@ -153,14 +163,34 @@ public class DiGraph {
 		}
 	}
 	public void resetVertexTreeNumber() {
-		resetVertexTreeNumber(-1);
+		resetVertexTreeNumber(VertexConstants.INITIAL_TREE_NUMBER);
 	}
 	
-	public DiGraph breadthFirstSearch(Vertex v) {
+	public DiGraph transpose() {
+		DiGraph result = new DiGraph(vertices.size());
+		// create a datastructure for tracking corresponding vertices
+		ConcurrentHashMap<Vertex, Vertex> vertexMap = new 
+				ConcurrentHashMap<Vertex, Vertex>(vertices.size());
+		// insert vertices into map and result graph
+		for (Vertex v : vertices) {
+			vertexMap.put(v, new Vertex(v));
+			result.addVertex(vertexMap.get(v));
+		}
+		Enumeration<Vertex> adj;
+		Vertex to;
+		for (Vertex from : vertices) {
+			adj = from.getAdjacencies();
+			while (adj.hasMoreElements()) {
+				to = adj.nextElement();
+				result.addEdge(vertexMap.get(to), vertexMap.get(from));
+			}
+		}
+		return result;
+	}
+	
+	public void breadthFirstSearch(Vertex v) {
 		if (!vertices.contains(v)) {
 			throw new IllegalArgumentException("Invalid vertex!");
 		}
-		DiGraph result = new DiGraph();
-		return result;
 	}
 }

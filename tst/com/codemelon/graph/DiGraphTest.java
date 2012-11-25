@@ -29,7 +29,7 @@ public class DiGraphTest {
 	public void setUp() {
 		vertices = new ArrayList<Vertex>(VERTICES_IN_TEST_GRAPH);
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
-			vertices.add(new Vertex());
+			vertices.add(new Vertex(i));
 		}
 	}
 
@@ -48,7 +48,7 @@ public class DiGraphTest {
 	@Test
 	public void testDiGraph() {
 		graph = new DiGraph();
-		assertEquals("Graph is initialized with no vertices", 0, graph.vertices());
+		assertEquals("Graph is initialized with no vertices", 0, graph.vertexCount());
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class DiGraphTest {
 	public void testDiGraphCollectionOfVertex() {
 		graph = new DiGraph(vertices);
 		assertEquals("Graph contains same number of vertices as collection used for initialization",
-				VERTICES_IN_TEST_GRAPH, graph.vertices());
+				VERTICES_IN_TEST_GRAPH, graph.vertexCount());
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class DiGraphTest {
 		graph = new DiGraph();
 		Vertex v = new Vertex();
 		graph.addVertex(v);
-		assertEquals("Correct vertex count after adding a vertex to empty graph", 1, graph.vertices());
+		assertEquals("Correct vertex count after adding a vertex to empty graph", 1, graph.vertexCount());
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class DiGraphTest {
 	public void testAddEdge() {
 		graph = new DiGraph(vertices);
 		graph.addEdge(vertices.get(0), vertices.get(1));
-		assertEquals("Correct edge count after adding a single edge", 1L, graph.edges());
+		assertEquals("Correct edge count after adding a single edge", 1L, graph.edgeCount());
 	}
 	
 	/**
@@ -112,23 +112,23 @@ public class DiGraphTest {
 				graph.removeEdge(vertices.get(0), vertices.get(1)));
 		assertFalse("Correct value returned when edge is not present",
 				graph.removeEdge(vertices.get(2), vertices.get(3)));
-		assertEquals("Correct number of edges remaining", 1, graph.edges());
+		assertEquals("Correct number of edges remaining", 1, graph.edgeCount());
 		assertFalse("Removed edge not present", graph.hasEdge(vertices.get(0), vertices.get(1)));
 		assertTrue("Unremoved edge present", graph.hasEdge(vertices.get(1), vertices.get(2)));
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.DiGraph#vertices()}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#vertexCount()}.
 	 */
 	@Test
 	public void testVertices() {
 		graph = new DiGraph(vertices);
 		assertEquals("Graph contains same number of vertices as collection used for initialization",
-				VERTICES_IN_TEST_GRAPH, graph.vertices());
+				VERTICES_IN_TEST_GRAPH, graph.vertexCount());
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.DiGraph#edges()}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#edgeCount()}.
 	 */
 	@Test
 	public void testEdges() {
@@ -140,6 +140,40 @@ public class DiGraphTest {
 			}
 		}
 		assertEquals("Correct number of edges after inserting all possible edges",
-				VERTICES_IN_TEST_GRAPH * VERTICES_IN_TEST_GRAPH, graph.edges());
+				VERTICES_IN_TEST_GRAPH * VERTICES_IN_TEST_GRAPH, graph.edgeCount());
+	}
+	/**
+	 * Test that labels are set up properly
+	 */
+	@Test
+	public void testLabeling() {
+		int[] testCases = {0, 23, 101};
+		for (int i : testCases) {
+			assertEquals("Label and index are the same", i, vertices.get(i).label);
+		}
+	}
+	/**
+	 * Test method for {@link com.codemelon.graph.DiGraph#transpose()}.
+	 */
+	@Test
+	public void testTranspose() {
+		graph = new DiGraph(vertices);
+		graph.addEdge(vertices.get(0), vertices.get(2));
+		graph.addEdge(vertices.get(3), vertices.get(2));
+		DiGraph transposedGraph = graph.transpose();
+		assertEquals("Correct number of edges in transposed graph", 
+				2, transposedGraph.edgeCount());
+		ArrayList<Vertex> transposedVertices = transposedGraph.getVertices();
+		// transposedGraph has proper structure
+		for (Vertex v : transposedVertices) {
+			if (v.label == 2) {
+				assertEquals("Vertex 2 is source for 2 edges", 2, v.adjacencyCount());
+				assertTrue("Vertex 2 contains adjacency 0", v.containsAdjacency(0));
+				assertTrue("Vertex 2 contains adjacency 3", v.containsAdjacency(3));
+			}
+			else {
+				assertFalse("Only vertex 2 has adjacencies", v.hasAdjacencies());
+			}
+		}
 	}
 }

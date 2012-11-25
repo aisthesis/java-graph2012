@@ -15,6 +15,7 @@ import com.codemelon.graph.common.EdgeData;
  */
 public class Vertex {
 	private ConcurrentHashMap<Vertex, EdgeData> adjacencies;
+	public int label;
 	public Color color;
 	public Vertex parent;
 	public int distance;	// for BFS, etc.
@@ -24,17 +25,49 @@ public class Vertex {
 	public int treeNumber;	// to identify components after DFS
 	
 	public Vertex() {
-		this(Color.WHITE);
+		this(VertexConstants.INITIAL_COLOR);
 	}
-	
+	public Vertex(int label) {
+		this(label, VertexConstants.INITIAL_COLOR, null, VertexConstants.INITIAL_DISTANCE, 
+				VertexConstants.INITIAL_DISCOVERY_TIME, 
+				VertexConstants.INITIAL_FINISH_TIME,
+				VertexConstants.INITIAL_TREE_NUMBER);
+	}
 	public Vertex(Color color) {
+		this(VertexConstants.DEFAULT_LABEL, color, null, VertexConstants.INITIAL_DISTANCE, 
+				VertexConstants.INITIAL_DISCOVERY_TIME, 
+				VertexConstants.INITIAL_FINISH_TIME,
+				VertexConstants.INITIAL_TREE_NUMBER);
+	}
+	public Vertex(int label, Color color, Vertex parent, int distance, int discoveryTime,
+			int finishTime, int treeNumber) {
 		adjacencies = new ConcurrentHashMap<Vertex, EdgeData>();
+		this.label = label;
 		this.color = color;
-		parent = null;
-		distance = -1;
-		discoveryTime = -1;
-		finishTime = -1;
-		treeNumber = -1;
+		this.parent = parent;
+		this.distance = distance;
+		this.discoveryTime = discoveryTime;
+		this.finishTime = finishTime;
+		this.treeNumber = treeNumber;
+	}
+	/**
+	 * Copy constructor. Copies all satellite data but leaves adjacency list
+	 * and parent of new vertex empty or, in the case of parent, null.
+	 * @param v vertex to be copied
+	 */
+	public Vertex(Vertex v) {
+		this(v, null);
+	}
+	/**
+	 * Copies all satellite data from vertexToCopy and assigns vertexParent
+	 * as parent. Adjacency list is empty on initialization
+	 * @param vertexToCopy vertex from which to copy satellite data
+	 * @param vertexParent parent to assign to new vertex
+	 */
+	public Vertex(Vertex vertexToCopy, Vertex vertexParent) {
+		this(vertexToCopy.label, vertexToCopy.color, vertexParent, vertexToCopy.distance, 
+				vertexToCopy.discoveryTime, vertexToCopy.finishTime, 
+				vertexToCopy.treeNumber);		
 	}
 	
 	/**
@@ -74,6 +107,16 @@ public class Vertex {
 	 */
 	public boolean containsAdjacency(Vertex v) {
 		return adjacencies.containsKey(v);
+	}
+	
+	public boolean containsAdjacency(int label) {
+		Enumeration<Vertex> adjacencyEnumeration = adjacencies.keys();
+		while (adjacencyEnumeration.hasMoreElements()) {
+			if (adjacencyEnumeration.nextElement().label == label) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**

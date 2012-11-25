@@ -36,7 +36,8 @@ public class VertexTest {
 		Color c = Color.BLACK;
 		Vertex u = new Vertex(c);
 		assertFalse("No initial adjacencies", v.hasAdjacencies());
-		assertEquals("Color is initially white using default constructor.", Color.WHITE, v.color);
+		assertEquals("Color is initially white using default constructor.", 
+				VertexConstants.INITIAL_COLOR, v.color);
 		assertEquals("Color is initialized properly when specified in constructor.", c, u.color);	
 	}
 	

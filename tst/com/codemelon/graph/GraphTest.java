@@ -67,7 +67,7 @@ public class GraphTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.Graph#edges()}.
+	 * Test method for {@link com.codemelon.graph.Graph#edgeCount()}.
 	 */
 	@Test
 	public void testEdges() {
@@ -79,7 +79,7 @@ public class GraphTest {
 			}
 		}
 		assertEquals("Correct number of edges after inserting all possible edges",
-				EXPECTED_RESULT, graph.edges());
+				EXPECTED_RESULT, graph.edgeCount());
 	}
 
 }
