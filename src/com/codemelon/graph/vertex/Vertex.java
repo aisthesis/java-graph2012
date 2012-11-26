@@ -6,6 +6,7 @@ package com.codemelon.graph.vertex;
 import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeData;
 
@@ -15,6 +16,8 @@ import com.codemelon.graph.common.EdgeData;
  */
 public class Vertex implements Comparable<Vertex> {
 	private ConcurrentHashMap<Vertex, EdgeData> adjacencies;
+	private DiGraph graph;
+	
 	public int label;
 	public Color color;
 	public Vertex parent;
@@ -42,6 +45,7 @@ public class Vertex implements Comparable<Vertex> {
 	public Vertex(int label, Color color, Vertex parent, int distance, int discoveryTime,
 			int finishTime, int treeNumber) {
 		adjacencies = new ConcurrentHashMap<Vertex, EdgeData>();
+		graph = null;
 		this.label = label;
 		this.color = color;
 		this.parent = parent;
@@ -69,6 +73,13 @@ public class Vertex implements Comparable<Vertex> {
 				vertexToCopy.discoveryTime, vertexToCopy.finishTime, 
 				vertexToCopy.treeNumber);		
 	}
+	/**
+	 * Set the graph to which the vertex belongs
+	 * @param g graph with which the vertex is to be associated
+	 */
+	public void setGraph(DiGraph g) {
+		graph = g;
+	}
 	
 	/**
 	 * Adds the specified vertex to the set of adjacencies
@@ -76,6 +87,9 @@ public class Vertex implements Comparable<Vertex> {
 	 * @return true if the adjacency list did not already contain v
 	 */
 	public boolean addAdjacency(Vertex v) {
+		if (this.graph != v.graph) {
+			throw new IllegalArgumentException("Vertex belongs to a different graph!");
+		}
 		if (adjacencies.containsKey(v)) { return false; }
 		adjacencies.put(v, new EdgeData());
 		return true;
@@ -138,6 +152,9 @@ public class Vertex implements Comparable<Vertex> {
 	public boolean hasAdjacencies() {
 		return !adjacencies.isEmpty();
 	}
+	/**
+	 * Allows sorting vertex collections by label
+	 */
 	@Override
 	public int compareTo(Vertex v) {
 		return this.label - v.label;

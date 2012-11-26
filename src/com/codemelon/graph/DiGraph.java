@@ -60,7 +60,13 @@ public class DiGraph {
 	 * @return true if the graph did not already contained the specified vertex
 	 */
 	public boolean addVertex(Vertex v) {
-		return vertices.add(v);
+		if (vertices.add(v)) {
+			// vertex was not already present
+			v.clearAdjacencies();
+			v.setGraph(this);
+			return true;
+		}
+		return false;
 	}
  	/**
 	 * Inserts edge if not already present. Returns false if the edge

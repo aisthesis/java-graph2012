@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 
 /**
@@ -58,7 +59,19 @@ public class VertexTest {
 		addAnonymousAdjacencies(MANY);
 		assertEquals("Correct count after adding many vertices", MANY, v.adjacencyCount());
 	}
-
+	
+	/**
+	 * Test method for {@link com.codemelon.graph.vertex.Vertex#addAdjacency(com.codemelon.graph.vertex.Vertex)}.
+	 */
+	/*
+	@Test(expected=IllegalArgumentException.class)
+	public void testAddFromDifferentGraph() {
+		Vertex u = new Vertex();
+		DiGraph g1 = new DiGraph();
+		DiGraph g2 = new DiGraph();
+		assertEquals("Correct count after adding many vertices", MANY, v.adjacencyCount());
+	}
+	*/
 	/**
 	 * Test method for {@link com.codemelon.graph.vertex.Vertex#removeAdjacency(com.codemelon.graph.vertex.Vertex)}.
 	 */
