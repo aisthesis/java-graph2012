@@ -23,12 +23,20 @@ public class VertexResetter {
 		this.graph = graph;
 	}
 	/**
-	 * Initializes the properties needed for breadth-first search
+	 * Resets the properties needed for breadth-first search
+	 * to their correct initial values
 	 */
 	public void bfsReset() {
 		resetColors();
 		resetParents();
 		resetDistances();
+	}
+	
+	public void dfsReset() {
+		resetColors();
+		resetParents();
+		resetDiscoveryTimes();
+		resetFinishTimes();
 	}
 
 	/**
