@@ -26,7 +26,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.core.VertexResetter;
 import com.codemelon.graph.vertex.Vertex;
-import com.codemelon.graph.vertex.VertexConstants;
 
 /**
  * @author Marshall Farrier

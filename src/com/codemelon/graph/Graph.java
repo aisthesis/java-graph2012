@@ -35,8 +35,4 @@ public class Graph extends DiGraph{
 	}
 	@Override
 	public long edgeCount() { return super.edgeCount() / 2L; }
-	@Override
-	public DiGraph transpose() {
-		throw new UnsupportedOperationException("Transpose operation trivial on undirected graph!");
-	}
 }

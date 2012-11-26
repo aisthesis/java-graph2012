@@ -63,15 +63,16 @@ public class VertexTest {
 	/**
 	 * Test method for {@link com.codemelon.graph.vertex.Vertex#addAdjacency(com.codemelon.graph.vertex.Vertex)}.
 	 */
-	/*
 	@Test(expected=IllegalArgumentException.class)
 	public void testAddFromDifferentGraph() {
 		Vertex u = new Vertex();
 		DiGraph g1 = new DiGraph();
 		DiGraph g2 = new DiGraph();
-		assertEquals("Correct count after adding many vertices", MANY, v.adjacencyCount());
+		g1.addVertex(u);
+		g2.addVertex(v);
+		u.addAdjacency(v);
 	}
-	*/
+	
 	/**
 	 * Test method for {@link com.codemelon.graph.vertex.Vertex#removeAdjacency(com.codemelon.graph.vertex.Vertex)}.
 	 */
