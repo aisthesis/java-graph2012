@@ -51,7 +51,7 @@ public class GraphTest {
 	public void testAddEdge() {
 		assertTrue("Edge can be added", graph.addEdge(vertices.get(0), vertices.get(1)));
 		assertTrue("Graph contains edge in opposite direction", 
-				graph.hasEdge(vertices.get(1), vertices.get(0)));
+				graph.containsEdge(vertices.get(1), vertices.get(0)));
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class GraphTest {
 		assertTrue("Reverse edge is present and can be removed", 
 				graph.removeEdge(vertices.get(1), vertices.get(0)));
 		assertFalse("Original edge is no longer in graph", 
-				graph.hasEdge(vertices.get(0), vertices.get(1)));
+				graph.containsEdge(vertices.get(0), vertices.get(1)));
 	}
 
 	/**

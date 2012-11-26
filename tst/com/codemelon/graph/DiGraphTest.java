@@ -114,8 +114,8 @@ public class DiGraphTest {
 		assertFalse("Correct value returned when edge is not present",
 				graph.removeEdge(vertices.get(2), vertices.get(3)));
 		assertEquals("Correct number of edges remaining", 1, graph.edgeCount());
-		assertFalse("Removed edge not present", graph.hasEdge(vertices.get(0), vertices.get(1)));
-		assertTrue("Unremoved edge present", graph.hasEdge(vertices.get(1), vertices.get(2)));
+		assertFalse("Removed edge not present", graph.containsEdge(vertices.get(0), vertices.get(1)));
+		assertTrue("Unremoved edge present", graph.containsEdge(vertices.get(1), vertices.get(2)));
 	}
 
 	/**
@@ -151,30 +151,6 @@ public class DiGraphTest {
 		int[] testCases = {0, 23, 101};
 		for (int i : testCases) {
 			assertEquals("Label and index are the same", i, vertices.get(i).label);
-		}
-	}
-	/**
-	 * Test method for {@link com.codemelon.graph.DiGraph#transpose()}.
-	 */
-	@Test
-	public void testTranspose() {
-		graph = new DiGraph(vertices);
-		graph.addEdge(vertices.get(0), vertices.get(2));
-		graph.addEdge(vertices.get(3), vertices.get(2));
-		DiGraph transposedGraph = graph.transpose();
-		assertEquals("Correct number of edges in transposed graph", 
-				2, transposedGraph.edgeCount());
-		ArrayList<Vertex> transposedVertices = transposedGraph.getVertices();
-		// transposedGraph has proper structure
-		for (Vertex v : transposedVertices) {
-			if (v.label == 2) {
-				assertEquals("Vertex 2 is source for 2 edges", 2, v.adjacencyCount());
-				assertTrue("Vertex 2 contains adjacency 0", v.containsAdjacency(0));
-				assertTrue("Vertex 2 contains adjacency 3", v.containsAdjacency(3));
-			}
-			else {
-				assertFalse("Only vertex 2 has adjacencies", v.hasAdjacencies());
-			}
 		}
 	}
 	/**

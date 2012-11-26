@@ -118,7 +118,7 @@ public class DiGraph {
 		return false;
 	}
 	
-	public boolean hasEdge(Vertex from, Vertex to) {
+	public boolean containsEdge(Vertex from, Vertex to) {
 		if (!vertices.contains(from) || !vertices.contains(to)) {
 			throw new IllegalArgumentException("One or more vertices not present in graph!");
 		}
@@ -150,28 +150,6 @@ public class DiGraph {
 	 * @return number of edges in the graph
 	 */
 	public long edgeCount() { return edges; }
-	
-	public DiGraph transpose() {
-		DiGraph result = new DiGraph(vertices.size());
-		// create a datastructure for tracking corresponding vertices
-		ConcurrentHashMap<Vertex, Vertex> vertexMap = new 
-				ConcurrentHashMap<Vertex, Vertex>(vertices.size());
-		// insert vertices into map and result graph
-		for (Vertex v : vertices) {
-			vertexMap.put(v, new Vertex(v));
-			result.addVertex(vertexMap.get(v));
-		}
-		Enumeration<Vertex> adj;
-		Vertex to;
-		for (Vertex from : vertices) {
-			adj = from.getAdjacencies();
-			while (adj.hasMoreElements()) {
-				to = adj.nextElement();
-				result.addEdge(vertexMap.get(to), vertexMap.get(from));
-			}
-		}
-		return result;
-	}
 	
 	public void breadthFirstSearch(Vertex v) {
 		if (!vertices.contains(v)) {
