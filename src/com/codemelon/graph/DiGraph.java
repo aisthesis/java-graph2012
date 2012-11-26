@@ -21,7 +21,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.core.VertexResetter;
@@ -150,31 +149,4 @@ public class DiGraph {
 	 * @return number of edges in the graph
 	 */
 	public long edgeCount() { return edges; }
-	
-	public void breadthFirstSearch(Vertex v) {
-		if (!vertices.contains(v)) {
-			throw new IllegalArgumentException("Invalid vertex!");
-		}
-		new VertexResetter(this).bfsReset();
-		LinkedList<Vertex> queue = new LinkedList<Vertex>();
-		v.color = Color.GRAY;
-		v.distance = 0;
-		queue.add(v);
-		Vertex t, u;
-		Enumeration<Vertex> adjacencyEnumeration;
-		while (!queue.isEmpty()) {
-			u = queue.removeFirst();
-			adjacencyEnumeration = u.getAdjacencies();
-			while (adjacencyEnumeration.hasMoreElements()) {
-				t = adjacencyEnumeration.nextElement();
-				if (t.color == Color.WHITE) {
-					t.color = Color.GRAY;
-					t.distance = u.distance + 1;
-					t.parent = u;
-					queue.addLast(t);
-				}
-			}
-			u.color = Color.BLACK;
-		}
-	}
 }
