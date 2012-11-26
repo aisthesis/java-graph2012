@@ -16,14 +16,10 @@ package com.codemelon.graph;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Set;
 
-import com.codemelon.graph.common.Color;
-import com.codemelon.graph.util.core.VertexResetter;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
