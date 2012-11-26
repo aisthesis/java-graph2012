@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -122,6 +123,13 @@ public class DiGraph {
 			throw new IllegalArgumentException("One or more vertices not present in graph!");
 		}
 		return from.containsAdjacency(to);
+	}
+	/**
+	 * Returns an iterator over the vertices in the graph
+	 * @return iterator over the graph's vertices
+	 */
+	public Iterator<Vertex> vertexIterator() {
+		return vertices.iterator();
 	}
 	
 	public boolean containsVertex(Vertex v) {
