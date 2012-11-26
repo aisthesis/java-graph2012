@@ -68,6 +68,20 @@ public class DiGraph {
 		}
 		return false;
 	}
+	public boolean removeVertex(Vertex v) {
+		if (vertices.remove(v)) {
+			edges -= v.adjacencyCount();
+			v.clearAdjacencies();
+			for (Vertex u : vertices) {
+				if (u.removeAdjacency(v)) {
+					edges--;
+				}
+			}
+			v.setGraph(null);
+			return true;
+		}
+		return false;
+	}
  	/**
 	 * Inserts edge if not already present. Returns false if the edge
 	 * was already present in the graph.
