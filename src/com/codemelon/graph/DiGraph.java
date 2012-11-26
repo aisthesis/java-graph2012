@@ -24,6 +24,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.codemelon.graph.common.Color;
+import com.codemelon.graph.util.core.VertexResetter;
 import com.codemelon.graph.vertex.Vertex;
 import com.codemelon.graph.vertex.VertexConstants;
 
@@ -150,55 +151,6 @@ public class DiGraph {
 	 * @return number of edges in the graph
 	 */
 	public long edgeCount() { return edges; }
-	/**
-	 * Sets all vertices in the graph to the given color
-	 * @param c color to which all vertices will be set
-	 */
-	public void resetVertexColor(Color c) {
-		for (Vertex v : vertices) {
-			v.color = c;
-		}
-	}
-	public void resetVertexParents() {
-		for (Vertex v : vertices) {
-			v.parent = null;
-		}
-	}
-	public void resetVertexColor() {
-		resetVertexColor(VertexConstants.INITIAL_COLOR);
-	}
-	public void resetVertexDistance(int distance) {
-		for (Vertex v : vertices) {
-			v.distance = distance;
-		}
-	}
-	public void resetVertexDistance() {
-		resetVertexDistance(VertexConstants.INITIAL_DISTANCE);
-	}
-	public void resetVertexDiscoveryTime(int discoveryTime) {
-		for (Vertex v : vertices) {
-			v.discoveryTime = discoveryTime;
-		}
-	}
-	public void resetVertexDiscoveryTime() {
-		resetVertexDiscoveryTime(VertexConstants.INITIAL_DISCOVERY_TIME);
-	}
-	public void resetVertexFinishTime(int finishTime) {
-		for (Vertex v : vertices) {
-			v.finishTime = finishTime;
-		}
-	}
-	public void resetVertexFinishTime() {
-		resetVertexFinishTime(VertexConstants.INITIAL_FINISH_TIME);
-	}
-	public void resetVertexTreeNumber(int treeNumber) {
-		for (Vertex v : vertices) {
-			v.treeNumber = treeNumber;
-		}
-	}
-	public void resetVertexTreeNumber() {
-		resetVertexTreeNumber(VertexConstants.INITIAL_TREE_NUMBER);
-	}
 	
 	public DiGraph transpose() {
 		DiGraph result = new DiGraph(vertices.size());
@@ -226,9 +178,7 @@ public class DiGraph {
 		if (!vertices.contains(v)) {
 			throw new IllegalArgumentException("Invalid vertex!");
 		}
-		resetVertexColor();
-		resetVertexDistance();
-		resetVertexParents();
+		new VertexResetter(this).bfsReset();
 		LinkedList<Vertex> queue = new LinkedList<Vertex>();
 		v.color = Color.GRAY;
 		v.distance = 0;
