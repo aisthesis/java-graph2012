@@ -14,7 +14,7 @@ import com.codemelon.graph.common.EdgeData;
  * @author Marshall Farrier
  * @version 11-23-2012
  */
-public class Vertex implements Comparable<Vertex> {
+public class Vertex {
 	private ConcurrentHashMap<Vertex, EdgeData> adjacencies;
 	private DiGraph graph;
 	
@@ -151,16 +151,5 @@ public class Vertex implements Comparable<Vertex> {
 	 */
 	public boolean hasAdjacencies() {
 		return !adjacencies.isEmpty();
-	}
-	/**
-	 * Allows sorting vertex collections by label
-	 */
-	@Override
-	public int compareTo(Vertex v) {
-		return this.label - v.label;
-	}
-	@Override
-	public boolean equals(Object o) {
-		return this.label == ((Vertex) o).label;
 	}
 }

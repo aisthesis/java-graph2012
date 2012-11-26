@@ -23,7 +23,7 @@ public class BreadthFirstSearch {
 		this.graph = graph;
 	}
 	
-	public void breadthFirstSearch(Vertex v) {
+	public void search(Vertex v) {
 		if (!graph.containsVertex(v)) {
 			throw new IllegalArgumentException("Invalid vertex!");
 		}
