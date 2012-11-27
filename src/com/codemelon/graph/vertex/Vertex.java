@@ -3,8 +3,9 @@
  * 
  */
 package com.codemelon.graph.vertex;
-import java.util.Enumeration;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
@@ -15,7 +16,7 @@ import com.codemelon.graph.common.EdgeData;
  * @version 11-23-2012
  */
 public class Vertex {
-	private ConcurrentHashMap<Vertex, EdgeData> adjacencies;
+	private HashMap<Vertex, EdgeData> adjacencies;
 	private DiGraph graph;
 	
 	public int label;
@@ -47,7 +48,7 @@ public class Vertex {
 	}
 	public Vertex(int label, int searchOrder, Color color, Vertex parent, int distance, int discoveryTime,
 			int finishTime, int treeNumber) {
-		adjacencies = new ConcurrentHashMap<Vertex, EdgeData>();
+		adjacencies = new HashMap<Vertex, EdgeData>();
 		graph = null;
 		this.label = label;
 		this.searchOrder = searchOrder;
@@ -128,11 +129,10 @@ public class Vertex {
 	}
 	
 	public boolean containsAdjacency(int label) {
-		Enumeration<Vertex> adjacencyEnumeration = adjacencies.keys();
-		while (adjacencyEnumeration.hasMoreElements()) {
-			if (adjacencyEnumeration.nextElement().label == label) {
-				return true;
-			}
+		Set<Vertex> adjacentVertices = adjacencies.keySet();
+		Iterator<Vertex> it = adjacentVertices.iterator();
+		while (it.hasNext()) {
+			if (it.next().label == label) { return true; }
 		}
 		return false;
 	}
@@ -145,8 +145,8 @@ public class Vertex {
 		return adjacencies.size();
 	}
 	
-	public Enumeration<Vertex> getAdjacencies() {
-		return adjacencies.keys();
+	public Set<Vertex> getAdjacencies() {
+		return adjacencies.keySet();
 	}
 
 	/**

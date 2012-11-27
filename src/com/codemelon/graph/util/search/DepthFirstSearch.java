@@ -3,8 +3,8 @@
  */
 package com.codemelon.graph.util.search;
 
-import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.Set;
 
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
@@ -40,14 +40,12 @@ public class DepthFirstSearch {
 		t++;
 		u.discoveryTime = t;
 		u.color = Color.GRAY;
-		Enumeration<Vertex> adj = u.getAdjacencies();
-		Vertex v;
-		while (adj.hasMoreElements()) {
-			v = adj.nextElement();
+		Set<Vertex> adjacentVertices = u.getAdjacencies();
+		for (Vertex v : adjacentVertices) {
 			if (v.color == Color.WHITE) {
 				v.parent = u;
 				dfsVisit(v);
-			}
+			}		
 		}
 		u.color = Color.BLACK;
 		t++;

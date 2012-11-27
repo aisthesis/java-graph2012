@@ -3,8 +3,8 @@
  */
 package com.codemelon.graph.util.core;
 
-import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.codemelon.graph.DiGraph;
@@ -28,23 +28,21 @@ public class Transposer {
 		ConcurrentHashMap<Vertex, Vertex> vertexMap = new 
 				ConcurrentHashMap<Vertex, Vertex>(graph.vertexCount());
 		// insert vertices into map and result graph
-		Iterator<Vertex> it = graph.vertexIterator();
+		Iterator<Vertex> vertexIterator = graph.vertexIterator();
 		Vertex v;
-		while (it.hasNext()) {
-			v = it.next();
+		while (vertexIterator.hasNext()) {
+			v = vertexIterator.next();
 			vertexMap.put(v, new Vertex(v));
 			result.addVertex(vertexMap.get(v));
 		}
-		Enumeration<Vertex> adj;
-		Vertex to;
-		it = graph.vertexIterator();
-		while (it.hasNext()) {
-			v = it.next();
-			adj = v.getAdjacencies();
-			while (adj.hasMoreElements()) {
-				to = adj.nextElement();
+		Set<Vertex> adjacentVertices;
+		vertexIterator = graph.vertexIterator();
+		while (vertexIterator.hasNext()) {
+			v = vertexIterator.next();
+			adjacentVertices = v.getAdjacencies();			
+			for (Vertex to : adjacentVertices) {
 				result.addEdge(vertexMap.get(to), vertexMap.get(v));
-			}			
+			}		
 		}
 		return result;
 	}
