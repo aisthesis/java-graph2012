@@ -12,6 +12,7 @@ import com.codemelon.graph.common.Color;
  */
 public class VertexConstants {
 	public static final int DEFAULT_LABEL = -1;
+	public static final int DEFAULT_SEARCH_ORDER_VALUE = -1;
 	public static final Color INITIAL_COLOR = Color.WHITE;
 	public static final int INITIAL_DISTANCE = -1;
 	public static final int INITIAL_DISCOVERY_TIME = -1;

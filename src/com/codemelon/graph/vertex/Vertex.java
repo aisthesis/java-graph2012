@@ -19,6 +19,7 @@ public class Vertex {
 	private DiGraph graph;
 	
 	public int label;
+	public int searchOrder;	// allows arbitrary prioritization for searches
 	public Color color;
 	public Vertex parent;
 	public int distance;	// for BFS, etc.
@@ -31,22 +32,25 @@ public class Vertex {
 		this(VertexConstants.INITIAL_COLOR);
 	}
 	public Vertex(int label) {
-		this(label, VertexConstants.INITIAL_COLOR, null, VertexConstants.INITIAL_DISTANCE, 
+		this(label, VertexConstants.DEFAULT_SEARCH_ORDER_VALUE,
+				VertexConstants.INITIAL_COLOR, null, VertexConstants.INITIAL_DISTANCE, 
 				VertexConstants.INITIAL_DISCOVERY_TIME, 
 				VertexConstants.INITIAL_FINISH_TIME,
 				VertexConstants.INITIAL_TREE_NUMBER);
 	}
 	public Vertex(Color color) {
-		this(VertexConstants.DEFAULT_LABEL, color, null, VertexConstants.INITIAL_DISTANCE, 
+		this(VertexConstants.DEFAULT_LABEL, VertexConstants.DEFAULT_SEARCH_ORDER_VALUE,
+				color, null, VertexConstants.INITIAL_DISTANCE, 
 				VertexConstants.INITIAL_DISCOVERY_TIME, 
 				VertexConstants.INITIAL_FINISH_TIME,
 				VertexConstants.INITIAL_TREE_NUMBER);
 	}
-	public Vertex(int label, Color color, Vertex parent, int distance, int discoveryTime,
+	public Vertex(int label, int searchOrder, Color color, Vertex parent, int distance, int discoveryTime,
 			int finishTime, int treeNumber) {
 		adjacencies = new ConcurrentHashMap<Vertex, EdgeData>();
 		graph = null;
 		this.label = label;
+		this.searchOrder = searchOrder;
 		this.color = color;
 		this.parent = parent;
 		this.distance = distance;
@@ -69,8 +73,8 @@ public class Vertex {
 	 * @param vertexParent parent to assign to new vertex
 	 */
 	public Vertex(Vertex vertexToCopy, Vertex vertexParent) {
-		this(vertexToCopy.label, vertexToCopy.color, vertexParent, vertexToCopy.distance, 
-				vertexToCopy.discoveryTime, vertexToCopy.finishTime, 
+		this(vertexToCopy.label, vertexToCopy.searchOrder, vertexToCopy.color, vertexParent, 
+				vertexToCopy.distance, vertexToCopy.discoveryTime, vertexToCopy.finishTime, 
 				vertexToCopy.treeNumber);		
 	}
 	/**
