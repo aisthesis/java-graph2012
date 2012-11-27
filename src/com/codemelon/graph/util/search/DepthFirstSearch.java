@@ -4,6 +4,7 @@
 package com.codemelon.graph.util.search;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 
 import com.codemelon.graph.DiGraph;
@@ -50,5 +51,34 @@ public class DepthFirstSearch {
 		u.color = Color.BLACK;
 		t++;
 		u.finishTime = t;
+	}
+	/**
+	 * CLRS, p. 613
+	 * @return
+	 */
+	public LinkedList<Vertex> topologicalSort() {
+		LinkedList<Vertex> result = new LinkedList<Vertex>();
+		new VertexResetter(graph).dfsReset();
+		Iterator<Vertex> it = graph.vertexIterator();
+		Vertex u;
+		while (it.hasNext()) {
+			u = it.next();
+			if (u.color == Color.WHITE) {
+				topologicalSortVisit(u, result);
+			}
+		}
+		return result;
+	}
+	
+	private void topologicalSortVisit(Vertex u, LinkedList<Vertex> result) {
+		u.color = Color.GRAY;
+		Set<Vertex> adjacentVertices = u.getAdjacencies();
+		for (Vertex v : adjacentVertices) {
+			if (v.color == Color.WHITE) {
+				topologicalSortVisit(v, result);
+			}		
+		}
+		u.color = Color.BLACK;
+		result.addFirst(u);	
 	}
 }
