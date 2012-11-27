@@ -5,6 +5,7 @@ package com.codemelon.graph.util.search;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.junit.After;
@@ -44,8 +45,8 @@ public class BreadthFirstSearchTest {
 	/**
 	 * Graph from CLRS, p. 596
 	 */
-	public ConcurrentHashMap<Character, Vertex> setUpSmallCLRSGraph() {
-		ConcurrentHashMap<Character, Vertex> vertices = new ConcurrentHashMap<Character, Vertex>();
+	public HashMap<Character, Vertex> setUpSmallCLRSGraph() {
+		HashMap<Character, Vertex> vertices = new HashMap<Character, Vertex>();
 		for (char i = 'r'; i <= 'y'; i++) {
 			vertices.put(i, new Vertex(i));
 		}
@@ -113,7 +114,7 @@ public class BreadthFirstSearchTest {
 	 */
 	@Test
 	public void testSmallCLRSGraph() {
-		ConcurrentHashMap<Character, Vertex> vertices = setUpSmallCLRSGraph();
+		HashMap<Character, Vertex> vertices = setUpSmallCLRSGraph();
 		new BreadthFirstSearch(graph).search(vertices.get('s'));
 		for (char i = 'r'; i <= 'y'; i++) {
 			assertEquals("All vertices are black", Color.BLACK, vertices.get(i).color);

@@ -24,7 +24,7 @@ public class DepthFirstSearch {
 		t = 0;
 	}
 	
-	public void depthFirstSearch() {
+	public void search() {
 		new VertexResetter(graph).dfsReset();
 		t = 0;
 		Iterator<Vertex> it = graph.vertexIterator();
@@ -32,11 +32,11 @@ public class DepthFirstSearch {
 		while (it.hasNext()) {
 			u = it.next();
 			if (u.color == Color.WHITE) {
-				dfsVisit(u);
+				visit(u);
 			}
 		}
 	}
-	private void dfsVisit(Vertex u) {
+	private void visit(Vertex u) {
 		t++;
 		u.discoveryTime = t;
 		u.color = Color.GRAY;
@@ -44,7 +44,7 @@ public class DepthFirstSearch {
 		for (Vertex v : adjacentVertices) {
 			if (v.color == Color.WHITE) {
 				v.parent = u;
-				dfsVisit(v);
+				visit(v);
 			}		
 		}
 		u.color = Color.BLACK;

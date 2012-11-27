@@ -48,4 +48,22 @@ public class BreadthFirstSearch {
 			u.color = Color.BLACK;
 		}
 	}
+	
+	/**
+	 * Shows a shortest path to a given vertex under the assumption that search()
+	 * has already been run.
+	 * For actually getting the list rather than just printing, a loop seems easier
+	 * than the recursion used by CLRS (p. 601)
+	 */
+	public LinkedList<Vertex> path(Vertex s, Vertex v) {
+		LinkedList<Vertex> result = new LinkedList<Vertex>();
+		Vertex tmp = v;
+		while (tmp != s) {
+			if (tmp.parent == null) { return null; }
+			result.addFirst(tmp);
+			tmp = tmp.parent;
+		}
+		result.addFirst(s);
+		return result;
+	}
 }
