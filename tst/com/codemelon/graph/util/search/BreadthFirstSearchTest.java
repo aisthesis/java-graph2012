@@ -29,8 +29,8 @@ public class BreadthFirstSearchTest {
 	 * Graph with sequential (from vertex i to i + 1) edges on the lower-numbered vertices,
 	 * no edges on higher-numbered vertices, and one forked edge.
 	 */
-	public ConcurrentHashMap<Integer, Vertex> setUpBigSparseGraph() {
-		ConcurrentHashMap<Integer, Vertex> vertices = new ConcurrentHashMap<Integer, Vertex>(VERTICES_IN_TEST_GRAPH);
+	public HashMap<Integer, Vertex> setUpBigSparseGraph() {
+		HashMap<Integer, Vertex> vertices = new HashMap<Integer, Vertex>(VERTICES_IN_TEST_GRAPH);
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
 			vertices.put(i, new Vertex(i));
 		}
@@ -77,7 +77,7 @@ public class BreadthFirstSearchTest {
 	 */
 	@Test
 	public void testBigSparseGraph() {
-		ConcurrentHashMap<Integer, Vertex> vertices = setUpBigSparseGraph();
+		HashMap<Integer, Vertex> vertices = setUpBigSparseGraph();
 		new BreadthFirstSearch(graph).search(vertices.get(1));
 		// vertex 0 is unreachable and hence white, etc.
 		assertEquals("Vertex 0 is white", Color.WHITE, vertices.get(0).color);
