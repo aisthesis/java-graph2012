@@ -5,6 +5,7 @@ package com.codemelon.graph.util.search.depthfirst;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.After;
@@ -21,6 +22,7 @@ import com.codemelon.graph.vertex.Vertex;
  */
 public class DepthFirstSearchTest {
 	private DiGraph graph;
+	private static final int CIRCULAR_GRAPH_SIZE = 1000;
 
 	@After
 	public void tearDown() {
@@ -41,6 +43,21 @@ public class DepthFirstSearchTest {
 					< vertices.get(i).finishTime);
 		}
 	}
+	@Test
+	public void testBiggerCircularGraph() {
+		ArrayList<Vertex> vertices = setUpBiggerCircularGraph();
+		new DepthFirstSearch(graph).search();		
+		//vertex first discovered will be vertex last finished in this case
+		int indexOfFirstDiscovery = -1;
+		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {
+			if (vertices.get(i).discoveryTime == 1) {
+				indexOfFirstDiscovery = i;
+				break;
+			}
+		}
+		assertEquals("Vertex first discovered has last finish time", 
+				CIRCULAR_GRAPH_SIZE * 2, vertices.get(indexOfFirstDiscovery).finishTime);
+	}
 	/**
 	 * Graph from CLRS, p. 605
 	 */
@@ -58,6 +75,21 @@ public class DepthFirstSearchTest {
 		graph.addEdge(vertices.get('x'), vertices.get('v'));
 		graph.addEdge(vertices.get('y'), vertices.get('x'));
 		graph.addEdge(vertices.get('z'), vertices.get('z'));
+		return vertices;
+	}
+	
+	public ArrayList<Vertex> setUpBiggerCircularGraph() {
+		ArrayList<Vertex> vertices = new ArrayList<Vertex>(CIRCULAR_GRAPH_SIZE);
+		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {
+			// vertex label will be the same as index in the array
+			vertices.add(new Vertex(i));
+		}
+		graph = new DiGraph(vertices);
+		for (int i = 0; i < CIRCULAR_GRAPH_SIZE - 1; i++) {
+			graph.addEdge(vertices.get(i), vertices.get(i + 1));
+		}
+		// now close the circle
+		graph.addEdge(vertices.get(CIRCULAR_GRAPH_SIZE - 1), vertices.get(0));
 		return vertices;
 	}
 }
