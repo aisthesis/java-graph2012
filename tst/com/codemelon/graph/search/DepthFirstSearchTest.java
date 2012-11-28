@@ -35,7 +35,7 @@ public class DepthFirstSearchTest {
 	@Test
 	public void testSmallCLRSGraph() {
 		HashMap<Character, Vertex> vertices = setUpSmallCLRSGraph();
-		new DepthFirstSearch(graph).search();
+		assertFalse("Graph is not acyclic", new DepthFirstSearch(graph).search());
 		// all vertices are black
 		for (char i = 'u'; i <= 'z'; i++) {
 			assertEquals("Vertex is black", Color.BLACK, vertices.get(i).color);
@@ -46,7 +46,7 @@ public class DepthFirstSearchTest {
 	@Test
 	public void testBiggerCircularGraph() {
 		ArrayList<Vertex> vertices = setUpBiggerCircularGraph();
-		new DepthFirstSearch(graph).search();		
+		assertFalse("Graph is not acyclic", new DepthFirstSearch(graph).search());		
 		//vertex first discovered will be vertex last finished in this case
 		int indexOfFirstDiscovery = -1;
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {

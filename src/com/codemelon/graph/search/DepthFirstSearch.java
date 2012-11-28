@@ -20,7 +20,6 @@ public class DepthFirstSearch {
 	private DiGraph graph;
 	private int t;	// time in CLRS
 	private boolean isAcyclic;
-	private int treeNumber;
 	
 	public DepthFirstSearch(DiGraph graph) {
 		this.graph = graph;
@@ -30,13 +29,11 @@ public class DepthFirstSearch {
 	public boolean search() {
 		new VertexResetter(graph).dfsReset();
 		t = 0;
-		treeNumber = 0;
 		Iterator<Vertex> it = graph.vertexIterator();
 		Vertex u;
 		while (it.hasNext()) {
 			u = it.next();
 			if (u.color == Color.WHITE) {
-				treeNumber++;
 				visit(u);
 			}
 		}
@@ -45,7 +42,6 @@ public class DepthFirstSearch {
 	private void visit(Vertex u) {
 		u.discoveryTime = ++t;
 		u.color = Color.GRAY;
-		u.treeNumber = treeNumber;
 		Set<Vertex> adjacentVertices = u.getAdjacencies();
 		for (Vertex v : adjacentVertices) {
 			switch (v.color) {
