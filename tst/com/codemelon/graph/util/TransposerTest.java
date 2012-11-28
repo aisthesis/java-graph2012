@@ -1,4 +1,4 @@
-package com.codemelon.graph.util.core;
+package com.codemelon.graph.util;
 
 import static org.junit.Assert.*;
 

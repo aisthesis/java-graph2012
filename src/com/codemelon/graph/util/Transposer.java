@@ -1,7 +1,7 @@
 /**
  * Utility class for transposing a graph
  */
-package com.codemelon.graph.util.core;
+package com.codemelon.graph.util;
 
 import java.util.Iterator;
 import java.util.Set;

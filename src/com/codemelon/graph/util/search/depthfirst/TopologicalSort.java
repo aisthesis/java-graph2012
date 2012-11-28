@@ -10,7 +10,7 @@ import java.util.Set;
 
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.util.core.VertexResetter;
+import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.Vertex;
 
 /**

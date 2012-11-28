@@ -2,7 +2,7 @@
  * Utility class for resetting the vertices of a graph.
  * The constructor takes the graph to reset as argument
  */
-package com.codemelon.graph.util.core;
+package com.codemelon.graph.util;
 
 import java.util.Iterator;
 
