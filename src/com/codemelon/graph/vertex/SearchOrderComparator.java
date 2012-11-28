@@ -7,15 +7,15 @@ import java.util.Comparator;
 
 /**
  * @author Marshall Farrier
- * @version Nov 26, 2012
+ * @version Nov 27, 2012
  *
  */
-public class LabelComparator implements Comparator<Vertex> {
+public class SearchOrderComparator implements Comparator<Vertex> {
 	
-	public LabelComparator() {}
+	public SearchOrderComparator() {}
 	
 	@Override
 	public int compare(Vertex v1, Vertex v2) {
-		return v1.label - v2.label;
+		return v1.searchOrder - v2.searchOrder;
 	}
 }
