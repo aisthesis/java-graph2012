@@ -2,4 +2,8 @@ java-graph2012
 =============================================
 Git repository for revised Java graph library
 started 11/23/2012
-Note: The library is currently not thread safe!
+This library currently includes relatively lightweight
+classes that avoid the overhead involved in insuring
+thread-safety.
+I plan to include thread-safe classes later while keeping
+things as simple and lightweight as possible to begin with.
