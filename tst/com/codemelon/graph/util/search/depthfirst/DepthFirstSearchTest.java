@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.codemelon.graph.DiGraph;
@@ -23,25 +22,16 @@ import com.codemelon.graph.vertex.Vertex;
 public class DepthFirstSearchTest {
 	private DiGraph graph;
 
-	/**
-	 * 
-	 */
-	@Before
-	public void setUp() {
-	}
-
-	/**
-	 * 
-	 */
 	@After
 	public void tearDown() {
+		graph = null;
 	}
 
 	/**
 	 * Test method for {@link com.codemelon.graph.util.search.DepthFirstSearch#search()}.
 	 */
 	@Test
-	public void testSearch() {
+	public void testSmallCLRSGraph() {
 		HashMap<Character, Vertex> vertices = setUpSmallCLRSGraph();
 		new DepthFirstSearch(graph).search();
 		// all vertices are black

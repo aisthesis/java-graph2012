@@ -4,58 +4,53 @@
 package com.codemelon.graph.util.search.depthfirst;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.core.VertexResetter;
 import com.codemelon.graph.vertex.Vertex;
+
 /**
  * @author Marshall Farrier
- * @version Nov 26, 2012
- * cf. CLRS, pp. 604ff.
+ * @version Nov 27, 2012
+ *
  */
-public class DepthFirstSearch {
+public class TopologicalSort {
 	private DiGraph graph;
-	private int t;	// time in CLRS
 	
-	public DepthFirstSearch(DiGraph graph) {
+	public TopologicalSort(DiGraph graph) {
 		this.graph = graph;
-		t = 0;
 	}
-	
-	public void search() {
-		new VertexResetter(graph).dfsReset();
-		t = 0;
+
+	/**
+	 * CLRS, p. 613
+	 * @return a list of topologically sorted vertices
+	 */
+	public LinkedList<Vertex> topologicalSort() {
+		LinkedList<Vertex> result = new LinkedList<Vertex>();
+		new VertexResetter(graph).resetColors();
 		Iterator<Vertex> it = graph.vertexIterator();
 		Vertex u;
 		while (it.hasNext()) {
 			u = it.next();
 			if (u.color == Color.WHITE) {
-				visit(u);
+				topologicalSortVisit(u, result);
 			}
 		}
+		return result;
 	}
-	private void visit(Vertex u) {
-		t++;
-		u.discoveryTime = t;
+	
+	private void topologicalSortVisit(Vertex u, LinkedList<Vertex> result) {
 		u.color = Color.GRAY;
 		Set<Vertex> adjacentVertices = u.getAdjacencies();
 		for (Vertex v : adjacentVertices) {
 			if (v.color == Color.WHITE) {
-				v.parent = u;
-				visit(v);
+				topologicalSortVisit(v, result);
 			}		
 		}
 		u.color = Color.BLACK;
-		t++;
-		u.finishTime = t;
-	}
-	/**
-	 * Searches vertices in the order specified by the searchOrder member field
-	 * of the vertex
-	 */
-	public void orderedSearch() {
-		
+		result.addFirst(u);	
 	}
 }
