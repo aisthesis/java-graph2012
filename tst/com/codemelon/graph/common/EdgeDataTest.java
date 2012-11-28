@@ -20,27 +20,27 @@ public class EdgeDataTest {
 	@Test
 	public void testEdgeData() {
 		EdgeData edgeData = new EdgeData();
-		assertEquals("Default color correct.", Color.WHITE, edgeData.color());
-		assertEquals("Default type correct.", EdgeType.UNKNOWN, edgeData.edgeType());
+		assertEquals("Default color correct.", Color.WHITE, edgeData.getColor());
+		assertEquals("Default type correct.", EdgeType.UNKNOWN, edgeData.getEdgeType());
 	}
 	
 	/**
-	 * Test method for {@link com.codemelon.graph.common.EdgeData#color()}.
-	 */
-	@Test
-	public void testColor() {
-		Color c = Color.BLACK;
-		EdgeData edgeData = new EdgeData(c);
-		assertEquals("Explicitly set color correct.", c, edgeData.color());
-	}
+		 * Test method for {@link com.codemelon.graph.common.EdgeData#getColor()}.
+		 */
+		@Test
+		public void testGetColor() {
+			Color c = Color.BLACK;
+			EdgeData edgeData = new EdgeData(c);
+			assertEquals("Explicitly set color correct.", c, edgeData.getColor());
+		}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.common.EdgeData#edgeType()}.
-	 */
-	@Test
-	public void testEdgeType() {
-		EdgeType et = EdgeType.TREE;
-		EdgeData edgeData = new EdgeData(et);
-		assertEquals("Explicitly set edge type correct.", et, edgeData.edgeType());
-	}
+		 * Test method for {@link com.codemelon.graph.common.EdgeData#getEdgeType()}.
+		 */
+		@Test
+		public void testGetEdgeType() {
+			EdgeType et = EdgeType.TREE;
+			EdgeData edgeData = new EdgeData(et);
+			assertEquals("Explicitly set edge type correct.", et, edgeData.getEdgeType());
+		}
 }

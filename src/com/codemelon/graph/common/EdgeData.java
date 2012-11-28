@@ -20,6 +20,8 @@ public class EdgeData {
 		color = c;
 		edgeType = et;
 	}
-	public Color color() { return color; }
-	public EdgeType edgeType() { return edgeType; }
+	public Color getColor() { return color; }
+	public EdgeType getEdgeType() { return edgeType; }
+	public void setColor(Color color) { this.color = color; }
+	public void setEdgeType(EdgeType edgeType) { this.edgeType = edgeType; }
 }

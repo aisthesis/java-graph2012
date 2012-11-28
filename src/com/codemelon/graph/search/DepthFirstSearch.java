@@ -18,13 +18,15 @@ import com.codemelon.graph.vertex.Vertex;
 public class DepthFirstSearch {
 	private DiGraph graph;
 	private int t;	// time in CLRS
+	private boolean isAcyclic;
 	
 	public DepthFirstSearch(DiGraph graph) {
 		this.graph = graph;
 		t = 0;
+		isAcyclic = true;
 	}
 	
-	public void search() {
+	public boolean search() {
 		new VertexResetter(graph).dfsReset();
 		t = 0;
 		Iterator<Vertex> it = graph.vertexIterator();
@@ -35,6 +37,7 @@ public class DepthFirstSearch {
 				visit(u);
 			}
 		}
+		return isAcyclic;
 	}
 	private void visit(Vertex u) {
 		u.discoveryTime = ++t;

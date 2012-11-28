@@ -3,7 +3,7 @@
  * 
  */
 package com.codemelon.graph.vertex;
-import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -16,7 +16,7 @@ import com.codemelon.graph.common.EdgeData;
  * @version 11-23-2012
  */
 public class Vertex {
-	private HashMap<Vertex, EdgeData> adjacencies;
+	private IdentityHashMap<Vertex, EdgeData> adjacencies;
 	private DiGraph graph;
 	
 	public int label;
@@ -48,7 +48,7 @@ public class Vertex {
 	}
 	public Vertex(int label, int searchOrder, Color color, Vertex parent, int distance, int discoveryTime,
 			int finishTime, int treeNumber) {
-		adjacencies = new HashMap<Vertex, EdgeData>();
+		adjacencies = new IdentityHashMap<Vertex, EdgeData>();
 		graph = null;
 		this.label = label;
 		this.searchOrder = searchOrder;
