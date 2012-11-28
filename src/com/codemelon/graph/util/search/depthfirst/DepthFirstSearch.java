@@ -37,8 +37,7 @@ public class DepthFirstSearch {
 		}
 	}
 	private void visit(Vertex u) {
-		t++;
-		u.discoveryTime = t;
+		u.discoveryTime = ++t;
 		u.color = Color.GRAY;
 		Set<Vertex> adjacentVertices = u.getAdjacencies();
 		for (Vertex v : adjacentVertices) {
@@ -48,8 +47,7 @@ public class DepthFirstSearch {
 			}		
 		}
 		u.color = Color.BLACK;
-		t++;
-		u.finishTime = t;
+		u.finishTime = ++t;
 	}
 	/**
 	 * Searches vertices in the order specified by the searchOrder member field
