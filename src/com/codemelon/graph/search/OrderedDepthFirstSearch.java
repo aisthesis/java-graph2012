@@ -4,7 +4,7 @@
  * we have to sort the list of all vertices in the graph once,
  * then each adjacency list that is explored.
  */
-package com.codemelon.graph.util.search.depthfirst;
+package com.codemelon.graph.search;
 
 import java.util.ArrayList;
 import java.util.Arrays;
