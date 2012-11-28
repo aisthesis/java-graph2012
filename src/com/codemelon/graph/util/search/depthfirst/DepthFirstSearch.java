@@ -51,7 +51,7 @@ public class DepthFirstSearch {
 	}
 	/**
 	 * Searches vertices in the order specified by the searchOrder member field
-	 * of the vertex
+	 * of the vertex (better: pass in 'T extends Comparator<Vertex>')
 	 */
 	public void orderedSearch() {
 		
