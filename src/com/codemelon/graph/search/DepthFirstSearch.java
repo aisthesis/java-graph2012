@@ -59,9 +59,7 @@ public class DepthFirstSearch {
 				isAcyclic = false;
 				break;
 			case BLACK:
-				// TODO cf. CLRS, p. 609. How to distinguish forward and cross?
-				// this should be doable without using treeNumber but using times
-				if (v.treeNumber == treeNumber) { u.setEdgeType(v, EdgeType.FORWARD); }
+				if (u.discoveryTime < v.discoveryTime) { u.setEdgeType(v, EdgeType.FORWARD); }
 				else { u.setEdgeType(v, EdgeType.CROSS); }
 			}		
 		}
