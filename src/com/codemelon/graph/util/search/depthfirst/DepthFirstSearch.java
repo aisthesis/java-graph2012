@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.codemelon.graph.util.search;
+package com.codemelon.graph.util.search.depthfirst;
 
 import java.util.Iterator;
 import java.util.LinkedList;

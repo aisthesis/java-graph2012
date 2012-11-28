@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.codemelon.graph.util.search;
+package com.codemelon.graph.util.search.depthfirst;
 
 import static org.junit.Assert.*;
 
