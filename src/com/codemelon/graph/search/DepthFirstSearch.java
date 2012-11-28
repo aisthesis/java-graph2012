@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
+import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.Vertex;
 /**
@@ -19,21 +20,23 @@ public class DepthFirstSearch {
 	private DiGraph graph;
 	private int t;	// time in CLRS
 	private boolean isAcyclic;
+	private int treeNumber;
 	
 	public DepthFirstSearch(DiGraph graph) {
 		this.graph = graph;
-		t = 0;
 		isAcyclic = true;
 	}
 	
 	public boolean search() {
 		new VertexResetter(graph).dfsReset();
 		t = 0;
+		treeNumber = 0;
 		Iterator<Vertex> it = graph.vertexIterator();
 		Vertex u;
 		while (it.hasNext()) {
 			u = it.next();
 			if (u.color == Color.WHITE) {
+				treeNumber++;
 				visit(u);
 			}
 		}
@@ -42,11 +45,24 @@ public class DepthFirstSearch {
 	private void visit(Vertex u) {
 		u.discoveryTime = ++t;
 		u.color = Color.GRAY;
+		u.treeNumber = treeNumber;
 		Set<Vertex> adjacentVertices = u.getAdjacencies();
 		for (Vertex v : adjacentVertices) {
-			if (v.color == Color.WHITE) {
+			switch (v.color) {
+			case WHITE:
 				v.parent = u;
+				u.setEdgeType(v, EdgeType.TREE);
 				visit(v);
+				break;
+			case GRAY:
+				u.setEdgeType(v, EdgeType.BACK);
+				isAcyclic = false;
+				break;
+			case BLACK:
+				// TODO cf. CLRS, p. 609. How to distinguish forward and cross?
+				// this should be doable without using treeNumber but using times
+				if (v.treeNumber == treeNumber) { u.setEdgeType(v, EdgeType.FORWARD); }
+				else { u.setEdgeType(v, EdgeType.CROSS); }
 			}		
 		}
 		u.color = Color.BLACK;

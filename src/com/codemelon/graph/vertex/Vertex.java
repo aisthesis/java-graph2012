@@ -10,6 +10,7 @@ import java.util.Set;
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeData;
+import com.codemelon.graph.common.EdgeType;
 
 /**
  * @author Marshall Farrier
@@ -155,5 +156,18 @@ public class Vertex {
 	 */
 	public boolean hasAdjacencies() {
 		return !adjacencies.isEmpty();
+	}
+	public void setEdgeColor(Vertex to, Color color) {
+		adjacencies.get(to).setColor(color);
+	}
+	public void setEdgeType(Vertex to, EdgeType edgeType) {
+		adjacencies.get(to).setEdgeType(edgeType);
+	}
+	/**
+	 * Don't allow subclasses to override the equals method
+	 */
+	@Override
+	public final boolean equals(Object o) {
+		return (this == o);
 	}
 }

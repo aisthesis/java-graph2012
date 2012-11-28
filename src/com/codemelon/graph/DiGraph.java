@@ -19,6 +19,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.codemelon.graph.common.Color;
+import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
@@ -144,4 +146,16 @@ public class DiGraph {
 	 * @return number of edges in the graph
 	 */
 	public long edgeCount() { return edges; }
+	public void setEdgeColor(Vertex from, Vertex to, Color color) {
+		if (!vertices.contains(from)) {
+			throw new IllegalArgumentException("No such vertex!");
+		}
+		from.setEdgeColor(to, color);
+	}
+	public void setEdgeType(Vertex from, Vertex to, EdgeType edgeType) {
+		if (!vertices.contains(from)) {
+			throw new IllegalArgumentException("No such vertex!");
+		}
+		from.setEdgeType(to, edgeType);
+	}
 }

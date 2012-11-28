@@ -37,6 +37,7 @@ public class VertexResetter {
 		resetParents();
 		resetDiscoveryTimes();
 		resetFinishTimes();
+		resetTreeNumbers();
 	}
 
 	/**
