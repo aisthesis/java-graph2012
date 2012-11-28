@@ -54,7 +54,7 @@ public class DepthFirstSearch {
 	}
 	/**
 	 * CLRS, p. 613
-	 * @return
+	 * @return a list of topologically sorted vertices
 	 */
 	public LinkedList<Vertex> topologicalSort() {
 		LinkedList<Vertex> result = new LinkedList<Vertex>();
@@ -80,5 +80,12 @@ public class DepthFirstSearch {
 		}
 		u.color = Color.BLACK;
 		result.addFirst(u);	
+	}
+	/**
+	 * Searches vertices in the order specified by the searchOrder member field
+	 * of the vertex
+	 */
+	public void orderedSearch() {
+		
 	}
 }

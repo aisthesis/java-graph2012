@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.codemelon.graph.DiGraph;
-import com.codemelon.graph.Graph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.Vertex;
 
