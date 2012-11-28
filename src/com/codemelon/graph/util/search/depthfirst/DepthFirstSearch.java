@@ -49,11 +49,4 @@ public class DepthFirstSearch {
 		u.color = Color.BLACK;
 		u.finishTime = ++t;
 	}
-	/**
-	 * Searches vertices in the order specified by the searchOrder member field
-	 * of the vertex (better: pass in 'T extends Comparator<Vertex>')
-	 */
-	public void orderedSearch() {
-		
-	}
 }

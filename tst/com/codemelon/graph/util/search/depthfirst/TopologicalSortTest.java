@@ -6,7 +6,6 @@ package com.codemelon.graph.util.search.depthfirst;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 import org.junit.After;
 import org.junit.Test;

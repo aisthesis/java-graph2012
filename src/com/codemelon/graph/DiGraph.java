@@ -35,7 +35,7 @@ public class DiGraph {
 		this(DEFAULT_INITIAL_CAPACITY);
 	}
 	public DiGraph(int initialCapacity) {
-		vertices = Collections.synchronizedSet(new HashSet<Vertex>(initialCapacity));
+		vertices = new HashSet<Vertex>(initialCapacity);
 		edges = 0L;
 	}
 	/**
@@ -44,7 +44,7 @@ public class DiGraph {
 	 * @param initialVertices collection of vertices to include in the Graph
 	 */
 	public DiGraph(Collection<Vertex> initialVertices) {
-		vertices = Collections.synchronizedSet(new HashSet<Vertex>(initialVertices));
+		vertices = new HashSet<Vertex>(initialVertices);
 		edges = 0L;
 		for (Vertex v : initialVertices) {
 			v.clearAdjacencies();
