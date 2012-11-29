@@ -53,7 +53,10 @@ public class DepthFirstSearchTest {
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {
 			if (vertices.get(i).discoveryTime == 1) {
 				indexOfFirstDiscovery = i;
-				break;
+			}
+			else if (i > 0) {
+				assertEquals("Edge from last to first is a back edge", EdgeType.TREE,
+						vertices.get(i - 1).getEdgeType(vertices.get(i)));
 			}
 		}
 		assertEquals("Vertex first discovered has last finish time", 
