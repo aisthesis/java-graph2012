@@ -22,7 +22,7 @@ import com.codemelon.graph.vertex.SearchOrderComparator;
  * @version Nov 27, 2012
  *
  */
-public class DeterministicDepthFirstSearch {
+public class InOrderDepthFirstSearch {
 	private DiGraph graph;
 	private int t;	// time in CLRS
 	private ArrayList<Vertex> vertices;
@@ -30,7 +30,7 @@ public class DeterministicDepthFirstSearch {
 	
 	private static final Vertex[] emptyVertexArray = new Vertex[0];
 	
-	public DeterministicDepthFirstSearch(DiGraph graph, Comparator<Vertex> comp) {
+	public InOrderDepthFirstSearch(DiGraph graph, Comparator<Vertex> comp) {
 		this.graph = graph;
 		vertices = graph.getVertices();
 		this.comp = comp;
@@ -40,7 +40,7 @@ public class DeterministicDepthFirstSearch {
 	 * If comparator is unspecified, use SearchOrderComparator
 	 * @param graph graph to search
 	 */
-	public DeterministicDepthFirstSearch(DiGraph graph) {
+	public InOrderDepthFirstSearch(DiGraph graph) {
 		this(graph, new SearchOrderComparator());
 	}
 	

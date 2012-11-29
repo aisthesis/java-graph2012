@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
+import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
@@ -57,6 +58,10 @@ public class DepthFirstSearchTest {
 		}
 		assertEquals("Vertex first discovered has last finish time", 
 				CIRCULAR_GRAPH_SIZE * 2, vertices.get(indexOfFirstDiscovery).finishTime);
+		int indexOfLastDiscovery = (indexOfFirstDiscovery == 
+				0 ? CIRCULAR_GRAPH_SIZE - 1 : indexOfFirstDiscovery - 1);
+		assertEquals("Edge from last to first is a back edge", EdgeType.BACK,
+				vertices.get(indexOfLastDiscovery).getEdgeType(vertices.get(indexOfFirstDiscovery)));
 	}
 	/**
 	 * Graph from CLRS, p. 605
