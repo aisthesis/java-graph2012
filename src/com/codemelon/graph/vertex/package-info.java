@@ -1,4 +1,4 @@
 /**
- * Vertex class and utilities relating directly to vertices
+ * Vertex class and utilities for working with vertices.
  */
 package com.codemelon.graph.vertex;
