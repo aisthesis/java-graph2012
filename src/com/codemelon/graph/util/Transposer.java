@@ -43,9 +43,8 @@ public class Transposer {
 		return vertexMap;
 	}
 	/**
-	 * Returns the transpose graph created when transpose() was called.
-	 * If transpose() has not been called, the transposeGraph will be empty.
-	 * @return
+	 * Returns the transpose of the original graph
+	 * @return transpose of the original graph
 	 */
 	public DiGraph getTransposeGraph() {
 		return transposeGraph;
