@@ -12,8 +12,9 @@ import com.codemelon.graph.vertex.Vertex;
 
 /**
  * @author Marshall Farrier
- * @version Nov 25, 2012
- *
+ * @version November 30, 2012
+ * 
+ * Utility class for transposing a graph.
  */
 public class Transposer {
 	private DiGraph graph;
@@ -21,6 +22,9 @@ public class Transposer {
 	private HashMap<Vertex, Vertex> vertexMap;
 
 	/**
+	 * Creates a transpose graph, which can be retrieved as needed through the
+	 * getTransposeGraph() method, and a HashMap from the vertices of the original
+	 * graph to the corresponding vertices of the transpose graph.
 	 * All vertex data (label, color, distance, discoveryTime, etc.) is copied
 	 * into the transpose graph with the exception of parent, which is set to 
 	 * null for each vertex in the transpose graph. Edge data, however,
