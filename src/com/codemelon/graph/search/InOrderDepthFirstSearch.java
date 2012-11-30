@@ -27,6 +27,7 @@ import com.codemelon.graph.vertex.SearchOrderComparator;
 public class InOrderDepthFirstSearch {
 	private DiGraph graph;
 	private int t;	// time in CLRS
+	private int treeNumber; // used in StronglyConnectedComponents
 	private ArrayList<Vertex> vertices;
 	private Comparator<Vertex> comp;
 	
@@ -45,7 +46,6 @@ public class InOrderDepthFirstSearch {
 		this.graph = graph;
 		vertices = graph.getVertices();
 		this.comp = comp;
-		t = 0;
 	}
 	/**
 	 * If comparator is unspecified, use SearchOrderComparator as the default.
@@ -75,14 +75,17 @@ public class InOrderDepthFirstSearch {
 		new VertexResetter(graph).dfsReset();
 		Collections.sort(vertices, comp);
 		t = 0;
+		treeNumber = 0;
 		for (Vertex u : vertices) {
 			if (u.color == Color.WHITE) {
+				treeNumber++;
 				visit(u);
 			}		
 		}
 	}
 	private void visit(Vertex u) {
 		u.discoveryTime = ++t;
+		u.treeNumber = treeNumber;
 		u.color = Color.GRAY;
 		Vertex[] adjacentVertices = u.getAdjacencies().toArray(emptyVertexArray);
 		Arrays.sort(adjacentVertices, comp);
