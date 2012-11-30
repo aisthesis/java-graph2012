@@ -17,41 +17,19 @@ import com.codemelon.graph.vertex.Vertex;
  */
 public class Transposer {
 	private DiGraph graph;
+	private DiGraph transposeGraph;
 	private HashMap<Vertex, Vertex> vertexMap;
-	
-	public Transposer(DiGraph graph) {
-		this.graph = graph;
-		vertexMap = null;
-	}
+
 	/**
 	 * All vertex data (label, color, distance, discoveryTime, etc.) is copied
 	 * into the transpose graph with the exception of parent, which is set to 
 	 * null for each vertex in the transpose graph. Edge data, however,
-	 * is <em>not</em> copied into the transpose graph. 	
-	 * @return a graph which is the transpose of the original graph
+	 * is <em>not</em> copied into the transpose graph.
 	 */
-	public DiGraph transpose() {
-		DiGraph result = new DiGraph(graph.vertexCount());
-		// create a datastructure for tracking corresponding vertices
-		vertexMap = new HashMap<Vertex, Vertex>(graph.vertexCount());
-		// insert vertices into map and result graph
-		Iterator<Vertex> vertexIterator = graph.vertexIterator();
-		Vertex v;
-		while (vertexIterator.hasNext()) {
-			v = vertexIterator.next();
-			vertexMap.put(v, new Vertex(v));
-			result.addVertex(vertexMap.get(v));
-		}
-		Set<Vertex> adjacentVertices;
-		vertexIterator = graph.vertexIterator();
-		while (vertexIterator.hasNext()) {
-			v = vertexIterator.next();
-			adjacentVertices = v.getAdjacencies();			
-			for (Vertex to : adjacentVertices) {
-				result.addEdge(vertexMap.get(to), vertexMap.get(v));
-			}		
-		}
-		return result;
+	public Transposer(DiGraph graph) {
+		this.graph = graph;
+		transposeGraph = new DiGraph(graph.vertexCount());
+		transpose();
 	}
 	/**
 	 * Returns a mapping in which the keys are the vertices of the original graph
@@ -63,5 +41,34 @@ public class Transposer {
 	 */
 	public HashMap<Vertex, Vertex> getVertexMap() {
 		return vertexMap;
+	}
+	/**
+	 * Returns the transpose graph created when transpose() was called.
+	 * If transpose() has not been called, the transposeGraph will be empty.
+	 * @return
+	 */
+	public DiGraph getTransposeGraph() {
+		return transposeGraph;
+	}
+	
+	private void transpose() {
+		vertexMap = new HashMap<Vertex, Vertex>(graph.vertexCount());
+		// insert vertices into map and result graph
+		Iterator<Vertex> vertexIterator = graph.vertexIterator();
+		Vertex v;
+		while (vertexIterator.hasNext()) {
+			v = vertexIterator.next();
+			vertexMap.put(v, new Vertex(v));
+			transposeGraph.addVertex(vertexMap.get(v));
+		}
+		Set<Vertex> adjacentVertices;
+		vertexIterator = graph.vertexIterator();
+		while (vertexIterator.hasNext()) {
+			v = vertexIterator.next();
+			adjacentVertices = v.getAdjacencies();			
+			for (Vertex to : adjacentVertices) {
+				transposeGraph.addEdge(vertexMap.get(to), vertexMap.get(v));
+			}		
+		}
 	}
 }

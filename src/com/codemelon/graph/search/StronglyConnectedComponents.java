@@ -23,10 +23,10 @@ public class StronglyConnectedComponents {
 		this.graph = graph;
 	}
 	
-	public void run() {
+	public Transposer run() {
 		new DepthFirstSearch(graph).search();
 		Transposer transposer = new Transposer(graph);
-		DiGraph transposeGraph = transposer.transpose();
+		DiGraph transposeGraph = transposer.getTransposeGraph();
 		// set searchOrder field in transpose graph to finish time in depth-first search
 		Iterator<Vertex> it = transposeGraph.vertexIterator();
 		Vertex v;
@@ -42,5 +42,6 @@ public class StronglyConnectedComponents {
 			v = it.next();
 			v.treeNumber = vertexMap.get(v).treeNumber;
 		}
+		return transposer;
 	}
 }
