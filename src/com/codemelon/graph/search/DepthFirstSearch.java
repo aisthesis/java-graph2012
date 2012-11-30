@@ -25,7 +25,21 @@ public class DepthFirstSearch {
 		this.graph = graph;
 		isAcyclic = true;
 	}
-	
+	/**
+	 * Conduct a depth-first search on the graph, visiting vertices
+	 * in no predetermined order.
+	 * This method modifies the graph in the following ways:
+	 * <ol>
+	 * <li>All vertices will be colored black after this method call.</li>
+	 * <li>All vertices will have discoveryTime and finishTime set according
+	 * to the order in which they were first discovered and finished.</li>
+	 * <li>Vertices will have parent fields set as determined by the search.</li>
+	 * <li>Edges will be classified as TREE, BACK, FORWARD or CROSS</li>
+	 * </ol>
+	 * The search() method returns a boolean value which is true iff the graph
+	 * is acyclic.
+	 * @return true iff the graph is acyclic.
+	 */
 	public boolean search() {
 		new VertexResetter(graph).dfsReset();
 		t = 0;
