@@ -58,7 +58,9 @@ public class TransposerTest {
 		vertices.get(2).finishTime = SPECIAL_FINISH_TIME;
 		vertices.get(2).searchOrder = SPECIAL_SEARCH_ORDER;
 		vertices.get(2).treeNumber = SPECIAL_TREE_NUMBER;
-		DiGraph transposedGraph = new Transposer(graph).transpose();
+		Transposer transposer = new Transposer(graph);
+		assertNull("transpose mapping not yet created", transposer.getVertexMap());
+		DiGraph transposedGraph = transposer.transpose();
 		assertEquals("Correct number of edges in transposed graph", 
 				2, transposedGraph.edgeCount());
 		ArrayList<Vertex> transposedVertices = transposedGraph.getVertices();

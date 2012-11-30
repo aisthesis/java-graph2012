@@ -17,10 +17,11 @@ import com.codemelon.graph.vertex.Vertex;
  */
 public class Transposer {
 	private DiGraph graph;
-	HashMap<Vertex, Vertex> vertexMap;
+	private HashMap<Vertex, Vertex> vertexMap;
 	
 	public Transposer(DiGraph graph) {
 		this.graph = graph;
+		vertexMap = null;
 	}
 	/**
 	 * All vertex data (label, color, distance, discoveryTime, etc.) is copied
@@ -54,9 +55,11 @@ public class Transposer {
 	}
 	/**
 	 * Returns a mapping in which the keys are the vertices of the original graph
-	 * and the values are the corresponding vertices in the transpose graph.
+	 * and the values are the corresponding vertices in the transpose graph. The mapping
+	 * is created only when the transpose() method is called. If transpose() has not been
+	 * called, this method will return null.
 	 * @return a HashMap from vertices in the original graph to vertices in the
-	 * transpose graph.
+	 * transpose graph, or null, if transpose() has not yet been called.
 	 */
 	public HashMap<Vertex, Vertex> getVertexMap() {
 		return vertexMap;
