@@ -54,6 +54,11 @@ public class DisjointSet<T> {
 		}
 	}
 	
+	/**
+	 * Returns the canonical representative of the set to which the given item belongs
+	 * @param item item whose set is to be determined
+	 * @return the canonical representative of the set to which the given item belongs
+	 */
 	public T findSet(T item) {
 		return nodes.get(item).setData.head.item;
 	}
