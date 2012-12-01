@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.codemelon.graph.common;
 
 /**

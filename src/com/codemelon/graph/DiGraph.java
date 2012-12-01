@@ -25,6 +25,18 @@ import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
+ * Graph class supporting insertion and removal of both vertices and
+ * edges.
+ * Labeling for vertices is assumed to occur outside of this class.
+ * The advantage is that various checks on vertices can then occur
+ * much faster than they would if we had to run through the values in 
+ * a hash.
+ * Before inserting or removing an edge, we need to check whether the
+ * graph contains its vertices.
+ * And when inserting a vertex, we need to check that it isn't already present.
+ * Both of these checks would be cumbersome if we implemented the graph
+ * as a map of a label to a vertex.
+ * 
  * @author Marshall Farrier
  * @version 11-23-2012
  */

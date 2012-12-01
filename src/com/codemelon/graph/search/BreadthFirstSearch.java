@@ -12,6 +12,8 @@ import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
+ * Implementation of breadth-first search following 
+ * <a href="http://mitpress.mit.edu/algorithms/">CLRS</a>, pp. 594ff.
  * @author Marshall Farrier
  * @version Nov 25, 2012
  *

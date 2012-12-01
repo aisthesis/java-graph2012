@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.codemelon.graph.search;
 
 import java.util.Iterator;
@@ -12,6 +9,8 @@ import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.Vertex;
 /**
+ * Implementation of depth-first search following 
+ * <a href="http://mitpress.mit.edu/algorithms/">CLRS</a>, pp. 603ff.
  * @author Marshall Farrier
  * @version Nov 26, 2012
  * cf. CLRS, pp. 604ff.
