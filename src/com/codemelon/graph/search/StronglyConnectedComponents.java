@@ -19,10 +19,25 @@ import com.codemelon.graph.vertex.Vertex;
 public class StronglyConnectedComponents {
 	private DiGraph graph;
 	
+	/**
+	 * Prepare to mark the graph for strongly connected components.
+	 * No changes to the graph are made when the graph is passed into the constructor.
+	 * @param graph graph for which strongly connected components are to be determined.
+	 */
 	public StronglyConnectedComponents(DiGraph graph) {
 		this.graph = graph;
 	}
 	
+	/**
+	 * Marks the strongly connected components in the graph by setting
+	 * the treeNumber field of each vertex accordingly. Vertices in the
+	 * same strongly connected component will have the same tree number, 
+	 * and vertices belonging to different components will have different
+	 * tree numbers
+	 * @return the Transposer object created when setting the vertex tree numbers.
+	 * This object may be discarded or maintained depending on whether or not the client has further
+	 * use for the transpose graph.
+	 */
 	public Transposer run() {
 		new DepthFirstSearch(graph).search();
 		Transposer transposer = new Transposer(graph);

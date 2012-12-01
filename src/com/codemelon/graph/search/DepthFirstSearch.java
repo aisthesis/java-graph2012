@@ -21,6 +21,11 @@ public class DepthFirstSearch {
 	private int t;	// time in CLRS
 	private boolean isAcyclic;
 	
+	/**
+	 * Prepare the depth-first search.
+	 * No changes are made to the graph when it is passed into the constructor.
+	 * @param graph graph on which the search will be run
+	 */
 	public DepthFirstSearch(DiGraph graph) {
 		this.graph = graph;
 		isAcyclic = true;

@@ -8,10 +8,10 @@
  */
 package com.codemelon.graph.search;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
@@ -28,7 +28,7 @@ public class InOrderDepthFirstSearch {
 	private DiGraph graph;
 	private int t;	// time in CLRS
 	private int treeNumber; // used in StronglyConnectedComponents
-	private ArrayList<Vertex> vertices;
+	private List<Vertex> vertices;
 	private Comparator<Vertex> comp;
 	
 	private static final Vertex[] emptyVertexArray = new Vertex[0];

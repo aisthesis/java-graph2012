@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import com.codemelon.graph.common.Color;
@@ -32,9 +33,20 @@ public class DiGraph {
 	private Set<Vertex> vertices;
 	private long edges;
 	
+	/**
+	 * Default constructor. Creates an empty graph with a default initial
+	 * capacity of 16 vertices.
+	 */
 	public DiGraph() {
 		this(DEFAULT_INITIAL_CAPACITY);
 	}
+	/**
+	 * Constructor explicitly specifying the expected number of vertices
+	 * the graph will contain. For large graphs in which the approximate
+	 * number of vertices is known in advance, use of this constructor will
+	 * result in significantly improved performance.
+	 * @param initialCapacity
+	 */
 	public DiGraph(int initialCapacity) {
 		vertices = new HashSet<Vertex>(initialCapacity);
 		edges = 0L;
@@ -65,6 +77,15 @@ public class DiGraph {
 		}
 		return false;
 	}
+	/**
+	 * Remove a vertex from the graph. The vertex is removed along with
+	 * its adjacency list, and it is also removed from the adjacency set of all
+	 * other vertices in the graph. After this method call, not only will
+	 * the vertex not belong to the graph, but the adjacency list of the 
+	 * vertex will be cleared.
+	 * @param v vertex to be removed from the graph
+	 * @return true if the vertex was found in the graph
+	 */
 	public boolean removeVertex(Vertex v) {
 		if (vertices.remove(v)) {
 			edges -= v.adjacencyCount();
@@ -113,7 +134,12 @@ public class DiGraph {
 		}
 		return false;
 	}
-	
+	/**
+	 * Shows whether or not the graph contains the specified edge
+	 * @param from the tail or source vertex of the edge for which we are testing
+	 * @param to the head or target vertex of the edge for which we are testing
+	 * @return true if the edge from the given tail to the given head exists in the graph.
+	 */
 	public boolean containsEdge(Vertex from, Vertex to) {
 		if (!vertices.contains(from) || !vertices.contains(to)) {
 			throw new IllegalArgumentException("One or more vertices not present in graph!");
@@ -127,11 +153,19 @@ public class DiGraph {
 	public Iterator<Vertex> vertexIterator() {
 		return vertices.iterator();
 	}
-	
+	/**
+	 * Shows whether or not the graph contains the given vertex
+	 * @param v the vertex whose presence in the graph is to be tested
+	 * @return true if the vertex is present in the graph
+	 */
 	public boolean containsVertex(Vertex v) {
 		return vertices.contains(v);
 	}
-	public ArrayList<Vertex> getVertices() {
+	/**
+	 * Returns a list of the vertices in the graph.
+	 * @return a list of the vertices in the graph
+	 */
+	public List<Vertex> getVertices() {
 		return new ArrayList<Vertex>(vertices);
 	}
 	/**
@@ -146,12 +180,32 @@ public class DiGraph {
 	 * @return number of edges in the graph
 	 */
 	public long edgeCount() { return edges; }
+	/**
+	 * Set the color of an edge in the graph. Throws an exception if the edge doesn't belong
+	 * to the graph
+	 * @param from tail of the edge to be colored
+	 * @param to head of the edge to be colored
+	 * @param color color to assign to the edge.
+	 * @throws IllegalArgumentException if the source vertex doesn't belong to the graph.
+	 * @throws NullPointerException if there is no such edge in the graph (including the
+	 * case where the target vertex doesn't belong to the graph)
+	 */
 	public void setEdgeColor(Vertex from, Vertex to, Color color) {
 		if (!vertices.contains(from)) {
 			throw new IllegalArgumentException("No such vertex!");
 		}
 		from.setEdgeColor(to, color);
 	}
+	/**
+	 * Set the edge type (TREE, BACK, FORWARD, CROSS) of an edge in the graph. 
+	 * Throws an exception if the edge doesn't belong to the graph.
+	 * @param from tail of the edge whose type is to be set
+	 * @param to head of the edge whose type is to be set
+	 * @param edgeType type to assign to the edge (TREE, BACK, FORWARD, or CROSS) 
+	 * @throws IllegalArgumentException if the source vertex doesn't belong to the graph.
+	 * @throws NullPointerException if there is no such edge in the graph (including the
+	 * case where the target vertex doesn't belong to the graph)
+	 */
 	public void setEdgeType(Vertex from, Vertex to, EdgeType edgeType) {
 		if (!vertices.contains(from)) {
 			throw new IllegalArgumentException("No such vertex!");

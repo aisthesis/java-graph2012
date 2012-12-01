@@ -65,7 +65,10 @@ public class BreadthFirstSearch {
 			u.color = Color.BLACK;
 		}
 	}
-	
+	/**
+	 * Returns the source vertex specified when search() was called.
+	 * @return the source vertex specified when search() was called
+	 */
 	public Vertex getSourceVertex() { return source; }
 	
 	/**
