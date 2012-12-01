@@ -23,49 +23,7 @@ import com.codemelon.graph.vertex.Vertex;
 public class BreadthFirstSearchTest {
 	private static final int VERTICES_IN_TEST_GRAPH = 1000;
 	private DiGraph graph;
-
-	/**
-	 * Graph with sequential (from vertex i to i + 1) edges on the lower-numbered vertices,
-	 * no edges on higher-numbered vertices, and one forked edge.
-	 */
-	public HashMap<Integer, Vertex> setUpBigSparseGraph() {
-		HashMap<Integer, Vertex> vertices = new HashMap<Integer, Vertex>(VERTICES_IN_TEST_GRAPH);
-		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
-			vertices.put(i, new Vertex(i));
-		}
-		graph = new DiGraph(vertices.values());
-		for (int i = 0; i < VERTICES_IN_TEST_GRAPH / 2; i++) {
-			graph.addEdge(vertices.get(i), vertices.get(i + 1));
-		}
-		graph.addEdge(vertices.get(VERTICES_IN_TEST_GRAPH / 4), vertices.get(VERTICES_IN_TEST_GRAPH / 2 + 1));
-		return vertices;
-	}
 	
-	/**
-	 * Graph from CLRS, p. 596
-	 */
-	public HashMap<Character, Vertex> setUpSmallCLRSGraph() {
-		HashMap<Character, Vertex> vertices = new HashMap<Character, Vertex>();
-		for (char i = 'r'; i <= 'y'; i++) {
-			vertices.put(i, new Vertex(i));
-		}
-		graph = new Graph(vertices.values());
-		graph.addEdge(vertices.get('r'), vertices.get('s'));
-		graph.addEdge(vertices.get('r'), vertices.get('v'));
-		graph.addEdge(vertices.get('s'), vertices.get('w'));
-		graph.addEdge(vertices.get('t'), vertices.get('u'));
-		graph.addEdge(vertices.get('t'), vertices.get('w'));
-		graph.addEdge(vertices.get('t'), vertices.get('x'));
-		graph.addEdge(vertices.get('u'), vertices.get('x'));
-		graph.addEdge(vertices.get('u'), vertices.get('y'));
-		graph.addEdge(vertices.get('w'), vertices.get('x'));
-		graph.addEdge(vertices.get('x'), vertices.get('y'));
-		return vertices;
-	}
-
-	/**
-	 * 
-	 */
 	@After
 	public void tearDown() {
 		graph = null;
@@ -136,4 +94,54 @@ public class BreadthFirstSearchTest {
 		assertEquals("Vertex y has correct distance", 3, vertices.get('y').distance);
 		assertEquals("Vertex y has correct parent", vertices.get('x'), vertices.get('y').parent);
 	}
+	
+	/**
+	 * throw an exception if path() called before search()
+	 * Test method for {@link com.codemelon.graph.util.search.BreadthFirstSearch#path(com.codemelon.graph.vertex.Vertex)}.
+	 */
+	@Test(expected=IllegalStateException.class)
+	public void testPathBeforeSearch() {
+		HashMap<Character, Vertex> vertices = setUpSmallCLRSGraph();
+		new BreadthFirstSearch(graph).path(vertices.get('t'));
+	}
+
+	/**
+	 * Graph with sequential (from vertex i to i + 1) edges on the lower-numbered vertices,
+	 * no edges on higher-numbered vertices, and one forked edge.
+	 */
+	private HashMap<Integer, Vertex> setUpBigSparseGraph() {
+		HashMap<Integer, Vertex> vertices = new HashMap<Integer, Vertex>(VERTICES_IN_TEST_GRAPH);
+		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
+			vertices.put(i, new Vertex(i));
+		}
+		graph = new DiGraph(vertices.values());
+		for (int i = 0; i < VERTICES_IN_TEST_GRAPH / 2; i++) {
+			graph.addEdge(vertices.get(i), vertices.get(i + 1));
+		}
+		graph.addEdge(vertices.get(VERTICES_IN_TEST_GRAPH / 4), vertices.get(VERTICES_IN_TEST_GRAPH / 2 + 1));
+		return vertices;
+	}
+	
+	/**
+	 * Graph from CLRS, p. 596
+	 */
+	private HashMap<Character, Vertex> setUpSmallCLRSGraph() {
+		HashMap<Character, Vertex> vertices = new HashMap<Character, Vertex>();
+		for (char i = 'r'; i <= 'y'; i++) {
+			vertices.put(i, new Vertex(i));
+		}
+		graph = new Graph(vertices.values());
+		graph.addEdge(vertices.get('r'), vertices.get('s'));
+		graph.addEdge(vertices.get('r'), vertices.get('v'));
+		graph.addEdge(vertices.get('s'), vertices.get('w'));
+		graph.addEdge(vertices.get('t'), vertices.get('u'));
+		graph.addEdge(vertices.get('t'), vertices.get('w'));
+		graph.addEdge(vertices.get('t'), vertices.get('x'));
+		graph.addEdge(vertices.get('u'), vertices.get('x'));
+		graph.addEdge(vertices.get('u'), vertices.get('y'));
+		graph.addEdge(vertices.get('w'), vertices.get('x'));
+		graph.addEdge(vertices.get('x'), vertices.get('y'));
+		return vertices;
+	}
+
 }

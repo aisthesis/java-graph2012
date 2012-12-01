@@ -82,7 +82,7 @@ public class BreadthFirstSearch {
 		if (source == null) {
 			throw new IllegalStateException("Source vertex has not been specified by calling search()!");
 		}
-		if (target.parent == null) { return null; }
+		if (target.parent == null && target != source) { return null; }
 		LinkedList<Vertex> result = new LinkedList<Vertex>();
 		Vertex tmp = target;
 		while (tmp != source) {
