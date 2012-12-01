@@ -70,7 +70,7 @@ public class DisjointSet<T> {
 	 */
 	public boolean union(T x, T y) {
 		Node bigSetHead = nodes.get(x).setData.head;
-		Node smallSetHead = nodes.get(x).setData.head;
+		Node smallSetHead = nodes.get(y).setData.head;
 		Node tmp;
 		if (bigSetHead == smallSetHead) { return false; }
 		// swap if necessary so that bigSetHead really points to the larger set
