@@ -30,6 +30,11 @@ public class EdgeData {
 	 */
 	public EdgeData(EdgeType edgeType) { this(Color.WHITE, edgeType, 1.0); }
 	/**
+	 * Sets initial edge type to the specified type, color white, and weight to 1.0
+	 * @param edgeType type to which edge is initialized
+	 */
+	public EdgeData(double weight) { this(Color.WHITE, EdgeType.UNKNOWN, weight); }
+	/**
 	 * Sets initial type to the specified type, color to the specified color and weight to 1.0
 	 * @param color color that the edge will initially have
 	 * @param edgeType initial edge type
@@ -55,7 +60,7 @@ public class EdgeData {
 	 * Get the edge type
 	 * @return the edge's type
 	 */
-	public EdgeType getEdgeType() { return edgeType; }
+	public EdgeType getType() { return edgeType; }
 	/**
 	 * Get edge weight
 	 * @return the edge's weight
@@ -70,7 +75,7 @@ public class EdgeData {
 	 * Set the edge type
 	 * @param edgeType type to which the edge should be set
 	 */
-	public void setEdgeType(EdgeType edgeType) { this.edgeType = edgeType; }
+	public void setType(EdgeType edgeType) { this.edgeType = edgeType; }
 	/**
 	 * Set edge weight
 	 * @param weight weight to which the edge is to be set

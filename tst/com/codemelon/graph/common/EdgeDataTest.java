@@ -13,6 +13,7 @@ import org.junit.Test;
  *
  */
 public class EdgeDataTest {
+	private static final double EQUALITY_RANGE = 0.000001;
 
 	/**
 	 * Test method for {@link com.codemelon.graph.common.EdgeData#EdgeData()}.
@@ -21,26 +22,49 @@ public class EdgeDataTest {
 	public void testEdgeData() {
 		EdgeData edgeData = new EdgeData();
 		assertEquals("Default color correct.", Color.WHITE, edgeData.getColor());
-		assertEquals("Default type correct.", EdgeType.UNKNOWN, edgeData.getEdgeType());
+		assertEquals("Default type correct.", EdgeType.UNKNOWN, edgeData.getType());
 	}
 	
 	/**
-		 * Test method for {@link com.codemelon.graph.common.EdgeData#getColor()}.
-		 */
-		@Test
-		public void testGetColor() {
-			Color c = Color.BLACK;
-			EdgeData edgeData = new EdgeData(c);
-			assertEquals("Explicitly set color correct.", c, edgeData.getColor());
-		}
-
+	 * Test method for {@link com.codemelon.graph.common.EdgeData#getColor()}.
+	 */
+	@Test
+	public void testGetColor() {
+		Color c1 = Color.BLACK;
+		Color c2 = Color.GRAY;
+		EdgeData edgeData = new EdgeData(c1);
+		assertEquals("Color set correctly using constructor.", c1, edgeData.getColor());
+		edgeData.setColor(c2);
+		assertEquals("Color set correcly using setter", c2, edgeData.getColor());
+	}
+	
 	/**
-		 * Test method for {@link com.codemelon.graph.common.EdgeData#getEdgeType()}.
+		 * Test method for {@link com.codemelon.graph.common.EdgeData#getType()}.
 		 */
 		@Test
-		public void testGetEdgeType() {
-			EdgeType et = EdgeType.TREE;
-			EdgeData edgeData = new EdgeData(et);
-			assertEquals("Explicitly set edge type correct.", et, edgeData.getEdgeType());
+		public void testGetType() {
+			EdgeType et1 = EdgeType.TREE;
+			EdgeType et2 = EdgeType.CROSS;
+			EdgeData edgeData = new EdgeData(et1);
+			assertEquals("Edge type correct using constructor.", et1, edgeData.getType());
+			edgeData.setType(et2);
+			assertEquals("Edge type set correcly using setter", et2, edgeData.getType());
 		}
+	
+	/**
+	 * Test method for {@link com.codemelon.graph.common.EdgeData#getEdgeWeight()}.
+	 */
+	@Test
+	public void testGetWeight() {
+		double weight1 = 3.14159;
+		double weight2 = 2.71828;
+		EdgeData edgeData = new EdgeData(weight1);
+		assertTrue("Edge weight correct using constructor.", approxEqual(weight1, edgeData.getWeight()));
+		edgeData.setWeight(weight2);
+		assertTrue("Edge type set correcly using setter", approxEqual(weight2, edgeData.getWeight()));
+	}
+	
+	private boolean approxEqual(double x, double y) {
+		return Math.abs(x - y) < EQUALITY_RANGE;
+	}
 }

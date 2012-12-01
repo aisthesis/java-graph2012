@@ -164,10 +164,10 @@ public class Vertex {
 		return adjacencies.get(to).getColor();
 	}
 	public void setEdgeType(Vertex to, EdgeType edgeType) {
-		adjacencies.get(to).setEdgeType(edgeType);
+		adjacencies.get(to).setType(edgeType);
 	}
 	public EdgeType getEdgeType(Vertex to) {
-		return adjacencies.get(to).getEdgeType();
+		return adjacencies.get(to).getType();
 	}
 	/**
 	 * Don't allow subclasses to override the equals method
