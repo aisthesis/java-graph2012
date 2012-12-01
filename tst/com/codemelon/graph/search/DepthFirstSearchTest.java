@@ -66,10 +66,11 @@ public class DepthFirstSearchTest {
 		assertEquals("Edge from last to first is a back edge", EdgeType.BACK,
 				vertices.get(indexOfLastDiscovery).getEdgeType(vertices.get(indexOfFirstDiscovery)));
 	}
+	
 	/**
 	 * Graph from CLRS, p. 605
 	 */
-	public HashMap<Character, Vertex> setUpSmallCLRSGraph() {
+	private HashMap<Character, Vertex> setUpSmallCLRSGraph() {
 		HashMap<Character, Vertex> vertices = new HashMap<Character, Vertex>();
 		for (char i = 'u'; i <= 'z'; i++) {
 			vertices.put(i, new Vertex(i));
@@ -86,7 +87,7 @@ public class DepthFirstSearchTest {
 		return vertices;
 	}
 	
-	public ArrayList<Vertex> setUpBiggerCircularGraph() {
+	private ArrayList<Vertex> setUpBiggerCircularGraph() {
 		ArrayList<Vertex> vertices = new ArrayList<Vertex>(CIRCULAR_GRAPH_SIZE);
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {
 			// vertex label will be the same as index in the array
