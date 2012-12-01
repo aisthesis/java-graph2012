@@ -13,15 +13,67 @@ package com.codemelon.graph.common;
 public class EdgeData {
 	private Color color;
 	private EdgeType edgeType;
-	public EdgeData() { this(Color.WHITE, EdgeType.UNKNOWN); }
-	public EdgeData(Color c) { this(c, EdgeType.UNKNOWN); }
-	public EdgeData(EdgeType et) { this(Color.WHITE, et); }
-	public EdgeData(Color c, EdgeType et) {
-		color = c;
-		edgeType = et;
+	private double weight;
+	
+	/**
+	 * Default constructor. Edge color is initially set to white, type to unknown, and weight to 1.0.
+	 */
+	public EdgeData() { this(Color.WHITE, EdgeType.UNKNOWN, 1.0); }
+	/**
+	 * Sets initial edge color to the specified color, type to unknown and weight to 1.0
+	 * @param color color to which the edge is set
+	 */
+	public EdgeData(Color color) { this(color, EdgeType.UNKNOWN, 1.0); }
+	/**
+	 * Sets initial edge type to the specified type, color white, and weight to 1.0
+	 * @param edgeType type to which edge is initialized
+	 */
+	public EdgeData(EdgeType edgeType) { this(Color.WHITE, edgeType, 1.0); }
+	/**
+	 * Sets initial type to the specified type, color to the specified color and weight to 1.0
+	 * @param color color that the edge will initially have
+	 * @param edgeType initial edge type
+	 */
+	public EdgeData(Color color, EdgeType edgeType) { this(color, edgeType, 1.0); }
+	/**
+	 * Specify all edge parameters explicitly
+	 * @param color initial edge color
+	 * @param edgeType initial edge type
+	 * @param weight initial edge weight
+	 */
+	public EdgeData(Color color, EdgeType edgeType, double weight) {
+		this.color = color;
+		this.edgeType = edgeType;
+		this.weight = weight;
 	}
+	/**
+	 * Get the edge color
+	 * @return the edge's color
+	 */
 	public Color getColor() { return color; }
+	/**
+	 * Get the edge type
+	 * @return the edge's type
+	 */
 	public EdgeType getEdgeType() { return edgeType; }
+	/**
+	 * Get edge weight
+	 * @return the edge's weight
+	 */
+	public double getWeight() { return weight; }
+	/**
+	 * Set the edge color
+	 * @param color color to which edge color should be set
+	 */
 	public void setColor(Color color) { this.color = color; }
+	/**
+	 * Set the edge type
+	 * @param edgeType type to which the edge should be set
+	 */
 	public void setEdgeType(EdgeType edgeType) { this.edgeType = edgeType; }
+	/**
+	 * Set edge weight
+	 * @param weight weight to which the edge is to be set
+	 */
+	public void setWeight(double weight) { this.weight = weight; }
 }
