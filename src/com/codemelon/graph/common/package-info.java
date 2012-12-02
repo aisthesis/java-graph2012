@@ -1,6 +1,5 @@
 /**
- * Classes required for vertices and graphs and commonly used in 
- * graph classes belonging to diverse packages.
+ * Common helper objects used across all graph packages.
  */
 
 package com.codemelon.graph.common;

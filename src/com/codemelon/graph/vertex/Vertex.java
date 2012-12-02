@@ -9,7 +9,7 @@ import java.util.Set;
 
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.common.EdgeData;
+import com.codemelon.graph.edge.EdgeData;
 import com.codemelon.graph.common.EdgeType;
 
 /**

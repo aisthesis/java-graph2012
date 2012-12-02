@@ -1,11 +1,14 @@
 /**
  * 
  */
-package com.codemelon.graph.common;
+package com.codemelon.graph.edge;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import com.codemelon.graph.common.Color;
+import com.codemelon.graph.common.EdgeType;
 
 /**
  * @author Marshall Farrier

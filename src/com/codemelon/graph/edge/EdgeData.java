@@ -3,7 +3,10 @@
  * a unique EdgeData, it is advantageous for this class to
  * be immutable.
  */
-package com.codemelon.graph.common;
+package com.codemelon.graph.edge;
+
+import com.codemelon.graph.common.Color;
+import com.codemelon.graph.common.EdgeType;
 
 
 /**
