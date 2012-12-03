@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.codemelon.graph.vertex;
 
 import com.codemelon.graph.common.Color;
@@ -8,7 +5,7 @@ import com.codemelon.graph.common.Color;
 /**
  * @author Marshall Farrier
  * @version Nov 24, 2012
- *
+ * Constants used by vertices
  */
 public class VertexConstants {
 	public static final int DEFAULT_LABEL = -1;

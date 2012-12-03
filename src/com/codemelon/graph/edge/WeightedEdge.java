@@ -19,18 +19,16 @@ public class WeightedEdge {
 	private Vertex to;
 	private double weight;
 	/**
-	 * Construct an immutable weighted edge
+	 * Construct an immutable weighted edge. The weight of the edge is set when the edge object
+	 * is created and is not synchronized with the graph. So, if the edge weight is updated
+	 * in the graph, the corresponding weighted edge will not be changed.
 	 * @param from tail vertex
 	 * @param to head vertex
-	 * @param weight edge weight
-	 * @throws IllegalArgumentException if from == tail
 	 * @throws IllegalArgumentException if from or to does not belong to a graph
 	 * @throws IllegalArgumentException if from or to do not belong to the same graph
+	 * @throws IllegalArgumentException if the graph does not contain the given edge
 	 */
-	public WeightedEdge(Vertex from, Vertex to, double weight) {
-		if (from == to) {
-			throw new IllegalArgumentException("Weighted edges cannot be self-edges!");
-		}
+	public WeightedEdge(Vertex from, Vertex to) {
 		graph = from.getGraph();
 		if (graph == null || to.getGraph() == null) {
 			throw new IllegalArgumentException("Edge must belong to a graph!");
@@ -38,15 +36,12 @@ public class WeightedEdge {
 		if (graph != to.getGraph()) {
 			throw new IllegalArgumentException("Vertices must belong to the same graph!");
 		}
-		if (!graph.containsEdge(from, to)) {
+		if (!from.containsAdjacency(to)) {
 			throw new IllegalArgumentException("Given edge does not exist!");
-		}
-		if (!graph.areEqualWeights(weight, from.getEdgeWeight(to))) {
-			throw new IllegalArgumentException("Edge ");
 		}
 		this.from = from;
 		this.to = to;
-		this.weight = weight;
+		this.weight = from.getEdgeWeight(to);
 	}
 	/**
 	 * Returns one end of the given edge. Note that the edge is undirected,

@@ -22,6 +22,7 @@ import java.util.Set;
 
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
+import com.codemelon.graph.edge.EdgeConstants;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
@@ -72,9 +73,10 @@ public class DiGraph {
 	public DiGraph(Collection<Vertex> initialVertices) {
 		vertices = new HashSet<Vertex>(initialVertices);
 		edges = 0L;
-		weightEpsilon = 0.000001;
+		weightEpsilon = EdgeConstants.DEFAULT_WEIGHT_EPSILON;
 		for (Vertex v : initialVertices) {
 			v.clearAdjacencies();
+			v.setGraph(this);
 		}
 	}
 	/**
@@ -211,6 +213,52 @@ public class DiGraph {
 		from.setEdgeColor(to, color);
 	}
 	/**
+	 * Returns the color of the specified edge
+	 * @param from tail of the edge whose color is to be returned
+	 * @param to head of the edge whose color is to be returned
+	 * @return the edge's color
+	 * @throws IllegalArgumentException if the source vertex doesn't belong to the graph
+	 * @throws NullPointerException if there is no such edge in the graph (including the
+	 * case where the target vertex doesn't belong to the graph)
+	 */
+	public Color getEdgeColor(Vertex from, Vertex to) {
+		if (!vertices.contains(from)) {
+			throw new IllegalArgumentException("No such vertex!");
+		}
+		return from.getEdgeColor(to);
+	}
+	/**
+	 * Set the weight of an edge in the graph. Throws an exception if the edge doesn't belong
+	 * to the graph
+	 * @param from tail of the edge to be colored
+	 * @param to head of the edge to be colored
+	 * @param weight weight to assign to the edge.
+	 * @throws IllegalArgumentException if the source vertex doesn't belong to the graph.
+	 * @throws NullPointerException if there is no such edge in the graph (including the
+	 * case where the target vertex doesn't belong to the graph)
+	 */
+	public void setEdgeWeight(Vertex from, Vertex to, double weight) {
+		if (!vertices.contains(from)) {
+			throw new IllegalArgumentException("No such vertex!");
+		}
+		from.setEdgeWeight(to, weight);
+	}
+	/**
+	 * Returns the weight of the specified edge
+	 * @param from tail of the edge whose weight is to be returned
+	 * @param to head of the edge whose weight is to be returned
+	 * @return the edge's weight
+	 * @throws IllegalArgumentException if the source vertex doesn't belong to the graph
+	 * @throws NullPointerException if there is no such edge in the graph (including the
+	 * case where the target vertex doesn't belong to the graph)
+	 */
+	public double getEdgeWeight(Vertex from, Vertex to) {
+		if (!vertices.contains(from)) {
+			throw new IllegalArgumentException("No such vertex!");
+		}
+		return from.getEdgeWeight(to);
+	}
+	/**
 	 * Set the edge type (TREE, BACK, FORWARD, CROSS) of an edge in the graph. 
 	 * Throws an exception if the edge doesn't belong to the graph.
 	 * @param from tail of the edge whose type is to be set
@@ -225,6 +273,21 @@ public class DiGraph {
 			throw new IllegalArgumentException("No such vertex!");
 		}
 		from.setEdgeType(to, edgeType);
+	}
+	/**
+	 * Returns the type (TREE, BACK, FORWARD, CROSS, UNKNOWN) of the specified edge
+	 * @param from tail of the edge whose type is to be returned
+	 * @param to head of the edge whose type is to be returned
+	 * @return the edge's type
+	 * @throws IllegalArgumentException if the source vertex doesn't belong to the graph
+	 * @throws NullPointerException if there is no such edge in the graph (including the
+	 * case where the target vertex doesn't belong to the graph)
+	 */
+	public EdgeType getEdgeType(Vertex from, Vertex to) {
+		if (!vertices.contains(from)) {
+			throw new IllegalArgumentException("No such vertex!");
+		}
+		return from.getEdgeType(to);
 	}
 	/**
 	 * Set the difference (epsilon) used to determine floating point equality for weight.

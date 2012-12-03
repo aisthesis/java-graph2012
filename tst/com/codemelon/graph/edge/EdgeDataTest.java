@@ -16,8 +16,6 @@ import com.codemelon.graph.common.EdgeType;
  *
  */
 public class EdgeDataTest {
-	private static final double EPSILON = 0.000001;
-
 	/**
 	 * Test method for {@link com.codemelon.graph.common.EdgeData#EdgeData()}.
 	 */
@@ -68,6 +66,6 @@ public class EdgeDataTest {
 	}
 	
 	private boolean approxEqual(double x, double y) {
-		return Math.abs(x - y) < EPSILON;
+		return Math.abs(x - y) < EdgeConstants.DEFAULT_WEIGHT_EPSILON;
 	}
 }

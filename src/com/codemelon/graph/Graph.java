@@ -5,6 +5,8 @@ package com.codemelon.graph;
 
 import java.util.Collection;
 
+import com.codemelon.graph.common.Color;
+import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
@@ -35,4 +37,19 @@ public class Graph extends DiGraph{
 	}
 	@Override
 	public long edgeCount() { return super.edgeCount() / 2L; }
+	@Override
+	public void setEdgeColor(Vertex from, Vertex to, Color color) {
+		super.setEdgeColor(from, to, color);
+		super.setEdgeColor(to, from, color);
+	}
+	@Override
+	public void setEdgeType(Vertex from, Vertex to, EdgeType edgeType) {
+		super.setEdgeType(from, to, edgeType);
+		super.setEdgeType(to, from, edgeType);
+	}
+	@Override
+	public void setEdgeWeight(Vertex from, Vertex to, double weight) {
+		super.setEdgeWeight(from, to, weight);
+		super.setEdgeWeight(to, from, weight);
+	}
 }
