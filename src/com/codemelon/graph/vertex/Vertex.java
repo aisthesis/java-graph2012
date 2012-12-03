@@ -86,6 +86,11 @@ public class Vertex {
 	public void setGraph(DiGraph g) {
 		graph = g;
 	}
+	/**
+	 * Returns the graph to which the vertex belongs.
+	 * @return the graph to which the vertex belongs
+	 */
+	public DiGraph getGraph() { return graph; }
 	
 	/**
 	 * Adds the specified vertex to the set of adjacencies
@@ -168,6 +173,12 @@ public class Vertex {
 	}
 	public EdgeType getEdgeType(Vertex to) {
 		return adjacencies.get(to).getType();
+	}
+	public void setEdgeWeight(Vertex to, double weight) {
+		adjacencies.get(to).setWeight(weight);
+	}
+	public double getEdgeWeight(Vertex to) {
+		return adjacencies.get(to).getWeight();
 	}
 	/**
 	 * Don't allow subclasses to override the equals method

@@ -44,6 +44,7 @@ public class DiGraph {
 	private static final int DEFAULT_INITIAL_CAPACITY = 16;
 	private Set<Vertex> vertices;
 	private long edges;
+	private double weightEpsilon;
 	
 	/**
 	 * Default constructor. Creates an empty graph with a default initial
@@ -71,6 +72,7 @@ public class DiGraph {
 	public DiGraph(Collection<Vertex> initialVertices) {
 		vertices = new HashSet<Vertex>(initialVertices);
 		edges = 0L;
+		weightEpsilon = 0.000001;
 		for (Vertex v : initialVertices) {
 			v.clearAdjacencies();
 		}
@@ -223,5 +225,37 @@ public class DiGraph {
 			throw new IllegalArgumentException("No such vertex!");
 		}
 		from.setEdgeType(to, edgeType);
+	}
+	/**
+	 * Set the difference (epsilon) used to determine floating point equality for weight.
+	 * This value initially defaults to 10<sup>-6</sup>. If the difference in 2 weights
+	 * falls below this threshold, the weights are to be considered equal.
+	 * <p>Including this method allows us to use a custom value here if needed.
+	 * @param weightEpsilon value to which to set the epsilon threshold for weight equality.
+	 * @throws IllegalArgumentException if the given epsilon is not stricly positive (great than 0).
+	 */
+	public void setWeightEpsilon(double weightEpsilon) {
+		if (weightEpsilon <= 0) {
+			throw new IllegalArgumentException("Epsilon must be positive!");
+		}
+		this.weightEpsilon = weightEpsilon;
+	}
+	/**
+	 * Get the difference (epsilon) used to determine floating point equality for weight.
+	 * This value initially defaults to 10<sup>-6</sup>. If the difference in 2 weights
+	 * falls below this threshold, the weights are to be considered equal.
+	 * @return epsilon value below which 2 weights are
+	 * to be considered equal
+	 */
+	public double getWeightEpsilon() { return weightEpsilon; }
+	/**
+	 * Determines whether 2 weight values are to be considered equal in this graph.
+	 * @param w1 first weight to compare
+	 * @param w2 second weight to compare
+	 * @return true iff the absolute value of the difference between the 2 weights is less than
+	 * the weightEpsilon for this graph
+	 */
+	public boolean areEqualWeights(double w1, double w2) {
+		return Math.abs(w1 - w2) < weightEpsilon;
 	}
 }

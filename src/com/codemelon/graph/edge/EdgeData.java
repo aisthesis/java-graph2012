@@ -34,7 +34,7 @@ public class EdgeData {
 	public EdgeData(EdgeType edgeType) { this(Color.WHITE, edgeType, 1.0); }
 	/**
 	 * Sets initial edge type to the specified type, color white, and weight to 1.0
-	 * @param edgeType type to which edge is initialized
+	 * @param weight weight to which edge is initialized
 	 */
 	public EdgeData(double weight) { this(Color.WHITE, EdgeType.UNKNOWN, weight); }
 	/**

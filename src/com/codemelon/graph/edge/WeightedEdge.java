@@ -1,5 +1,6 @@
 package com.codemelon.graph.edge;
 
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
@@ -13,10 +14,36 @@ import com.codemelon.graph.vertex.Vertex;
  * @version Dec 2, 2012
  */
 public class WeightedEdge {
+	private DiGraph graph;
 	private Vertex from;
 	private Vertex to;
 	private double weight;
+	/**
+	 * Construct an immutable weighted edge
+	 * @param from tail vertex
+	 * @param to head vertex
+	 * @param weight edge weight
+	 * @throws IllegalArgumentException if from == tail
+	 * @throws IllegalArgumentException if from or to does not belong to a graph
+	 * @throws IllegalArgumentException if from or to do not belong to the same graph
+	 */
 	public WeightedEdge(Vertex from, Vertex to, double weight) {
+		if (from == to) {
+			throw new IllegalArgumentException("Weighted edges cannot be self-edges!");
+		}
+		graph = from.getGraph();
+		if (graph == null || to.getGraph() == null) {
+			throw new IllegalArgumentException("Edge must belong to a graph!");
+		}
+		if (graph != to.getGraph()) {
+			throw new IllegalArgumentException("Vertices must belong to the same graph!");
+		}
+		if (!graph.containsEdge(from, to)) {
+			throw new IllegalArgumentException("Given edge does not exist!");
+		}
+		if (!graph.areEqualWeights(weight, from.getEdgeWeight(to))) {
+			throw new IllegalArgumentException("Edge ");
+		}
 		this.from = from;
 		this.to = to;
 		this.weight = weight;
