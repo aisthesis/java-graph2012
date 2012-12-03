@@ -1,7 +1,3 @@
-/**
- * Utility class for resetting the vertices of a graph.
- * The constructor takes the graph to reset as argument
- */
 package com.codemelon.graph.util;
 
 import java.util.Iterator;
@@ -15,6 +11,8 @@ import com.codemelon.graph.vertex.VertexConstants;
  * @author Marshall Farrier
  * @version Nov 25, 2012
  *
+ * Utility class for resetting the vertices of a graph.
+ * The constructor takes the graph to reset as argument.
  */
 public class VertexResetter {
 	private DiGraph graph;

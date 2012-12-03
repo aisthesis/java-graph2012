@@ -7,6 +7,7 @@ import com.codemelon.graph.Graph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.edge.WeightedEdge;
 import com.codemelon.graph.util.DisjointSet;
+import com.codemelon.graph.util.EdgeResetter;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
@@ -18,6 +19,8 @@ import com.codemelon.graph.vertex.Vertex;
  *
  */
 public class Kruskal {
+	public static final Color MARKER_COLOR = Color.BLACK;
+	
 	private Graph graph;
 	private WeightedEdge[] edges;
 	private DisjointSet<Vertex> vertexDisjointSet;
@@ -42,11 +45,11 @@ public class Kruskal {
 	 * Set edges in minimum spanning tree to BLACK, all other edges are WHITE
 	 */
 	public void markEdges() {
-		//TODO reset edge color to white
+		new EdgeResetter(graph).resetColors();
 		for (WeightedEdge edge : edges) {
 			if (vertexDisjointSet.findSet(edge.from()) 
 					!= vertexDisjointSet.findSet(edge.to())) {
-				graph.setEdgeColor(edge.from(), edge.to(), Color.BLACK);
+				graph.setEdgeColor(edge.from(), edge.to(), MARKER_COLOR);
 				vertexDisjointSet.union(edge.from(), edge.to());				
 			}
 		}		
