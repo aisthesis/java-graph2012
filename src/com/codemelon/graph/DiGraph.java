@@ -42,7 +42,6 @@ import com.codemelon.graph.vertex.Vertex;
 public class DiGraph {
 	private static final int DEFAULT_INITIAL_CAPACITY = 16;
 	private Set<Vertex> vertices;
-	private int edges;
 	private double weightEpsilon;
 	
 	/**
@@ -61,7 +60,6 @@ public class DiGraph {
 	 */
 	public DiGraph(int initialCapacity) {
 		vertices = new HashSet<Vertex>(initialCapacity);
-		edges = 0;
 	}
 	/**
 	 * Initializes the Graph to contain the vertices in the collection
@@ -70,7 +68,6 @@ public class DiGraph {
 	 */
 	public DiGraph(Collection<Vertex> initialVertices) {
 		vertices = new HashSet<Vertex>(initialVertices);
-		edges = 0;
 		weightEpsilon = EdgeConstants.DEFAULT_WEIGHT_EPSILON;
 		for (Vertex v : initialVertices) {
 			v.clearAdjacencies();
@@ -102,11 +99,9 @@ public class DiGraph {
 	 */
 	public boolean removeVertex(Vertex v) {
 		if (vertices.remove(v)) {
-			edges -= v.adjacencyCount();
 			v.clearAdjacencies();
 			for (Vertex u : vertices) {
 				if (u.removeAdjacency(v)) {
-					edges--;
 				}
 			}
 			v.setGraph(null);
@@ -125,11 +120,7 @@ public class DiGraph {
 		if (!vertices.contains(from) || !vertices.contains(to)) {
 			throw new IllegalArgumentException("Cannot add edge for vertex not present in graph!");
 		}
-		if (from.addAdjacency(to)) {
-			edges++;
-			return true;
-		}
-		return false;
+		return from.addAdjacency(to);
 	}
 	/**
 	 * Removes the specified edge if it is present. If the edge
@@ -142,11 +133,7 @@ public class DiGraph {
 		if (!vertices.contains(from) || !vertices.contains(to)) {
 			throw new IllegalArgumentException("Cannot remove edge for vertex not present in graph!");
 		}
-		if (from.removeAdjacency(to)) {
-			edges--;
-			return true;
-		}
-		return false;
+		return from.removeAdjacency(to);
 	}
 	/**
 	 * Shows whether or not the graph contains the specified edge
@@ -193,7 +180,13 @@ public class DiGraph {
 	 * Number of edges in the graph
 	 * @return number of edges in the graph
 	 */
-	public int edgeCount() { return edges; }
+	public int edgeCount() { 
+		int result = 0;
+		for (Vertex v : vertices) {
+			result += v.adjacencyCount();
+		}
+		return result; 
+	}
 	/**
 	 * Set the color of an edge in the graph. Throws an exception if the edge doesn't belong
 	 * to the graph
