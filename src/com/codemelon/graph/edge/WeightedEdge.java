@@ -80,6 +80,11 @@ public class WeightedEdge {
 		return (from == ((WeightedEdge) o).from && to == ((WeightedEdge) o).to) 
 				|| (from == ((WeightedEdge) o).to && to == ((WeightedEdge) o).from);
 	}
+	/**
+	 * Overridden so that adding weighted edges to a HashSet will automatically eliminate
+	 * duplicates. We want edges that are equal (according to the equals() method) to have
+	 * the same hash code.
+	 */
 	@Override
 	public int hashCode() {
 		return from.hashCode() + to.hashCode();
