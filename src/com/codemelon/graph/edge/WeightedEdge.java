@@ -87,6 +87,6 @@ public class WeightedEdge {
 	 */
 	@Override
 	public int hashCode() {
-		return from.hashCode() + to.hashCode();
+		return from.hashCode() ^ to.hashCode();
 	}
 }
