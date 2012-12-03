@@ -4,10 +4,14 @@
 package com.codemelon.graph;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.edge.WeightedEdge;
 
 /**
  * @author Marshall Farrier
@@ -36,7 +40,7 @@ public class Graph extends DiGraph{
 		return super.removeEdge(to, from);
 	}
 	@Override
-	public long edgeCount() { return super.edgeCount() / 2L; }
+	public int edgeCount() { return super.edgeCount() / 2; }
 	@Override
 	public void setEdgeColor(Vertex from, Vertex to, Color color) {
 		super.setEdgeColor(from, to, color);
@@ -51,5 +55,19 @@ public class Graph extends DiGraph{
 	public void setEdgeWeight(Vertex from, Vertex to, double weight) {
 		super.setEdgeWeight(from, to, weight);
 		super.setEdgeWeight(to, from, weight);
+	}
+	public Set<WeightedEdge> getWeightedEdges() {
+		HashSet<WeightedEdge> result = new HashSet<WeightedEdge>(edgeCount());
+		Iterator<Vertex> vertexIterator = this.vertexIterator();
+		Vertex from;
+		Set<Vertex> adjacencySet;
+		while (vertexIterator.hasNext()) {
+			from = vertexIterator.next();
+			adjacencySet = from.getAdjacencies();
+			for (Vertex to : adjacencySet) {
+				result.add(new WeightedEdge(from, to));
+			}
+		}
+		return result;
 	}
 }

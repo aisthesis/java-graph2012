@@ -6,11 +6,13 @@ package com.codemelon.graph;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.codemelon.graph.edge.WeightedEdge;
 import com.codemelon.graph.vertex.Vertex;
 
 /**
@@ -20,6 +22,8 @@ import com.codemelon.graph.vertex.Vertex;
  */
 public class GraphTest {
 	private static final int VERTICES_IN_TEST_GRAPH = 1000;
+	private static final int EDGES_IN_DENSE_GRAPH = VERTICES_IN_TEST_GRAPH 
+			* (VERTICES_IN_TEST_GRAPH - 1) / 2;
 	private Graph graph;
 	private ArrayList<Vertex> vertices;
 
@@ -71,15 +75,27 @@ public class GraphTest {
 	 */
 	@Test
 	public void testEdges() {
-		final long EXPECTED_RESULT = VERTICES_IN_TEST_GRAPH * (VERTICES_IN_TEST_GRAPH - 1) / 2;
+		setUpDenseGraph();
+		assertEquals("Correct number of edges after inserting all possible edges",
+				EDGES_IN_DENSE_GRAPH, graph.edgeCount());
+	}
+	/**
+	 * Test method for {@link com.codemelon.graph.Graph#getWeightedEdges()}.
+	 */
+	@Test
+	public void testGetWeightedEdges() {
+		setUpDenseGraph();
+		Set<WeightedEdge> weightedEdges = graph.getWeightedEdges();
+		assertEquals("Correct number of weighted edges in set",
+				EDGES_IN_DENSE_GRAPH, weightedEdges.size());
+	}
+	
+	private void setUpDenseGraph() {
 		// connect all vertices
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
 			for (int j = 0; j < VERTICES_IN_TEST_GRAPH; j++) {
 				graph.addEdge(vertices.get(i), vertices.get(j));
 			}
-		}
-		assertEquals("Correct number of edges after inserting all possible edges",
-				EXPECTED_RESULT, graph.edgeCount());
+		}		
 	}
-
 }

@@ -44,7 +44,7 @@ import com.codemelon.graph.vertex.Vertex;
 public class DiGraph {
 	private static final int DEFAULT_INITIAL_CAPACITY = 16;
 	private Set<Vertex> vertices;
-	private long edges;
+	private int edges;
 	private double weightEpsilon;
 	
 	/**
@@ -63,7 +63,7 @@ public class DiGraph {
 	 */
 	public DiGraph(int initialCapacity) {
 		vertices = new HashSet<Vertex>(initialCapacity);
-		edges = 0L;
+		edges = 0;
 	}
 	/**
 	 * Initializes the Graph to contain the vertices in the collection
@@ -72,7 +72,7 @@ public class DiGraph {
 	 */
 	public DiGraph(Collection<Vertex> initialVertices) {
 		vertices = new HashSet<Vertex>(initialVertices);
-		edges = 0L;
+		edges = 0;
 		weightEpsilon = EdgeConstants.DEFAULT_WEIGHT_EPSILON;
 		for (Vertex v : initialVertices) {
 			v.clearAdjacencies();
@@ -195,7 +195,7 @@ public class DiGraph {
 	 * Number of edges in the graph
 	 * @return number of edges in the graph
 	 */
-	public long edgeCount() { return edges; }
+	public int edgeCount() { return edges; }
 	/**
 	 * Set the color of an edge in the graph. Throws an exception if the edge doesn't belong
 	 * to the graph

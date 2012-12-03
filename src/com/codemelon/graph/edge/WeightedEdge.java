@@ -80,4 +80,8 @@ public class WeightedEdge {
 		return (from == ((WeightedEdge) o).from && to == ((WeightedEdge) o).to) 
 				|| (from == ((WeightedEdge) o).to && to == ((WeightedEdge) o).from);
 	}
+	@Override
+	public int hashCode() {
+		return from.hashCode() + to.hashCode();
+	}
 }
