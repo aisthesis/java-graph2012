@@ -8,6 +8,7 @@
  */
 package com.codemelon.graph.search;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,7 +32,7 @@ public class InOrderDepthFirstSearch {
 	private List<Vertex> vertices;
 	private Comparator<Vertex> comp;
 	
-	private static final Vertex[] emptyVertexArray = new Vertex[0];
+	private static final Vertex[] EMPTY_VERTEX_ARRAY = new Vertex[0];
 	/**
 	 * Prepares the graph for a depth-first search where vertices
 	 * are visited in the order specified by the Comparator passed
@@ -44,7 +45,7 @@ public class InOrderDepthFirstSearch {
 	 */
 	public InOrderDepthFirstSearch(DiGraph graph, Comparator<Vertex> comp) {
 		this.graph = graph;
-		vertices = graph.getVertices();
+		vertices = new ArrayList<Vertex>(graph.getVertices());
 		this.comp = comp;
 	}
 	/**
@@ -87,7 +88,7 @@ public class InOrderDepthFirstSearch {
 		u.discoveryTime = ++t;
 		u.treeNumber = treeNumber;
 		u.color = Color.GRAY;
-		Vertex[] adjacentVertices = u.getAdjacencies().toArray(emptyVertexArray);
+		Vertex[] adjacentVertices = u.getAdjacencies().toArray(EMPTY_VERTEX_ARRAY);
 		Arrays.sort(adjacentVertices, comp);
 		for (Vertex v : adjacentVertices) {
 			if (v.color == Color.WHITE) {

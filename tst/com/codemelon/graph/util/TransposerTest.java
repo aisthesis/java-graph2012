@@ -3,7 +3,7 @@ package com.codemelon.graph.util;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
@@ -63,7 +63,7 @@ public class TransposerTest {
 		DiGraph transposedGraph = transposer.getTransposeGraph();
 		assertEquals("Correct number of edges in transposed graph", 
 				2, transposedGraph.edgeCount());
-		List<Vertex> transposedVertices = transposedGraph.getVertices();
+		Set<Vertex> transposedVertices = transposedGraph.getVertices();
 		// transposedGraph has proper structure
 		for (Vertex v : transposedVertices) {
 			if (v.label == 2) {

@@ -13,11 +13,9 @@
  */
 package com.codemelon.graph;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import com.codemelon.graph.common.Color;
@@ -181,8 +179,8 @@ public class DiGraph {
 	 * Returns a list of the vertices in the graph.
 	 * @return a list of the vertices in the graph
 	 */
-	public List<Vertex> getVertices() {
-		return new ArrayList<Vertex>(vertices);
+	public Set<Vertex> getVertices() {
+		return vertices;
 	}
 	/**
 	 * Number of vertices in the graph
