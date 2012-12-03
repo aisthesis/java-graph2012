@@ -50,7 +50,6 @@ public class EdgeResetter {
 	public void resetEdgeTypes() {
 		resetEdgeTypes(EdgeConstants.DEFAULT_EDGE_TYPE);
 	}
-
 	public void resetWeights(double weight) {
 		Iterator<Vertex> it = graph.vertexIterator();
 		Set<Vertex> adj;
@@ -62,5 +61,8 @@ public class EdgeResetter {
 				from.setEdgeWeight(to, weight);
 			}
 		}
+	}
+	public void resetWeights() {
+		resetWeights(EdgeConstants.DEFAULT_WEIGHT);
 	}
 }
