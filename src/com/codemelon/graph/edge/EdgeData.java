@@ -21,17 +21,20 @@ public class EdgeData {
 	/**
 	 * Default constructor. Edge color is initially set to white, type to unknown, and weight to 1.0.
 	 */
-	public EdgeData() { this(EdgeConstants.DEFAULT_COLOR, EdgeConstants.DEFAULT_EDGE_TYPE, 1.0); }
+	public EdgeData() { this(EdgeConstants.DEFAULT_COLOR, EdgeConstants.DEFAULT_EDGE_TYPE, 
+			EdgeConstants.DEFAULT_WEIGHT); }
 	/**
 	 * Sets initial edge color to the specified color, type to unknown and weight to 1.0
 	 * @param color color to which the edge is set
 	 */
-	public EdgeData(Color color) { this(color, EdgeConstants.DEFAULT_EDGE_TYPE, 1.0); }
+	public EdgeData(Color color) { this(color, EdgeConstants.DEFAULT_EDGE_TYPE, 
+			EdgeConstants.DEFAULT_WEIGHT); }
 	/**
 	 * Sets initial edge type to the specified type, color white, and weight to 1.0
 	 * @param edgeType type to which edge is initialized
 	 */
-	public EdgeData(EdgeType edgeType) { this(EdgeConstants.DEFAULT_COLOR, edgeType, 1.0); }
+	public EdgeData(EdgeType edgeType) { this(EdgeConstants.DEFAULT_COLOR, edgeType, 
+			EdgeConstants.DEFAULT_WEIGHT); }
 	/**
 	 * Sets initial edge type to the specified type, color white, and weight to 1.0
 	 * @param weight weight to which edge is initialized
@@ -43,7 +46,7 @@ public class EdgeData {
 	 * @param color color that the edge will initially have
 	 * @param edgeType initial edge type
 	 */
-	public EdgeData(Color color, EdgeType edgeType) { this(color, edgeType, 1.0); }
+	public EdgeData(Color color, EdgeType edgeType) { this(color, edgeType, EdgeConstants.DEFAULT_WEIGHT); }
 	/**
 	 * Specify all edge parameters explicitly
 	 * @param color initial edge color
