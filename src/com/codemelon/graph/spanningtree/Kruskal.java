@@ -41,7 +41,7 @@ public class Kruskal {
 	/**
 	 * Set edges in minimum spanning tree to BLACK, all other edges are WHITE
 	 */
-	public void markTree() {
+	public void markEdges() {
 		//TODO reset edge color to white
 		for (WeightedEdge edge : edges) {
 			if (vertexDisjointSet.findSet(edge.from()) 
