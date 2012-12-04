@@ -22,6 +22,10 @@ import com.codemelon.graph.vertex.Vertex;
  *
  */
 public class Kruskal {
+	/**
+	 * Color to which edges belonging to minimum spanning tree will be set
+	 * after running markEdges()
+	 */
 	public static final Color MARKER_COLOR = Color.BLACK;
 	
 	private Graph graph;
@@ -39,7 +43,10 @@ public class Kruskal {
 			return 0;
 		}		
 	};
-	
+	/**
+	 * Initialize the graph for which a minimum spanning tree is to be found.
+	 * @param graph graph for which we want to find a minimum spanning tree.
+	 */
 	public Kruskal(Graph graph) {
 		this.graph = graph;
 		edges = null;
@@ -48,7 +55,8 @@ public class Kruskal {
 		spanningTree = null;
 	}
 	/**
-	 * Set edges in minimum spanning tree to BLACK, all other edges are WHITE
+	 * Set edges in minimum spanning tree to MARKER_COLOR, all other edges are 
+	 * set to EdgeConstants.DEFAULT_COLOR
 	 */
 	public void markEdges() {
 		initializeForMarking();

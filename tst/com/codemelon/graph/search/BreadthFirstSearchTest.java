@@ -143,5 +143,4 @@ public class BreadthFirstSearchTest {
 		graph.addEdge(vertices.get('x'), vertices.get('y'));
 		return vertices;
 	}
-
 }

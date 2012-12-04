@@ -1,7 +1,3 @@
-/**
- * Vertex class containing a map of other vertices to edge data.
- * 
- */
 package com.codemelon.graph.vertex;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
@@ -15,6 +11,14 @@ import com.codemelon.graph.common.EdgeType;
 /**
  * @author Marshall Farrier
  * @version 11-23-2012
+ * 
+ * Vertex class containing a map of other vertices to edge data.
+ * The setter methods of this class should be used with caution, particularly when they
+ * belong to undirected graphs (Graph objects), as they can cause the graph
+ * to be in an inconsistent state, such as the edge weight for (u, v) being different
+ * from that for (v, u) in an undirected graph. To avoid such problems, it is
+ * always a good idea to use the corresponding methods from the graph object to which
+ * the vertex (or edge) belongs.
  */
 public class Vertex {
 	private IdentityHashMap<Vertex, EdgeData> adjacencies;
