@@ -94,8 +94,12 @@ public class Kruskal {
 	/**
 	 * Returns a map showing which vertex in the spanning tree corresponds to a given
 	 * vertex in the original graph. Edges between corresponding vertices in the 2 graphs
-	 * will have the same weight. 
-	 * @return
+	 * will have the same weight. The keys of this map are the vertices in the original
+	 * graph, and the values are vertices in the spanning tree generated when generateTree()
+	 * is called.
+	 * @return map from vertices in the original graph to vertices in the spanning tree
+	 * @throws IllegalStateException if this method is called before generateTree(). In this case, the map
+	 * has not been created yet.
 	 */
 	public Map<Vertex, Vertex> getVertexMap() {
 		if (vertexMap == null) {

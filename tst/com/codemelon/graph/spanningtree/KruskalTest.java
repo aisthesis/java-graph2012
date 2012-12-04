@@ -18,6 +18,8 @@ import com.codemelon.graph.vertex.Vertex;
  * @version Dec 4, 2012
  */
 public class KruskalTest {
+	private static final double CUSTOM_EPSILON = 0.001;
+	private static final double MAX_EPSILON_DIFF = 0.000000000000001;
 	private Graph graph;
 	private Kruskal kruskal;
 	private HashMap<Character, Vertex> vertices;
@@ -118,6 +120,8 @@ public class KruskalTest {
 				vertexMap.get(vertices.get('f'))));
 		assertFalse("Edge e-f not in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('e')),
 				vertexMap.get(vertices.get('f'))));
+		assertTrue("Weight epsilons equal", Math.abs(spanningTree.getWeightEpsilon() 
+				- graph.getWeightEpsilon()) < MAX_EPSILON_DIFF);
 	}
 
 	/**
@@ -166,5 +170,6 @@ public class KruskalTest {
 		graph.setEdgeWeight(vertices.get('g'), vertices.get('i'), 6.0);
 		graph.addEdge(vertices.get('h'), vertices.get('i'));
 		graph.setEdgeWeight(vertices.get('h'), vertices.get('i'), 7.0);
+		graph.setWeightEpsilon(CUSTOM_EPSILON);
 	}
 }
