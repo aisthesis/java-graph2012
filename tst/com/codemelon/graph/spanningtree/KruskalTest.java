@@ -90,16 +90,12 @@ public class KruskalTest {
 				.getEdgeWeight(vertexMap.get(vertices.get('h')), vertexMap.get(vertices.get('g')))));
 		assertTrue("Edge c-i in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('c')),
 				vertexMap.get(vertices.get('i'))));
-		/*
 		assertTrue("c-i copy has correct weight", spanningTree.areEqualWeights(2.0, spanningTree
-				.getEdgeWeight(vertexMap.get(vertices.get('c')), vertexMap.get(vertices.get('i')))));
-		*/
+				.getEdgeWeight(vertexMap.get(vertices.get('c')), vertexMap.get(vertices.get('i')))));		
 		assertTrue("Edge f-g in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('f')),
 				vertexMap.get(vertices.get('g'))));
-		/*
 		assertTrue("f-g copy has correct weight", spanningTree.areEqualWeights(2.0, spanningTree
 				.getEdgeWeight(vertexMap.get(vertices.get('f')), vertexMap.get(vertices.get('g')))));
-		*/
 		assertTrue("Edge c-f in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('c')),
 				vertexMap.get(vertices.get('f'))));
 		assertTrue("c-f copy has correct weight", spanningTree.areEqualWeights(4.0, spanningTree

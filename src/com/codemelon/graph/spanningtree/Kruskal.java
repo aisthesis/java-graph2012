@@ -84,7 +84,8 @@ public class Kruskal {
 			if (vertexDisjointSet.findSet(edge.from()) 
 					!= vertexDisjointSet.findSet(edge.to())) {
 				spanningTree.addEdge(vertexMap.get(edge.from()), vertexMap.get(edge.to()));
-				vertexMap.get(edge.from()).setEdgeWeight(vertexMap.get(edge.to()), edge.weight());
+				spanningTree.setEdgeWeight(vertexMap.get(edge.from()), vertexMap.get(edge.to()),
+						edge.weight());
 				vertexDisjointSet.union(edge.from(), edge.to());				
 			}
 		}		
