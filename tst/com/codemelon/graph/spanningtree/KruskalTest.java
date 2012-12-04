@@ -3,6 +3,7 @@ package com.codemelon.graph.spanningtree;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -77,15 +78,60 @@ public class KruskalTest {
 	 */
 	@Test
 	public void testGenerateTree() {
-		fail("Not yet implemented");
+		Graph spanningTree = kruskal.generateTree();
+		Map<Vertex, Vertex> vertexMap = kruskal.getVertexMap();
+		assertTrue("Edge a-b in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('a')),
+				vertexMap.get(vertices.get('b'))));
+		assertTrue("a-b copy has correct weight", spanningTree.areEqualWeights(4.0, spanningTree
+				.getEdgeWeight(vertexMap.get(vertices.get('a')), vertexMap.get(vertices.get('b')))));
+		assertTrue("Edge h-g in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('h')),
+				vertexMap.get(vertices.get('g'))));
+		assertTrue("h-g copy has correct weight", spanningTree.areEqualWeights(1.0, spanningTree
+				.getEdgeWeight(vertexMap.get(vertices.get('h')), vertexMap.get(vertices.get('g')))));
+		assertTrue("Edge c-i in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('c')),
+				vertexMap.get(vertices.get('i'))));
+		/*
+		assertTrue("c-i copy has correct weight", spanningTree.areEqualWeights(2.0, spanningTree
+				.getEdgeWeight(vertexMap.get(vertices.get('c')), vertexMap.get(vertices.get('i')))));
+		*/
+		assertTrue("Edge f-g in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('f')),
+				vertexMap.get(vertices.get('g'))));
+		/*
+		assertTrue("f-g copy has correct weight", spanningTree.areEqualWeights(2.0, spanningTree
+				.getEdgeWeight(vertexMap.get(vertices.get('f')), vertexMap.get(vertices.get('g')))));
+		*/
+		assertTrue("Edge c-f in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('c')),
+				vertexMap.get(vertices.get('f'))));
+		assertTrue("c-f copy has correct weight", spanningTree.areEqualWeights(4.0, spanningTree
+				.getEdgeWeight(vertexMap.get(vertices.get('c')), vertexMap.get(vertices.get('f')))));
+		assertTrue("Edge c-d in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('c')),
+				vertexMap.get(vertices.get('d'))));
+		assertTrue("c-d copy has correct weight", spanningTree.areEqualWeights(7.0, spanningTree
+				.getEdgeWeight(vertexMap.get(vertices.get('c')), vertexMap.get(vertices.get('d')))));
+		assertTrue("Edge d-e in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('d')),
+				vertexMap.get(vertices.get('e'))));
+		assertTrue("d-e copy has correct weight", spanningTree.areEqualWeights(9.0, spanningTree
+				.getEdgeWeight(vertexMap.get(vertices.get('d')), vertexMap.get(vertices.get('e')))));
+		assertFalse("Edge b-h not in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('b')),
+				vertexMap.get(vertices.get('h'))));
+		assertFalse("Edge i-h not in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('i')),
+				vertexMap.get(vertices.get('h'))));
+		assertFalse("Edge g-i not in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('g')),
+				vertexMap.get(vertices.get('i'))));
+		assertFalse("Edge d-f not in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('d')),
+				vertexMap.get(vertices.get('f'))));
+		assertFalse("Edge e-f not in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('e')),
+				vertexMap.get(vertices.get('f'))));
 	}
 
 	/**
+	 * Test getting vertex map prior to running generateTree()
 	 * Test method for {@link com.codemelon.graph.spanningtree.Kruskal#getVertexMap()}.
 	 */
-	@Test
+	@Test(expected=IllegalStateException.class)
 	public void testGetVertexMap() {
-		fail("Not yet implemented");
+		Map<Vertex, Vertex> vertexMap = kruskal.getVertexMap();
+		vertexMap.get(vertices.get('a'));
 	}
 	/**
 	 * Graph from CLRS, p. 596
