@@ -4,9 +4,9 @@ package com.codemelon.graph.vertex;
  * @author Marshall Farrier
  * @version Dec 4, 2012
  * 
- * Object allowing us to associate a vertex with a weight
+ * Object associating a vertex with a weight
  */
-public class VertexAndWeight {
+public class VertexAndWeight implements Comparable<VertexAndWeight> {
 	private Vertex v;
 	private double weight;
 	public VertexAndWeight(Vertex v, double weight) {
@@ -21,5 +21,11 @@ public class VertexAndWeight {
 	}
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+	@Override
+	public int compareTo(VertexAndWeight weightedVertex) {
+		if (this.weight < weightedVertex.weight) { return -1; }
+		if (this.weight > weightedVertex.weight) { return 1; }
+		return 0;
 	}
 }
