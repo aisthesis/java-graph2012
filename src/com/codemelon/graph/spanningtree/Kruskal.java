@@ -11,7 +11,7 @@ import com.codemelon.graph.common.Color;
 import com.codemelon.graph.edge.WeightedEdge;
 import com.codemelon.graph.util.DisjointSet;
 import com.codemelon.graph.util.EdgeResetter;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * Implementation of Kruskal's algorithm for growing a minimum spanning
@@ -30,8 +30,8 @@ public class Kruskal {
 	
 	private Graph graph;
 	private WeightedEdge[] edges;
-	private DisjointSet<Vertex> vertexDisjointSet;
-	private HashMap<Vertex, Vertex> vertexMap;
+	private DisjointSet<CompleteVertex> vertexDisjointSet;
+	private HashMap<CompleteVertex, CompleteVertex> vertexMap;
 	private Graph spanningTree;
 	
 	private static final WeightedEdge[] EMPTY_EDGE_ARRAY = new WeightedEdge[0];
@@ -101,30 +101,30 @@ public class Kruskal {
 	 * @throws IllegalStateException if this method is called before generateTree(). In this case, the map
 	 * has not been created yet.
 	 */
-	public Map<Vertex, Vertex> getVertexMap() {
+	public Map<CompleteVertex, CompleteVertex> getVertexMap() {
 		if (vertexMap == null) {
 			throw new IllegalStateException("Map must first be created by running generateTree()!");
 		}
 		return vertexMap;
 	}
 	private void initializeForGenerateTree() {
-		vertexMap = new HashMap<Vertex, Vertex>(graph.vertexCount());
+		vertexMap = new HashMap<CompleteVertex, CompleteVertex>(graph.vertexCount());
 		spanningTree = new Graph(graph.vertexCount());
 		spanningTree.setWeightEpsilon(graph.getWeightEpsilon());
-		Iterator<Vertex> it = graph.vertexIterator();
-		Vertex v;
+		Iterator<CompleteVertex> it = graph.vertexIterator();
+		CompleteVertex v;
 		while (it.hasNext()) {
 			v = it.next();
-			vertexMap.put(v, new Vertex());
+			vertexMap.put(v, new CompleteVertex());
 			spanningTree.addVertex(vertexMap.get(v));
 		}
-		vertexDisjointSet = new DisjointSet<Vertex>(graph.getVertices());
+		vertexDisjointSet = new DisjointSet<CompleteVertex>(graph.getVertices());
 		edges = graph.getWeightedEdges().toArray(EMPTY_EDGE_ARRAY);
 		Arrays.sort(edges, COMPARATOR);		
 	}
 	private void initializeForMarking() {
 		new EdgeResetter(graph).resetColors();
-		vertexDisjointSet = new DisjointSet<Vertex>(graph.getVertices());
+		vertexDisjointSet = new DisjointSet<CompleteVertex>(graph.getVertices());
 		edges = graph.getWeightedEdges().toArray(EMPTY_EDGE_ARRAY);
 		Arrays.sort(edges, COMPARATOR);
 	}

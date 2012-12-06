@@ -16,13 +16,13 @@ import com.codemelon.graph.common.Color;
  * @author Marshall Farrier
  * @version 11-24-2012
  */
-public class VertexTest {
+public class CompleteVertexTest {
 	private static final int MANY = 1000;
 	private static final int TEST_NUMBER = 100;
-	private Vertex v;
+	private CompleteVertex v;
 	@Before
 	public void setUp() {
-		v = new Vertex();
+		v = new CompleteVertex();
 	}
 	@After
 	public void tearDown() {
@@ -35,7 +35,7 @@ public class VertexTest {
 	@Test
 	public void testVertex() {
 		Color c = Color.BLACK;
-		Vertex u = new Vertex(c);
+		CompleteVertex u = new CompleteVertex(c);
 		assertFalse("No initial adjacencies", v.hasAdjacencies());
 		assertEquals("Color is initially white using default constructor.", 
 				VertexConstants.INITIAL_COLOR, v.color);
@@ -43,16 +43,16 @@ public class VertexTest {
 	}
 	
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#addAdjacency(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#addAdjacency(com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testAddDuplicateAdjacency() {
-		Vertex u = new Vertex();
+		CompleteVertex u = new CompleteVertex();
 		v.addAdjacency(u);
 		assertFalse("Method returns false when adjacency already exists", v.addAdjacency(u));
 	}
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#addAdjacency(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#addAdjacency(com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testAddManyAdjacencies() {
@@ -61,11 +61,11 @@ public class VertexTest {
 	}
 	
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#addAdjacency(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#addAdjacency(com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testAddFromDifferentGraph() {
-		Vertex u = new Vertex();
+		CompleteVertex u = new CompleteVertex();
 		DiGraph g1 = new DiGraph();
 		DiGraph g2 = new DiGraph();
 		g1.addVertex(u);
@@ -74,19 +74,19 @@ public class VertexTest {
 	}
 	
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#removeAdjacency(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#removeAdjacency(com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testRemoveAdjacency() {
-		Vertex u = new Vertex();
+		CompleteVertex u = new CompleteVertex();
 		v.addAdjacency(u);
 		assertTrue("Returns true when adjacency exists", v.removeAdjacency(u));
 		assertFalse("Adding, then removing an adjacency leaves no adjacencies.", v.hasAdjacencies());
-		assertFalse("Returns false when adjacency doesn't exist", v.removeAdjacency(new Vertex()));
+		assertFalse("Returns false when adjacency doesn't exist", v.removeAdjacency(new CompleteVertex()));
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#clearAdjacencies()}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#clearAdjacencies()}.
 	 */
 	@Test
 	public void testClearAdjacencies() {
@@ -96,17 +96,17 @@ public class VertexTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#containsAdjacency(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#containsAdjacency(com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testContainsAdjacency() {
-		Vertex u = new Vertex();
+		CompleteVertex u = new CompleteVertex();
 		v.addAdjacency(u);
 		assertTrue("Adjacency map contains added adjacency.", v.containsAdjacency(u));
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#adjacencyCount()}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#adjacencyCount()}.
 	 */
 	@Test
 	public void testAdjacencies() {
@@ -115,16 +115,16 @@ public class VertexTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#hasAdjacencies()}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#hasAdjacencies()}.
 	 */
 	@Test
 	public void testHasAdjacencies() {
-		v.addAdjacency(new Vertex());
+		v.addAdjacency(new CompleteVertex());
 		assertTrue("Vertex has adjacencies after adding 1.", v.hasAdjacencies());
 	}
 	
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#color}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#color}.
 	 */
 	@Test
 	public void testColor() {
@@ -134,18 +134,18 @@ public class VertexTest {
 	}
 	
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#parent}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#parent}.
 	 */
 	@Test
 	public void testParent() {
-		Vertex u = new Vertex();
+		CompleteVertex u = new CompleteVertex();
 		assertEquals("Parent initialized to null.", null, v.parent);
 		v.parent = u;
 		assertEquals("Parent subsequently assigned to another vertex.", u, v.parent);
 	}
 	
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#parent}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#parent}.
 	 */
 	@Test
 	public void testDistance() {
@@ -155,7 +155,7 @@ public class VertexTest {
 	}
 	
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#discoveryTime}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#discoveryTime}.
 	 */
 	@Test
 	public void testDiscoveryTime() {
@@ -165,7 +165,7 @@ public class VertexTest {
 	}
 	
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#finishTime}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#finishTime}.
 	 */
 	@Test
 	public void testFinishTime() {
@@ -175,7 +175,7 @@ public class VertexTest {
 	}
 	
 	/**
-	 * Test method for {@link com.codemelon.graph.vertex.Vertex#treeNumber}.
+	 * Test method for {@link com.codemelon.graph.vertex.CompleteVertex#treeNumber}.
 	 */
 	@Test
 	public void testTreeNumber() {
@@ -186,7 +186,7 @@ public class VertexTest {
 	
 	private void addAnonymousAdjacencies(int vertexCount) {
 		for (int i = 0; i < vertexCount; i++) {
-			v.addAdjacency(new Vertex());
+			v.addAdjacency(new CompleteVertex());
 		}
 	}
 }

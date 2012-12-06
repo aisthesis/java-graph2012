@@ -7,7 +7,7 @@ import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.util.VertexResetter;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 /**
  * Implementation of depth-first search following 
  * <a href="http://mitpress.mit.edu/algorithms/">CLRS</a>, pp. 603ff.
@@ -47,8 +47,8 @@ public class DepthFirstSearch {
 	public boolean search() {
 		new VertexResetter(graph).dfsReset();
 		t = 0;
-		Iterator<Vertex> it = graph.vertexIterator();
-		Vertex u;
+		Iterator<CompleteVertex> it = graph.vertexIterator();
+		CompleteVertex u;
 		while (it.hasNext()) {
 			u = it.next();
 			if (u.color == Color.WHITE) {
@@ -57,11 +57,11 @@ public class DepthFirstSearch {
 		}
 		return isAcyclic;
 	}
-	private void visit(Vertex u) {
+	private void visit(CompleteVertex u) {
 		u.discoveryTime = ++t;
 		u.color = Color.GRAY;
-		Set<Vertex> adjacentVertices = u.getAdjacencies();
-		for (Vertex v : adjacentVertices) {
+		Set<CompleteVertex> adjacentVertices = u.getAdjacencies();
+		for (CompleteVertex v : adjacentVertices) {
 			switch (v.color) {
 			case WHITE:
 				v.parent = u;

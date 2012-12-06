@@ -1,7 +1,7 @@
 package com.codemelon.graph.edge;
 
 import com.codemelon.graph.DiGraph;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * Immutable, undirected edges that maintain a floating point weight.
@@ -15,8 +15,8 @@ import com.codemelon.graph.vertex.Vertex;
  */
 public class WeightedEdge {
 	private DiGraph graph;
-	private Vertex from;
-	private Vertex to;
+	private CompleteVertex from;
+	private CompleteVertex to;
 	private double weight;
 	/**
 	 * Construct an immutable weighted edge. The weight of the edge is set when the edge object
@@ -28,7 +28,7 @@ public class WeightedEdge {
 	 * @throws IllegalArgumentException if from or to do not belong to the same graph
 	 * @throws IllegalArgumentException if the graph does not contain the given edge
 	 */
-	public WeightedEdge(Vertex from, Vertex to) {
+	public WeightedEdge(CompleteVertex from, CompleteVertex to) {
 		graph = from.getGraph();
 		if (graph == null || to.getGraph() == null) {
 			throw new IllegalArgumentException("Edge must belong to a graph!");
@@ -51,7 +51,7 @@ public class WeightedEdge {
 	 * from() and to() vertices.
 	 * @return the "from" vertex specified in the constructor
 	 */
-	public Vertex from() { return from; }
+	public CompleteVertex from() { return from; }
 	/**
 	 * Returns one end of the given edge. Note that the edge is undirected,
 	 * so the distinction between head and tail or from and to is arbitrary.
@@ -60,7 +60,7 @@ public class WeightedEdge {
 	 * from() and to() vertices.
 	 * @return the "from" vertex specified in the constructor
 	 */
-	public Vertex to() { return to; }
+	public CompleteVertex to() { return to; }
 	/**
 	 * Returns the edge's weight.
 	 * @return the edge's weight

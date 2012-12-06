@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.util.Transposer;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * @author Marshall Farrier
@@ -43,7 +43,7 @@ public class StronglyConnectedComponentsTest {
 	 */
 	@Test
 	public void testRun() {
-		HashMap<Character, Vertex> vertices = setUpCLRSGraph();
+		HashMap<Character, CompleteVertex> vertices = setUpCLRSGraph();
 		Transposer transposer = new StronglyConnectedComponents(graph).run();
 		// component abe
 		assertEquals("a and b belong to same tree", vertices.get('a').treeNumber, 
@@ -66,7 +66,7 @@ public class StronglyConnectedComponentsTest {
 		
 		// transposer is correct
 		DiGraph transposeGraph = transposer.getTransposeGraph();
-		HashMap<Vertex, Vertex> mapToTransposeVertices = transposer.getVertexMap();
+		HashMap<CompleteVertex, CompleteVertex> mapToTransposeVertices = transposer.getVertexMap();
 		assertTrue("Correct edges in transpose graph", transposeGraph
 				.containsEdge(mapToTransposeVertices.get(vertices.get('b')), 
 				mapToTransposeVertices.get(vertices.get('a'))));
@@ -113,10 +113,10 @@ public class StronglyConnectedComponentsTest {
 	/**
 	 * Graph from CLRS, p. 616
 	 */
-	private HashMap<Character, Vertex> setUpCLRSGraph() {
-		HashMap<Character, Vertex> vertices = new HashMap<Character, Vertex>();
+	private HashMap<Character, CompleteVertex> setUpCLRSGraph() {
+		HashMap<Character, CompleteVertex> vertices = new HashMap<Character, CompleteVertex>();
 		for (char i = 'a'; i <= 'h'; i++) {
-			vertices.put(i, new Vertex(i));
+			vertices.put(i, new CompleteVertex(i));
 		}
 		graph = new DiGraph(vertices.values());
 		graph.addEdge(vertices.get('a'), vertices.get('b'));

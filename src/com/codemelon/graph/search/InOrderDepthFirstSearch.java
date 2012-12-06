@@ -17,7 +17,7 @@ import java.util.List;
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.SearchOrderComparator;
 
 /**
@@ -29,10 +29,10 @@ public class InOrderDepthFirstSearch {
 	private DiGraph graph;
 	private int t;	// time in CLRS
 	private int treeNumber; // used in StronglyConnectedComponents
-	private List<Vertex> vertices;
-	private Comparator<Vertex> comp;
+	private List<CompleteVertex> vertices;
+	private Comparator<CompleteVertex> comp;
 	
-	private static final Vertex[] EMPTY_VERTEX_ARRAY = new Vertex[0];
+	private static final CompleteVertex[] EMPTY_VERTEX_ARRAY = new CompleteVertex[0];
 	/**
 	 * Prepares the graph for a depth-first search where vertices
 	 * are visited in the order specified by the Comparator passed
@@ -43,9 +43,9 @@ public class InOrderDepthFirstSearch {
 	 * @param comp Comparator determining the order in which vertices
 	 * will be visited.
 	 */
-	public InOrderDepthFirstSearch(DiGraph graph, Comparator<Vertex> comp) {
+	public InOrderDepthFirstSearch(DiGraph graph, Comparator<CompleteVertex> comp) {
 		this.graph = graph;
-		vertices = new ArrayList<Vertex>(graph.getVertices());
+		vertices = new ArrayList<CompleteVertex>(graph.getVertices());
 		this.comp = comp;
 	}
 	/**
@@ -77,20 +77,20 @@ public class InOrderDepthFirstSearch {
 		Collections.sort(vertices, comp);
 		t = 0;
 		treeNumber = 0;
-		for (Vertex u : vertices) {
+		for (CompleteVertex u : vertices) {
 			if (u.color == Color.WHITE) {
 				treeNumber++;
 				visit(u);
 			}		
 		}
 	}
-	private void visit(Vertex u) {
+	private void visit(CompleteVertex u) {
 		u.discoveryTime = ++t;
 		u.treeNumber = treeNumber;
 		u.color = Color.GRAY;
-		Vertex[] adjacentVertices = u.getAdjacencies().toArray(EMPTY_VERTEX_ARRAY);
+		CompleteVertex[] adjacentVertices = u.getAdjacencies().toArray(EMPTY_VERTEX_ARRAY);
 		Arrays.sort(adjacentVertices, comp);
-		for (Vertex v : adjacentVertices) {
+		for (CompleteVertex v : adjacentVertices) {
 			if (v.color == Color.WHITE) {
 				v.parent = u;
 				visit(v);

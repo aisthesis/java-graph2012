@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.VertexConstants;
 
 /**
@@ -48,7 +48,7 @@ public class VertexResetter {
 	 * @param c color to which all vertices will be set
 	 */
 	public void resetColors(Color c) {
-		Iterator<Vertex> it = graph.vertexIterator();
+		Iterator<CompleteVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
 			it.next().color = c;
 		}
@@ -57,13 +57,13 @@ public class VertexResetter {
 		resetColors(VertexConstants.INITIAL_COLOR);
 	}
 	public void resetParents() {
-		Iterator<Vertex> it = graph.vertexIterator();
+		Iterator<CompleteVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
 			it.next().parent = null;
 		}
 	}
 	public void resetDistances(int distance) {
-		Iterator<Vertex> it = graph.vertexIterator();
+		Iterator<CompleteVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
 			it.next().distance = distance;
 		}
@@ -72,7 +72,7 @@ public class VertexResetter {
 		resetDistances(VertexConstants.INITIAL_DISTANCE);
 	}
 	public void resetDiscoveryTimes(int discoveryTime) {
-		Iterator<Vertex> it = graph.vertexIterator();
+		Iterator<CompleteVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
 			it.next().discoveryTime = discoveryTime;
 		}
@@ -81,7 +81,7 @@ public class VertexResetter {
 		resetDiscoveryTimes(VertexConstants.INITIAL_DISCOVERY_TIME);
 	}
 	public void resetFinishTimes(int finishTime) {
-		Iterator<Vertex> it = graph.vertexIterator();
+		Iterator<CompleteVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
 			it.next().finishTime = finishTime;
 		}
@@ -90,7 +90,7 @@ public class VertexResetter {
 		resetFinishTimes(VertexConstants.INITIAL_FINISH_TIME);
 	}
 	public void resetTreeNumbers(int treeNumber) {
-		Iterator<Vertex> it = graph.vertexIterator();
+		Iterator<CompleteVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
 			it.next().treeNumber = treeNumber;
 		}
@@ -99,7 +99,7 @@ public class VertexResetter {
 		resetTreeNumbers(VertexConstants.INITIAL_TREE_NUMBER);
 	}
 	public void resetWeights(double weight) {
-		Iterator<Vertex> it = graph.vertexIterator();
+		Iterator<CompleteVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
 			it.next().weight = weight;
 		}		

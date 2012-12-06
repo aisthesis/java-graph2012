@@ -13,7 +13,7 @@ import org.junit.Test;
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.Graph;
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * @author Marshall Farrier
@@ -30,11 +30,11 @@ public class BreadthFirstSearchTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.util.search.BreadthFirstSearch#search(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.util.search.BreadthFirstSearch#search(com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testBigSparseGraph() {
-		HashMap<Integer, Vertex> vertices = setUpBigSparseGraph();
+		HashMap<Integer, CompleteVertex> vertices = setUpBigSparseGraph();
 		new BreadthFirstSearch(graph).search(vertices.get(1));
 		// vertex 0 is unreachable and hence white, etc.
 		assertEquals("Vertex 0 is white", Color.WHITE, vertices.get(0).color);
@@ -67,11 +67,11 @@ public class BreadthFirstSearchTest {
 	}
 	/**
 	 * Graph from CLRS, p. 596
-	 * Test method for {@link com.codemelon.graph.util.search.BreadthFirstSearch#search(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.util.search.BreadthFirstSearch#search(com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testSmallCLRSGraph() {
-		HashMap<Character, Vertex> vertices = setUpSmallCLRSGraph();
+		HashMap<Character, CompleteVertex> vertices = setUpSmallCLRSGraph();
 		new BreadthFirstSearch(graph).search(vertices.get('s'));
 		for (char i = 'r'; i <= 'y'; i++) {
 			assertEquals("All vertices are black", Color.BLACK, vertices.get(i).color);
@@ -97,11 +97,11 @@ public class BreadthFirstSearchTest {
 	
 	/**
 	 * throw an exception if path() called before search()
-	 * Test method for {@link com.codemelon.graph.util.search.BreadthFirstSearch#path(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.util.search.BreadthFirstSearch#path(com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test(expected=IllegalStateException.class)
 	public void testPathBeforeSearch() {
-		HashMap<Character, Vertex> vertices = setUpSmallCLRSGraph();
+		HashMap<Character, CompleteVertex> vertices = setUpSmallCLRSGraph();
 		new BreadthFirstSearch(graph).path(vertices.get('t'));
 	}
 
@@ -109,10 +109,10 @@ public class BreadthFirstSearchTest {
 	 * Graph with sequential (from vertex i to i + 1) edges on the lower-numbered vertices,
 	 * no edges on higher-numbered vertices, and one forked edge.
 	 */
-	private HashMap<Integer, Vertex> setUpBigSparseGraph() {
-		HashMap<Integer, Vertex> vertices = new HashMap<Integer, Vertex>(VERTICES_IN_TEST_GRAPH);
+	private HashMap<Integer, CompleteVertex> setUpBigSparseGraph() {
+		HashMap<Integer, CompleteVertex> vertices = new HashMap<Integer, CompleteVertex>(VERTICES_IN_TEST_GRAPH);
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
-			vertices.put(i, new Vertex(i));
+			vertices.put(i, new CompleteVertex(i));
 		}
 		graph = new DiGraph(vertices.values());
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH / 2; i++) {
@@ -125,10 +125,10 @@ public class BreadthFirstSearchTest {
 	/**
 	 * Graph from CLRS, p. 596
 	 */
-	private HashMap<Character, Vertex> setUpSmallCLRSGraph() {
-		HashMap<Character, Vertex> vertices = new HashMap<Character, Vertex>();
+	private HashMap<Character, CompleteVertex> setUpSmallCLRSGraph() {
+		HashMap<Character, CompleteVertex> vertices = new HashMap<Character, CompleteVertex>();
 		for (char i = 'r'; i <= 'y'; i++) {
-			vertices.put(i, new Vertex(i));
+			vertices.put(i, new CompleteVertex(i));
 		}
 		graph = new Graph(vertices.values());
 		graph.addEdge(vertices.get('r'), vertices.get('s'));

@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * @author Marshall Farrier
@@ -21,15 +21,15 @@ import com.codemelon.graph.vertex.Vertex;
 public class DiGraphTest {
 	private static final int VERTICES_IN_TEST_GRAPH = 1000;
 	private DiGraph graph;
-	private ArrayList<Vertex> vertices;
+	private ArrayList<CompleteVertex> vertices;
 
 	/**
 	 */
 	@Before
 	public void setUp() {
-		vertices = new ArrayList<Vertex>(VERTICES_IN_TEST_GRAPH);
+		vertices = new ArrayList<CompleteVertex>(VERTICES_IN_TEST_GRAPH);
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
-			vertices.add(new Vertex(i));
+			vertices.add(new CompleteVertex(i));
 		}
 	}
 
@@ -62,18 +62,18 @@ public class DiGraphTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.DiGraph#addVertex(com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#addVertex(com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testAddVertex() {
 		graph = new DiGraph();
-		Vertex v = new Vertex();
+		CompleteVertex v = new CompleteVertex();
 		graph.addVertex(v);
 		assertEquals("Correct vertex count after adding a vertex to empty graph", 1, graph.vertexCount());
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.DiGraph#addEdge(com.codemelon.graph.vertex.Vertex, com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#addEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testAddEdge() {
@@ -88,7 +88,7 @@ public class DiGraphTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testAddEdgeSourceVertexNotPresent() {
 		graph = new DiGraph(vertices);
-		graph.addEdge(new Vertex(), vertices.get(1));		
+		graph.addEdge(new CompleteVertex(), vertices.get(1));		
 	}
 	
 	/**
@@ -97,11 +97,11 @@ public class DiGraphTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testAddEdgeTargetVertexNotPresent() {
 		graph = new DiGraph(vertices);
-		graph.addEdge(vertices.get(0), new Vertex());		
+		graph.addEdge(vertices.get(0), new CompleteVertex());		
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.DiGraph#removeEdge(com.codemelon.graph.vertex.Vertex, com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#removeEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testRemoveEdge() {

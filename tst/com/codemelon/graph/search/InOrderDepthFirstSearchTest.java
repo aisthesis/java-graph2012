@@ -16,7 +16,7 @@ import org.junit.Test;
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.LabelComparator;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * @author Marshall Farrier
@@ -37,7 +37,7 @@ public class InOrderDepthFirstSearchTest {
 	 */
 	@Test
 	public void testSmallCLRSGraph() {
-		HashMap<Character, Vertex> vertices = setUpSmallCLRSGraph();
+		HashMap<Character, CompleteVertex> vertices = setUpSmallCLRSGraph();
 		new InOrderDepthFirstSearch(graph, new LabelComparator()).search();
 		// all vertices are black
 		for (char i = 'u'; i <= 'z'; i++) {
@@ -60,7 +60,7 @@ public class InOrderDepthFirstSearchTest {
 	}
 	@Test
 	public void testBiggerCircularGraph() {
-		ArrayList<Vertex> vertices = setUpBiggerCircularGraph();
+		ArrayList<CompleteVertex> vertices = setUpBiggerCircularGraph();
 		new InOrderDepthFirstSearch(graph, new LabelComparator()).search();	
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {
 			assertEquals("Color is black", Color.BLACK, vertices.get(i).color);
@@ -72,10 +72,10 @@ public class InOrderDepthFirstSearchTest {
 	/**
 	 * Graph from CLRS, p. 605
 	 */
-	public HashMap<Character, Vertex> setUpSmallCLRSGraph() {
-		HashMap<Character, Vertex> vertices = new HashMap<Character, Vertex>();
+	public HashMap<Character, CompleteVertex> setUpSmallCLRSGraph() {
+		HashMap<Character, CompleteVertex> vertices = new HashMap<Character, CompleteVertex>();
 		for (char i = 'u'; i <= 'z'; i++) {
-			vertices.put(i, new Vertex(i));
+			vertices.put(i, new CompleteVertex(i));
 		}
 		graph = new DiGraph(vertices.values());
 		graph.addEdge(vertices.get('u'), vertices.get('v'));
@@ -89,11 +89,11 @@ public class InOrderDepthFirstSearchTest {
 		return vertices;
 	}
 	
-	public ArrayList<Vertex> setUpBiggerCircularGraph() {
-		ArrayList<Vertex> vertices = new ArrayList<Vertex>(CIRCULAR_GRAPH_SIZE);
+	public ArrayList<CompleteVertex> setUpBiggerCircularGraph() {
+		ArrayList<CompleteVertex> vertices = new ArrayList<CompleteVertex>(CIRCULAR_GRAPH_SIZE);
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {
 			// vertex label will be the same as index in the array
-			vertices.add(new Vertex(i));
+			vertices.add(new CompleteVertex(i));
 		}
 		graph = new DiGraph(vertices);
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE - 1; i++) {

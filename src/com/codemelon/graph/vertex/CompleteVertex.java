@@ -20,14 +20,14 @@ import com.codemelon.graph.common.EdgeType;
  * always a good idea to use the corresponding methods from the graph object to which
  * the vertex (or edge) belongs.
  */
-public class Vertex {
-	private IdentityHashMap<Vertex, EdgeData> adjacencies;
+public class CompleteVertex {
+	private IdentityHashMap<CompleteVertex, EdgeData> adjacencies;
 	private DiGraph graph;
 	
 	public int label;
 	public int searchOrder;	// allows arbitrary prioritization for searches
 	public Color color;
-	public Vertex parent;
+	public CompleteVertex parent;
 	public int distance;	// for BFS, etc.
 	// for DFS
 	public int discoveryTime;
@@ -35,10 +35,10 @@ public class Vertex {
 	public int treeNumber;	// to identify components after DFS
 	public double weight;
 	
-	public Vertex() {
+	public CompleteVertex() {
 		this(VertexConstants.INITIAL_COLOR);
 	}
-	public Vertex(int label) {
+	public CompleteVertex(int label) {
 		this(label, VertexConstants.DEFAULT_SEARCH_ORDER_VALUE,
 				VertexConstants.INITIAL_COLOR, null, VertexConstants.INITIAL_DISTANCE, 
 				VertexConstants.INITIAL_DISCOVERY_TIME, 
@@ -46,7 +46,7 @@ public class Vertex {
 				VertexConstants.INITIAL_TREE_NUMBER,
 				VertexConstants.INITIAL_WEIGHT);
 	}
-	public Vertex(Color color) {
+	public CompleteVertex(Color color) {
 		this(VertexConstants.DEFAULT_LABEL, VertexConstants.DEFAULT_SEARCH_ORDER_VALUE,
 				color, null, VertexConstants.INITIAL_DISTANCE, 
 				VertexConstants.INITIAL_DISCOVERY_TIME, 
@@ -54,9 +54,9 @@ public class Vertex {
 				VertexConstants.INITIAL_TREE_NUMBER,
 				VertexConstants.INITIAL_WEIGHT);
 	}
-	public Vertex(int label, int searchOrder, Color color, Vertex parent, int distance, int discoveryTime,
+	public CompleteVertex(int label, int searchOrder, Color color, CompleteVertex parent, int distance, int discoveryTime,
 			int finishTime, int treeNumber, double weight) {
-		adjacencies = new IdentityHashMap<Vertex, EdgeData>();
+		adjacencies = new IdentityHashMap<CompleteVertex, EdgeData>();
 		graph = null;
 		this.label = label;
 		this.searchOrder = searchOrder;
@@ -73,7 +73,7 @@ public class Vertex {
 	 * and parent of new vertex empty or, in the case of parent, null.
 	 * @param v vertex to be copied
 	 */
-	public Vertex(Vertex v) {
+	public CompleteVertex(CompleteVertex v) {
 		this(v, null);
 	}
 	/**
@@ -82,7 +82,7 @@ public class Vertex {
 	 * @param vertexToCopy vertex from which to copy satellite data
 	 * @param vertexParent parent to assign to new vertex
 	 */
-	public Vertex(Vertex vertexToCopy, Vertex vertexParent) {
+	public CompleteVertex(CompleteVertex vertexToCopy, CompleteVertex vertexParent) {
 		this(vertexToCopy.label, vertexToCopy.searchOrder, vertexToCopy.color, vertexParent, 
 				vertexToCopy.distance, vertexToCopy.discoveryTime, vertexToCopy.finishTime, 
 				vertexToCopy.treeNumber, vertexToCopy.weight);		
@@ -105,7 +105,7 @@ public class Vertex {
 	 * @param v vertex to be added
 	 * @return true if the adjacency list did not already contain v
 	 */
-	public boolean addAdjacency(Vertex v) {
+	public boolean addAdjacency(CompleteVertex v) {
 		if (this.graph != v.graph) {
 			throw new IllegalArgumentException("Vertex belongs to a different graph!");
 		}
@@ -119,7 +119,7 @@ public class Vertex {
 	 * @param v vertex to be removed
 	 * @return true if the vertex was found in the adjacency set
 	 */
-	public boolean removeAdjacency(Vertex v) {
+	public boolean removeAdjacency(CompleteVertex v) {
 		if (!adjacencies.containsKey(v)) { return false; }
 		adjacencies.remove(v);
 		return true;
@@ -138,13 +138,13 @@ public class Vertex {
 	 * @param v vertex whose presence is to be tested
 	 * @return true if v is found in the adjacency set
 	 */
-	public boolean containsAdjacency(Vertex v) {
+	public boolean containsAdjacency(CompleteVertex v) {
 		return adjacencies.containsKey(v);
 	}
 	
 	public boolean containsAdjacency(int label) {
-		Set<Vertex> adjacentVertices = adjacencies.keySet();
-		Iterator<Vertex> it = adjacentVertices.iterator();
+		Set<CompleteVertex> adjacentVertices = adjacencies.keySet();
+		Iterator<CompleteVertex> it = adjacentVertices.iterator();
 		while (it.hasNext()) {
 			if (it.next().label == label) { return true; }
 		}
@@ -159,7 +159,7 @@ public class Vertex {
 		return adjacencies.size();
 	}
 	
-	public Set<Vertex> getAdjacencies() {
+	public Set<CompleteVertex> getAdjacencies() {
 		return adjacencies.keySet();
 	}
 
@@ -170,22 +170,22 @@ public class Vertex {
 	public boolean hasAdjacencies() {
 		return !adjacencies.isEmpty();
 	}
-	public void setEdgeColor(Vertex to, Color color) {
+	public void setEdgeColor(CompleteVertex to, Color color) {
 		adjacencies.get(to).setColor(color);
 	}
-	public Color getEdgeColor(Vertex to) {
+	public Color getEdgeColor(CompleteVertex to) {
 		return adjacencies.get(to).getColor();
 	}
-	public void setEdgeType(Vertex to, EdgeType edgeType) {
+	public void setEdgeType(CompleteVertex to, EdgeType edgeType) {
 		adjacencies.get(to).setType(edgeType);
 	}
-	public EdgeType getEdgeType(Vertex to) {
+	public EdgeType getEdgeType(CompleteVertex to) {
 		return adjacencies.get(to).getType();
 	}
-	public void setEdgeWeight(Vertex to, double weight) {
+	public void setEdgeWeight(CompleteVertex to, double weight) {
 		adjacencies.get(to).setWeight(weight);
 	}
-	public double getEdgeWeight(Vertex to) {
+	public double getEdgeWeight(CompleteVertex to) {
 		return adjacencies.get(to).getWeight();
 	}
 	/**

@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.codemelon.graph.edge.WeightedEdge;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * @author Marshall Farrier
@@ -25,16 +25,16 @@ public class GraphTest {
 	private static final int EDGES_IN_DENSE_GRAPH = VERTICES_IN_TEST_GRAPH 
 			* (VERTICES_IN_TEST_GRAPH - 1) / 2;
 	private Graph graph;
-	private ArrayList<Vertex> vertices;
+	private ArrayList<CompleteVertex> vertices;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		vertices = new ArrayList<Vertex>(VERTICES_IN_TEST_GRAPH);
+		vertices = new ArrayList<CompleteVertex>(VERTICES_IN_TEST_GRAPH);
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
-			vertices.add(new Vertex());
+			vertices.add(new CompleteVertex());
 		}
 		graph = new Graph(vertices);
 	}
@@ -49,7 +49,7 @@ public class GraphTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.Graph#addEdge(com.codemelon.graph.vertex.Vertex, com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.Graph#addEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testAddEdge() {
@@ -59,7 +59,7 @@ public class GraphTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.Graph#removeEdge(com.codemelon.graph.vertex.Vertex, com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.Graph#removeEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testRemoveEdge() {

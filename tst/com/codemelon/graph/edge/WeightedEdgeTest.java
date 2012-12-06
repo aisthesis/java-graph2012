@@ -12,7 +12,7 @@ import org.junit.matchers.JUnitMatchers;
 import org.junit.rules.ExpectedException;
 
 import com.codemelon.graph.Graph;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * @author Marshall Farrier
@@ -22,7 +22,7 @@ import com.codemelon.graph.vertex.Vertex;
 public class WeightedEdgeTest {
 	private static final double CUSTOM_WEIGHT = 2.71828;
 	private static final int VERTICES_IN_TEST_GRAPH = 1000;
-	HashMap<Integer, Vertex> vertices;
+	HashMap<Integer, CompleteVertex> vertices;
 	private Graph graph;
 
 	/**
@@ -32,9 +32,9 @@ public class WeightedEdgeTest {
 	 */
 	@Before
 	public void setUp() {
-		vertices = new HashMap<Integer, Vertex>(VERTICES_IN_TEST_GRAPH);
+		vertices = new HashMap<Integer, CompleteVertex>(VERTICES_IN_TEST_GRAPH);
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
-			vertices.put(i, new Vertex(i));
+			vertices.put(i, new CompleteVertex(i));
 		}
 		graph = new Graph(vertices.values());
 		graph.addEdge(vertices.get(0), vertices.get(1));
@@ -55,26 +55,26 @@ public class WeightedEdgeTest {
 	public ExpectedException thrown = ExpectedException.none();
 
 	/**
-	 * Test method for {@link com.codemelon.graph.edge.WeightedEdge#WeightedEdge(com.codemelon.graph.vertex.Vertex, com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.edge.WeightedEdge#WeightedEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testWeightedEdgeNullGraph() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage(JUnitMatchers.containsString("must belong to a graph"));
-		Vertex u = new Vertex();
-		Vertex v = new Vertex();
+		CompleteVertex u = new CompleteVertex();
+		CompleteVertex v = new CompleteVertex();
 		WeightedEdge e = new WeightedEdge(u, v);
 		e.from();
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.edge.WeightedEdge#WeightedEdge(com.codemelon.graph.vertex.Vertex, com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.edge.WeightedEdge#WeightedEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testWeightedEdgeDifferentGraphs() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage(JUnitMatchers.containsString("must belong to the same graph"));
-		Vertex u = new Vertex();
+		CompleteVertex u = new CompleteVertex();
 		Graph g2 = new Graph(1);
 		g2.addVertex(u);
 		assertEquals("u belongs to g2", g2, u.getGraph());
@@ -83,7 +83,7 @@ public class WeightedEdgeTest {
 		e.from();
 	}
 	/**
-	 * Test method for {@link com.codemelon.graph.edge.WeightedEdge#WeightedEdge(com.codemelon.graph.vertex.Vertex, com.codemelon.graph.vertex.Vertex)}.
+	 * Test method for {@link com.codemelon.graph.edge.WeightedEdge#WeightedEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testWeightedEdgeNoSuchEdge() {

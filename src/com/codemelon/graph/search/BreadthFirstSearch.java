@@ -9,7 +9,7 @@ import java.util.Set;
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * Implementation of breadth-first search following 
@@ -20,7 +20,7 @@ import com.codemelon.graph.vertex.Vertex;
  */
 public class BreadthFirstSearch {
 	private DiGraph graph;
-	private Vertex source;
+	private CompleteVertex source;
 	
 	/**
 	 * Prepares the search on the given graph
@@ -41,22 +41,22 @@ public class BreadthFirstSearch {
 	 * show a distance of 0, and unreachable vertices will have distances set to -1
 	 * @param source source vertex from which shortest paths are to be determined
 	 */
-	public void search(Vertex source) {
+	public void search(CompleteVertex source) {
 		if (!graph.containsVertex(source)) {
 			throw new IllegalArgumentException("Invalid vertex!");
 		}
 		this.source = source;
 		new VertexResetter(graph).bfsReset();
-		LinkedList<Vertex> queue = new LinkedList<Vertex>();
+		LinkedList<CompleteVertex> queue = new LinkedList<CompleteVertex>();
 		source.color = Color.GRAY;
 		source.distance = 0;
 		queue.add(source);
-		Vertex u;
-		Set<Vertex> adjacentVertices;
+		CompleteVertex u;
+		Set<CompleteVertex> adjacentVertices;
 		while (!queue.isEmpty()) {
 			u = queue.removeFirst();
 			adjacentVertices = u.getAdjacencies();
-			for (Vertex v : adjacentVertices) {
+			for (CompleteVertex v : adjacentVertices) {
 				if (v.color == Color.WHITE) {
 					v.color = Color.GRAY;
 					v.distance = u.distance + 1;
@@ -71,7 +71,7 @@ public class BreadthFirstSearch {
 	 * Returns the source vertex specified when search() was called.
 	 * @return the source vertex specified when search() was called
 	 */
-	public Vertex getSourceVertex() { return source; }
+	public CompleteVertex getSourceVertex() { return source; }
 	
 	/**
 	 * Shows a shortest path from the source vertex passed in the search() method
@@ -83,13 +83,13 @@ public class BreadthFirstSearch {
 	 * to the target vertex
 	 * @throws IllegalStateException if search() has not yet been called
 	 */
-	public LinkedList<Vertex> path(Vertex target) {
+	public LinkedList<CompleteVertex> path(CompleteVertex target) {
 		if (source == null) {
 			throw new IllegalStateException("Source vertex has not been specified by calling search()!");
 		}
 		if (target.parent == null && target != source) { return null; }
-		LinkedList<Vertex> result = new LinkedList<Vertex>();
-		Vertex tmp = target;
+		LinkedList<CompleteVertex> result = new LinkedList<CompleteVertex>();
+		CompleteVertex tmp = target;
 		while (tmp != source) {
 			result.addFirst(tmp);
 			tmp = tmp.parent;

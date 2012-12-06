@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import com.codemelon.graph.DiGraph;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * @author Marshall Farrier
@@ -31,7 +31,7 @@ public class TopologicalSortTest {
 	 */
 	@Test
 	public void testSmallCLRSGraph() {
-		HashMap<String, Vertex> vertices = setUpSmallCLRSGraph();
+		HashMap<String, CompleteVertex> vertices = setUpSmallCLRSGraph();
 		TopologicalSort topSort = new TopologicalSort(graph);
 		assertTrue("Proper precedences", topSort.showsAsInOrder(vertices.get("undershorts"), 
 				vertices.get("pants")));
@@ -53,17 +53,17 @@ public class TopologicalSortTest {
 	/**
 	 * Graph from CLRS, p. 613
 	 */
-	private HashMap<String, Vertex> setUpSmallCLRSGraph() {
-		HashMap<String, Vertex> vertices = new HashMap<String, Vertex>();
-		vertices.put("undershorts", new Vertex());
-		vertices.put("pants", new Vertex());
-		vertices.put("belt", new Vertex());
-		vertices.put("shirt", new Vertex());
-		vertices.put("tie", new Vertex());
-		vertices.put("jacket", new Vertex());
-		vertices.put("socks", new Vertex());
-		vertices.put("shoes", new Vertex());
-		vertices.put("watch", new Vertex());
+	private HashMap<String, CompleteVertex> setUpSmallCLRSGraph() {
+		HashMap<String, CompleteVertex> vertices = new HashMap<String, CompleteVertex>();
+		vertices.put("undershorts", new CompleteVertex());
+		vertices.put("pants", new CompleteVertex());
+		vertices.put("belt", new CompleteVertex());
+		vertices.put("shirt", new CompleteVertex());
+		vertices.put("tie", new CompleteVertex());
+		vertices.put("jacket", new CompleteVertex());
+		vertices.put("socks", new CompleteVertex());
+		vertices.put("shoes", new CompleteVertex());
+		vertices.put("watch", new CompleteVertex());
 		graph = new DiGraph(vertices.values());
 		graph.addEdge(vertices.get("undershorts"), vertices.get("pants"));
 		graph.addEdge(vertices.get("undershorts"), vertices.get("shoes"));

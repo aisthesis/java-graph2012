@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.codemelon.graph.DiGraph;
-import com.codemelon.graph.vertex.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * @author Marshall Farrier
@@ -19,7 +19,7 @@ import com.codemelon.graph.vertex.Vertex;
 public class Transposer {
 	private DiGraph graph;
 	private DiGraph transposeGraph;
-	private HashMap<Vertex, Vertex> vertexMap;
+	private HashMap<CompleteVertex, CompleteVertex> vertexMap;
 
 	/**
 	 * Creates a transpose graph, which can be retrieved as needed through the
@@ -43,7 +43,7 @@ public class Transposer {
 	 * @return a HashMap from vertices in the original graph to vertices in the
 	 * transpose graph, or null, if transpose() has not yet been called.
 	 */
-	public HashMap<Vertex, Vertex> getVertexMap() {
+	public HashMap<CompleteVertex, CompleteVertex> getVertexMap() {
 		return vertexMap;
 	}
 	/**
@@ -55,21 +55,21 @@ public class Transposer {
 	}
 	
 	private void transpose() {
-		vertexMap = new HashMap<Vertex, Vertex>(graph.vertexCount());
+		vertexMap = new HashMap<CompleteVertex, CompleteVertex>(graph.vertexCount());
 		// insert vertices into map and result graph
-		Iterator<Vertex> vertexIterator = graph.vertexIterator();
-		Vertex v;
+		Iterator<CompleteVertex> vertexIterator = graph.vertexIterator();
+		CompleteVertex v;
 		while (vertexIterator.hasNext()) {
 			v = vertexIterator.next();
-			vertexMap.put(v, new Vertex(v));
+			vertexMap.put(v, new CompleteVertex(v));
 			transposeGraph.addVertex(vertexMap.get(v));
 		}
-		Set<Vertex> adjacentVertices;
+		Set<CompleteVertex> adjacentVertices;
 		vertexIterator = graph.vertexIterator();
 		while (vertexIterator.hasNext()) {
 			v = vertexIterator.next();
 			adjacentVertices = v.getAdjacencies();			
-			for (Vertex to : adjacentVertices) {
+			for (CompleteVertex to : adjacentVertices) {
 				transposeGraph.addEdge(vertexMap.get(to), vertexMap.get(v));
 			}		
 		}
