@@ -36,6 +36,11 @@ public class VertexResetter {
 		resetDiscoveryTimes();
 		resetFinishTimes();
 	}
+	
+	public void primReset() {
+		resetColors();
+		resetParents();
+	}
 
 	/**
 	 * Sets all vertices in the graph to the given color

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 import com.codemelon.graph.Graph;
 import com.codemelon.graph.common.Color;
@@ -16,6 +17,7 @@ import com.codemelon.graph.util.EdgeResetter;
 import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.Vertex;
 import com.codemelon.graph.vertex.VertexAndWeight;
+import com.codemelon.graph.vertex.VertexConstants;
 
 /**
  * Implementation of Prim's algorithm for growing a minimum spanning
@@ -30,20 +32,20 @@ public class Prim {
 	 * after running markEdges()
 	 */
 	public static final Color MARKER_COLOR = Color.BLACK;
-	private static final Comparator<AbstractMap.SimpleEntry<Vertex, Double>> COMPARATOR = 
-			new Comparator<AbstractMap.SimpleEntry<Vertex, Double>>() {
+	private static final Comparator<Map.Entry<Vertex, Double>> COMPARATOR = 
+			new Comparator<Map.Entry<Vertex, Double>>() {
 				@Override
-				public int compare(SimpleEntry<Vertex, Double> entry1,
-						SimpleEntry<Vertex, Double> entry2) {
+				public int compare(Map.Entry<Vertex, Double> entry1,
+						Map.Entry<Vertex, Double> entry2) {
 					if (entry1.getValue() < entry2.getValue()) { return -1; }
 					if (entry2.getValue() < entry1.getValue()) { return 1; }
 					return 0;
 				}		
 	};
 	private Graph graph;
-	private PriorityQueue<VertexAndWeight> queue;
+	private PriorityQueue<VertexAndWeight> queueOld;
 	// TODO This implementation replaces use of weird VertexAndWeight class altogether
-	private PriorityQueue<AbstractMap.SimpleEntry<Vertex, Double>> queue2;
+	private PriorityQueue<Map.Entry<Vertex, Double>> queue;
 	
 	private Map<Vertex, Double> weightMap;
 	
@@ -58,22 +60,38 @@ public class Prim {
 	 */
 	public void markEdges(Vertex root) {
 		initializeForMarking(root);
-		VertexAndWeight u;
+		Map.Entry<Vertex, Double> u;
+		Set<Vertex> adj;
 		while (!queue.isEmpty()) {
 			u = queue.poll();
-			u.vertex().color = Color.BLACK; // mark the vertices no longer in the queue
-			//TODO
+			adj = u.getKey().getAdjacencies();
+			for (Vertex v : adj) {
+				// initial color means that v is still in the queue
+				if (v.color == VertexConstants.INITIAL_COLOR && 
+						graph.getEdgeWeight(u.getKey(), v) < weightMap.get(v)) {
+					v.parent = u.getKey();
+					// TODO
+					/*
+					 * This is where this implementation breaks down. Now it is 
+					 * impossible to retrieve the Entry object without iterating through
+					 * the entire collection
+					 */
+				}
+			}
 		}
 	}
 	private void initializeForMarking(Vertex root) {
+		new VertexResetter(graph).primReset();
 		weightMap = new HashMap<Vertex, Double>(graph.vertexCount());
-		// now set up priority queue using a Comparator on AbstractMap.SimpleEntry<Vertex, Double>
-		
-		new VertexResetter(graph).resetColors();
-		queue = new PriorityQueue<VertexAndWeight>(graph.vertexCount());
-		for (Vertex vertex : graph.getVertices()) {
-			queue.add(new VertexAndWeight(vertex, vertex == root ? 0.0 : Double.MAX_VALUE));
-			vertex.parent = null;
+		Set<Vertex> vertices = graph.getVertices();
+		for (Vertex vertex : vertices) {
+			weightMap.put(vertex, Double.MAX_VALUE);
+		}
+		weightMap.put(root, 0.0);
+		queue = new PriorityQueue<Map.Entry<Vertex, Double>>(graph.vertexCount(), COMPARATOR);
+		Set<Map.Entry<Vertex, Double>> entrySet = weightMap.entrySet();
+		for (Map.Entry<Vertex, Double> entry : entrySet) {
+			queue.add(entry);
 		}
 	}
 }
