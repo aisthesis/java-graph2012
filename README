@@ -7,3 +7,6 @@ classes that avoid the overhead involved in insuring
 thread-safety.
 I plan to include thread-safe classes later while keeping
 things as simple as possible to begin with.
+Note: As of 12/5/2012 it seems to be better to deal with the complications
+of various Vertex interfaces, as we have too much vertex data that
+is necessary for 1 algorithm but unnecessary for others.
