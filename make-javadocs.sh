@@ -1,2 +1,2 @@
 #!/bin/bash
-javadoc -d html -sourcepath src -subpackages com
+javadoc -d ~/Documents/Programming/websites/codemelon2012/content/documentation/graph2012 -sourcepath src -subpackages com
