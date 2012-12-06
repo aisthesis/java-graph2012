@@ -40,6 +40,7 @@ public class VertexResetter {
 	public void primReset() {
 		resetColors();
 		resetParents();
+		resetWeights(Double.MAX_VALUE);
 	}
 
 	/**
@@ -96,5 +97,14 @@ public class VertexResetter {
 	}
 	public void resetTreeNumbers() {
 		resetTreeNumbers(VertexConstants.INITIAL_TREE_NUMBER);
+	}
+	public void resetWeights(double weight) {
+		Iterator<Vertex> it = graph.vertexIterator();
+		while (it.hasNext()) {
+			it.next().weight = weight;
+		}		
+	}
+	public void resetWeights() {
+		resetWeights(VertexConstants.INITIAL_WEIGHT);
 	}
 }

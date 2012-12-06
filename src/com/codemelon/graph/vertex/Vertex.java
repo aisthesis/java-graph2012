@@ -33,6 +33,7 @@ public class Vertex {
 	public int discoveryTime;
 	public int finishTime;
 	public int treeNumber;	// to identify components after DFS
+	public double weight;
 	
 	public Vertex() {
 		this(VertexConstants.INITIAL_COLOR);
@@ -42,17 +43,19 @@ public class Vertex {
 				VertexConstants.INITIAL_COLOR, null, VertexConstants.INITIAL_DISTANCE, 
 				VertexConstants.INITIAL_DISCOVERY_TIME, 
 				VertexConstants.INITIAL_FINISH_TIME,
-				VertexConstants.INITIAL_TREE_NUMBER);
+				VertexConstants.INITIAL_TREE_NUMBER,
+				VertexConstants.INITIAL_WEIGHT);
 	}
 	public Vertex(Color color) {
 		this(VertexConstants.DEFAULT_LABEL, VertexConstants.DEFAULT_SEARCH_ORDER_VALUE,
 				color, null, VertexConstants.INITIAL_DISTANCE, 
 				VertexConstants.INITIAL_DISCOVERY_TIME, 
 				VertexConstants.INITIAL_FINISH_TIME,
-				VertexConstants.INITIAL_TREE_NUMBER);
+				VertexConstants.INITIAL_TREE_NUMBER,
+				VertexConstants.INITIAL_WEIGHT);
 	}
 	public Vertex(int label, int searchOrder, Color color, Vertex parent, int distance, int discoveryTime,
-			int finishTime, int treeNumber) {
+			int finishTime, int treeNumber, double weight) {
 		adjacencies = new IdentityHashMap<Vertex, EdgeData>();
 		graph = null;
 		this.label = label;
@@ -63,6 +66,7 @@ public class Vertex {
 		this.discoveryTime = discoveryTime;
 		this.finishTime = finishTime;
 		this.treeNumber = treeNumber;
+		this.weight = weight;
 	}
 	/**
 	 * Copy constructor. Copies all satellite data but leaves adjacency list
@@ -81,7 +85,7 @@ public class Vertex {
 	public Vertex(Vertex vertexToCopy, Vertex vertexParent) {
 		this(vertexToCopy.label, vertexToCopy.searchOrder, vertexToCopy.color, vertexParent, 
 				vertexToCopy.distance, vertexToCopy.discoveryTime, vertexToCopy.finishTime, 
-				vertexToCopy.treeNumber);		
+				vertexToCopy.treeNumber, vertexToCopy.weight);		
 	}
 	/**
 	 * Set the graph to which the vertex belongs

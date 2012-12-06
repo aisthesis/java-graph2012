@@ -15,5 +15,6 @@ public class VertexConstants {
 	public static final int INITIAL_DISCOVERY_TIME = -1;
 	public static final int INITIAL_FINISH_TIME = -1;
 	public static final int INITIAL_TREE_NUMBER = -1;
+	public static final double INITIAL_WEIGHT = 0.0;
 	private VertexConstants() {}
 }

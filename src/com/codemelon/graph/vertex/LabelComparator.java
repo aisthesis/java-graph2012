@@ -1,7 +1,4 @@
-/**
- * 
- */
-package com.codemelon.graph.vertex;
+ package com.codemelon.graph.vertex;
 
 import java.util.Comparator;
 
