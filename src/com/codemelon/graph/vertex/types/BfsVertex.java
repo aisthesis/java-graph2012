@@ -1,9 +1,12 @@
 package com.codemelon.graph.vertex.types;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.graph.Graph;
 import com.codemelon.graph.common.Color;
+import com.codemelon.graph.vertex.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ChildVertex;
 import com.codemelon.graph.vertex.interfaces.ColoredVertex;
 import com.codemelon.graph.vertex.interfaces.DistanceVertex;
@@ -16,11 +19,23 @@ import com.codemelon.graph.vertex.interfaces.Vertex;
  */
 public class BfsVertex implements Vertex, ColoredVertex, DistanceVertex,
 		ChildVertex {
+	private DiGraph graph;
 	private Set<Vertex> adjacencies;
 	private ChildVertex parent;
-	private Graph<Vertex> graph;
 	private int distance;
 	private Color color;
+	
+	/**
+	 * Create a vertex belonging to no graph (graph is null), with no adjacencies,
+	 * no parent (parent is null) and default values for color and distance.
+	 */
+	public BfsVertex() {
+		graph = null;
+		adjacencies = new HashSet<Vertex>();
+		parent = null;
+		distance = VertexConstants.INITIAL_DISTANCE;
+		color = VertexConstants.INITIAL_COLOR;
+	}
 
 	/* (non-Javadoc)
 	 * @see com.codemelon.graph.vertex.interfaces.ChildVertex#setParent(com.codemelon.graph.vertex.interfaces.ChildVertex)
@@ -81,7 +96,7 @@ public class BfsVertex implements Vertex, ColoredVertex, DistanceVertex,
 	 * @see com.codemelon.graph.vertex.interfaces.Vertex#setGraph(com.codemelon.graph.DiGraph)
 	 */
 	@Override
-	public void setGraph(Graph<Vertex> graph) {
+	public void setGraph(DiGraph graph) {
 		this.graph = graph;
 	}
 
@@ -89,7 +104,7 @@ public class BfsVertex implements Vertex, ColoredVertex, DistanceVertex,
 	 * @see com.codemelon.graph.vertex.interfaces.Vertex#getGraph()
 	 */
 	@Override
-	public Graph<Vertex> getGraph() {
+	public DiGraph getGraph() {
 		return graph;
 	}
 

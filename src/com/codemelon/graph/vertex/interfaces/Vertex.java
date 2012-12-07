@@ -2,7 +2,7 @@ package com.codemelon.graph.vertex.interfaces;
 
 import java.util.Set;
 
-import com.codemelon.graph.graph.Graph;
+import com.codemelon.graph.graph.DiGraph;
 
 /**
  * Basic specification which any Vertex class must implement
@@ -14,11 +14,11 @@ public interface Vertex {
 	 * Set the graph to which the vertex belongs
 	 * @param g graph with which the vertex is to be associated
 	 */
-	public void setGraph(Graph<Vertex> graph);/**
+	public void setGraph(DiGraph diGraph);/**
 	 * Returns the graph to which the vertex belongs.
 	 * @return the graph to which the vertex belongs
 	 */
-	public Graph<Vertex> getGraph();
+	public DiGraph getGraph();
 	/**
 	 * Adds the specified vertex to the set of adjacencies
 	 * @param to vertex to be added
