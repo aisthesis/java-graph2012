@@ -1,15 +1,15 @@
-/**
- * 
- */
 package com.codemelon.graph.search;
 
 import java.util.LinkedList;
 import java.util.Set;
 
 import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.graph.Graph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.interfaces.Vertex;
+import com.codemelon.graph.vertex.types.BfsVertex;
 
 /**
  * Implementation of breadth-first search following 
@@ -19,16 +19,21 @@ import com.codemelon.graph.vertex.CompleteVertex;
  *
  */
 public class BreadthFirstSearch {
-	private OldDiGraph graph;
-	private CompleteVertex source;
+	private Graph<BfsVertex> graph;
+	private BfsVertex source;
+	
+	private OldDiGraph oldGraph;
+	private CompleteVertex oldSource;
 	
 	/**
 	 * Prepares the search on the given graph
 	 * @param graph graph that will be searched
 	 */
-	public BreadthFirstSearch(OldDiGraph graph) {
+	public BreadthFirstSearch(Graph<BfsVertex> graph) {
 		this.graph = graph;
 		source = null;
+		this.oldGraph = null;
+		oldSource = null;
 	}
 	
 	/**
@@ -41,37 +46,39 @@ public class BreadthFirstSearch {
 	 * show a distance of 0, and unreachable vertices will have distances set to -1
 	 * @param source source vertex from which shortest paths are to be determined
 	 */
-	public void search(CompleteVertex source) {
+	public void search(BfsVertex source) {
 		if (!graph.containsVertex(source)) {
 			throw new IllegalArgumentException("Invalid vertex!");
 		}
 		this.source = source;
-		new VertexResetter(graph).bfsReset();
-		LinkedList<CompleteVertex> queue = new LinkedList<CompleteVertex>();
-		source.color = Color.GRAY;
-		source.distance = 0;
+		VertexResetter.resetColors(graph);
+		VertexResetter.resetDistances(graph);
+		VertexResetter.resetParents(graph);
+		LinkedList<BfsVertex> queue = new LinkedList<BfsVertex>();
+		source.setColor(Color.GRAY);
+		source.setDistance(0);
 		queue.add(source);
-		CompleteVertex u;
-		Set<CompleteVertex> adjacentVertices;
+		BfsVertex u;
+		Set<Vertex> adjacentVertices;
 		while (!queue.isEmpty()) {
 			u = queue.removeFirst();
 			adjacentVertices = u.getAdjacencies();
-			for (CompleteVertex v : adjacentVertices) {
-				if (v.color == Color.WHITE) {
-					v.color = Color.GRAY;
-					v.distance = u.distance + 1;
-					v.parent = u;
-					queue.addLast(v);
+			for (Vertex v : adjacentVertices) {
+				if (((BfsVertex) v).getColor() == Color.WHITE) {
+					((BfsVertex) v).setColor(Color.GRAY);
+					((BfsVertex) v).setDistance(u.getDistance() + 1);
+					((BfsVertex) v).setParent(u);
+					queue.addLast(((BfsVertex) v));
 				}
 			}
-			u.color = Color.BLACK;
+			u.setColor(Color.BLACK);
 		}
 	}
 	/**
 	 * Returns the source vertex specified when search() was called.
 	 * @return the source vertex specified when search() was called
 	 */
-	public CompleteVertex getSourceVertex() { return source; }
+	public BfsVertex getSourceVertex() { return source; }
 	
 	/**
 	 * Shows a shortest path from the source vertex passed in the search() method
@@ -84,17 +91,17 @@ public class BreadthFirstSearch {
 	 * @throws IllegalStateException if search() has not yet been called
 	 */
 	public LinkedList<CompleteVertex> path(CompleteVertex target) {
-		if (source == null) {
+		if (oldSource == null) {
 			throw new IllegalStateException("Source vertex has not been specified by calling search()!");
 		}
-		if (target.parent == null && target != source) { return null; }
+		if (target.parent == null && target != oldSource) { return null; }
 		LinkedList<CompleteVertex> result = new LinkedList<CompleteVertex>();
 		CompleteVertex tmp = target;
-		while (tmp != source) {
+		while (tmp != oldSource) {
 			result.addFirst(tmp);
 			tmp = tmp.parent;
 		}
-		result.addFirst(source);
+		result.addFirst(oldSource);
 		return result;
 	}
 }
