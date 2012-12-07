@@ -1,4 +1,5 @@
-package com.codemelon.graph.vertex.types;
+package com.codemelon.graph.vertex.interfaces;
+
 
 /**
  * Vertex supporting a floating point weight value

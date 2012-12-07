@@ -1,4 +1,5 @@
-package com.codemelon.graph.vertex.types;
+package com.codemelon.graph.vertex.interfaces;
+
 
 /**
  * Vertex that supports fields for marking discovery and finish times, as used

@@ -6,7 +6,7 @@ package com.codemelon.graph.search;
 import java.util.LinkedList;
 import java.util.Set;
 
-import com.codemelon.graph.DiGraph;
+import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.CompleteVertex;
@@ -19,14 +19,14 @@ import com.codemelon.graph.vertex.CompleteVertex;
  *
  */
 public class BreadthFirstSearch {
-	private DiGraph graph;
+	private OldDiGraph graph;
 	private CompleteVertex source;
 	
 	/**
 	 * Prepares the search on the given graph
 	 * @param graph graph that will be searched
 	 */
-	public BreadthFirstSearch(DiGraph graph) {
+	public BreadthFirstSearch(OldDiGraph graph) {
 		this.graph = graph;
 		source = null;
 	}

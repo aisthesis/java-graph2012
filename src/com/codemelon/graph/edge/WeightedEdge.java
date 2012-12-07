@@ -1,6 +1,6 @@
 package com.codemelon.graph.edge;
 
-import com.codemelon.graph.DiGraph;
+import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
@@ -14,7 +14,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * @version Dec 2, 2012
  */
 public class WeightedEdge {
-	private DiGraph graph;
+	private OldDiGraph graph;
 	private CompleteVertex from;
 	private CompleteVertex to;
 	private double weight;

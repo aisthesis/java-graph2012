@@ -3,9 +3,9 @@ import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.codemelon.graph.DiGraph;
+import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.edge.EdgeData;
+import com.codemelon.graph.edge.CompleteEdgeData;
 import com.codemelon.graph.common.EdgeType;
 
 /**
@@ -21,8 +21,8 @@ import com.codemelon.graph.common.EdgeType;
  * the vertex (or edge) belongs.
  */
 public class CompleteVertex {
-	private IdentityHashMap<CompleteVertex, EdgeData> adjacencies;
-	private DiGraph graph;
+	private IdentityHashMap<CompleteVertex, CompleteEdgeData> adjacencies;
+	private OldDiGraph graph;
 	
 	public int label;
 	public int searchOrder;	// allows arbitrary prioritization for searches
@@ -56,7 +56,7 @@ public class CompleteVertex {
 	}
 	public CompleteVertex(int label, int searchOrder, Color color, CompleteVertex parent, int distance, int discoveryTime,
 			int finishTime, int treeNumber, double weight) {
-		adjacencies = new IdentityHashMap<CompleteVertex, EdgeData>();
+		adjacencies = new IdentityHashMap<CompleteVertex, CompleteEdgeData>();
 		graph = null;
 		this.label = label;
 		this.searchOrder = searchOrder;
@@ -91,14 +91,14 @@ public class CompleteVertex {
 	 * Set the graph to which the vertex belongs
 	 * @param g graph with which the vertex is to be associated
 	 */
-	public void setGraph(DiGraph g) {
+	public void setGraph(OldDiGraph g) {
 		graph = g;
 	}
 	/**
 	 * Returns the graph to which the vertex belongs.
 	 * @return the graph to which the vertex belongs
 	 */
-	public DiGraph getGraph() { return graph; }
+	public OldDiGraph getGraph() { return graph; }
 	
 	/**
 	 * Adds the specified vertex to the set of adjacencies
@@ -110,7 +110,7 @@ public class CompleteVertex {
 			throw new IllegalArgumentException("Vertex belongs to a different graph!");
 		}
 		if (adjacencies.containsKey(v)) { return false; }
-		adjacencies.put(v, new EdgeData());
+		adjacencies.put(v, new CompleteEdgeData());
 		return true;
 	}
 	

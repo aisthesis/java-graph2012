@@ -39,7 +39,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * @author Marshall Farrier
  * @version 11-23-2012
  */
-public class DiGraph {
+public class OldDiGraph {
 	private static final int DEFAULT_INITIAL_CAPACITY = 16;
 	private Set<CompleteVertex> vertices;
 	private double weightEpsilon;
@@ -48,7 +48,7 @@ public class DiGraph {
 	 * Default constructor. Creates an empty graph with a default initial
 	 * capacity of 16 vertices.
 	 */
-	public DiGraph() {
+	public OldDiGraph() {
 		this(DEFAULT_INITIAL_CAPACITY);
 	}
 	/**
@@ -58,7 +58,7 @@ public class DiGraph {
 	 * result in significantly improved performance.
 	 * @param initialCapacity
 	 */
-	public DiGraph(int initialCapacity) {
+	public OldDiGraph(int initialCapacity) {
 		vertices = new HashSet<CompleteVertex>(initialCapacity);
 	}
 	/**
@@ -66,7 +66,7 @@ public class DiGraph {
 	 * and clears the adjacency set of all vertices in the collection.
 	 * @param initialVertices collection of vertices to include in the Graph
 	 */
-	public DiGraph(Collection<CompleteVertex> initialVertices) {
+	public OldDiGraph(Collection<CompleteVertex> initialVertices) {
 		vertices = new HashSet<CompleteVertex>(initialVertices);
 		weightEpsilon = EdgeConstants.DEFAULT_WEIGHT_EPSILON;
 		for (CompleteVertex v : initialVertices) {

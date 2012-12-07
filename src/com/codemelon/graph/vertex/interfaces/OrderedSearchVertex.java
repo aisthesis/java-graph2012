@@ -1,4 +1,5 @@
-package com.codemelon.graph.vertex.types;
+package com.codemelon.graph.vertex.interfaces;
+
 
 /**
  * Vertex that supports a field for conducting searches in a specific order

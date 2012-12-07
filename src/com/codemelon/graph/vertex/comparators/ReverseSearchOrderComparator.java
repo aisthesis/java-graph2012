@@ -1,9 +1,11 @@
 /**
  * Used in StronglyConnectedComponents
  */
-package com.codemelon.graph.vertex;
+package com.codemelon.graph.vertex.comparators;
 
 import java.util.Comparator;
+
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * @author Marshall Farrier

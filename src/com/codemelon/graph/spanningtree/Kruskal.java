@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.codemelon.graph.Graph;
+import com.codemelon.graph.OldGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.edge.WeightedEdge;
 import com.codemelon.graph.util.DisjointSet;
@@ -28,11 +28,11 @@ public class Kruskal {
 	 */
 	public static final Color MARKER_COLOR = Color.BLACK;
 	
-	private Graph graph;
+	private OldGraph graph;
 	private WeightedEdge[] edges;
 	private DisjointSet<CompleteVertex> vertexDisjointSet;
 	private HashMap<CompleteVertex, CompleteVertex> vertexMap;
-	private Graph spanningTree;
+	private OldGraph spanningTree;
 	
 	private static final WeightedEdge[] EMPTY_EDGE_ARRAY = new WeightedEdge[0];
 	private static final Comparator<WeightedEdge> COMPARATOR = new Comparator<WeightedEdge>() {
@@ -47,7 +47,7 @@ public class Kruskal {
 	 * Initialize the graph for which a minimum spanning tree is to be found.
 	 * @param graph graph for which we want to find a minimum spanning tree.
 	 */
-	public Kruskal(Graph graph) {
+	public Kruskal(OldGraph graph) {
 		this.graph = graph;
 		edges = null;
 		vertexDisjointSet = null;
@@ -78,7 +78,7 @@ public class Kruskal {
 	 * regardless of the corresponding value in the original graph.
 	 * @return a spanning tree of the original graph.
 	 */
-	public Graph generateTree() {
+	public OldGraph generateTree() {
 		initializeForGenerateTree();
 		for (WeightedEdge edge : edges) {
 			if (vertexDisjointSet.findSet(edge.from()) 
@@ -109,7 +109,7 @@ public class Kruskal {
 	}
 	private void initializeForGenerateTree() {
 		vertexMap = new HashMap<CompleteVertex, CompleteVertex>(graph.vertexCount());
-		spanningTree = new Graph(graph.vertexCount());
+		spanningTree = new OldGraph(graph.vertexCount());
 		spanningTree.setWeightEpsilon(graph.getWeightEpsilon());
 		Iterator<CompleteVertex> it = graph.vertexIterator();
 		CompleteVertex v;

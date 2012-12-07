@@ -1,5 +1,5 @@
 /**
- * Interfaces specifying various kinds of vertices
+ * Various vertex classes
  * @author Marshall Farrier
  * @version Dec 6, 2012
  */

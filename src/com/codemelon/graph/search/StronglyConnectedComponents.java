@@ -6,10 +6,10 @@ package com.codemelon.graph.search;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.codemelon.graph.DiGraph;
+import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.util.Transposer;
-import com.codemelon.graph.vertex.ReverseSearchOrderComparator;
 import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.comparators.ReverseSearchOrderComparator;
 
 /**
  * @author Marshall Farrier
@@ -17,14 +17,14 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * Cf. CLRS, p. 617
  */
 public class StronglyConnectedComponents {
-	private DiGraph graph;
+	private OldDiGraph graph;
 	
 	/**
 	 * Prepare to mark the graph for strongly connected components.
 	 * No changes to the graph are made when the graph is passed into the constructor.
 	 * @param graph graph for which strongly connected components are to be determined.
 	 */
-	public StronglyConnectedComponents(DiGraph graph) {
+	public StronglyConnectedComponents(OldDiGraph graph) {
 		this.graph = graph;
 	}
 	
@@ -41,7 +41,7 @@ public class StronglyConnectedComponents {
 	public Transposer run() {
 		new DepthFirstSearch(graph).search();
 		Transposer transposer = new Transposer(graph);
-		DiGraph transposeGraph = transposer.getTransposeGraph();
+		OldDiGraph transposeGraph = transposer.getTransposeGraph();
 		// set searchOrder field in transpose graph to finish time in depth-first search
 		Iterator<CompleteVertex> it = transposeGraph.vertexIterator();
 		CompleteVertex v;

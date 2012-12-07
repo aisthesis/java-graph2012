@@ -4,12 +4,12 @@ package com.codemelon.graph.spanningtree;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import com.codemelon.graph.Graph;
+import com.codemelon.graph.OldGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.VertexConstants;
-import com.codemelon.graph.vertex.WeightComparator;
+import com.codemelon.graph.vertex.comparators.WeightComparator;
 
 /**
  * Implementation of Prim's algorithm for growing a minimum spanning
@@ -25,10 +25,10 @@ public class Prim {
 	 */
 	public static final Color MARKER_COLOR = Color.BLACK;
 	
-	private Graph graph;
+	private OldGraph graph;
 	private PriorityQueue<CompleteVertex> queue;
 	
-	public Prim(Graph graph) {
+	public Prim(OldGraph graph) {
 		this.graph = graph;
 		queue = null;
 	}

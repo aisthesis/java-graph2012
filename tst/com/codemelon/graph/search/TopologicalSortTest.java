@@ -10,7 +10,7 @@ import java.util.HashMap;
 import org.junit.After;
 import org.junit.Test;
 
-import com.codemelon.graph.DiGraph;
+import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
@@ -19,7 +19,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  *
  */
 public class TopologicalSortTest {
-	private DiGraph graph;
+	private OldDiGraph graph;
 	
 	@After
 	public void tearDown() {
@@ -64,7 +64,7 @@ public class TopologicalSortTest {
 		vertices.put("socks", new CompleteVertex());
 		vertices.put("shoes", new CompleteVertex());
 		vertices.put("watch", new CompleteVertex());
-		graph = new DiGraph(vertices.values());
+		graph = new OldDiGraph(vertices.values());
 		graph.addEdge(vertices.get("undershorts"), vertices.get("pants"));
 		graph.addEdge(vertices.get("undershorts"), vertices.get("shoes"));
 		graph.addEdge(vertices.get("pants"), vertices.get("belt"));

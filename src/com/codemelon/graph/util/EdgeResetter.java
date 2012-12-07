@@ -3,7 +3,7 @@ package com.codemelon.graph.util;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.codemelon.graph.DiGraph;
+import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.edge.EdgeConstants;
@@ -16,8 +16,8 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * The constructor takes the graph to reset as argument.
  */
 public class EdgeResetter {
-	private DiGraph graph;
-	public EdgeResetter(DiGraph graph) {
+	private OldDiGraph graph;
+	public EdgeResetter(OldDiGraph graph) {
 		this.graph = graph;
 	}
 	public void resetColors(Color color) {

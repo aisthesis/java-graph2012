@@ -10,8 +10,8 @@ import java.util.HashMap;
 import org.junit.After;
 import org.junit.Test;
 
-import com.codemelon.graph.DiGraph;
-import com.codemelon.graph.Graph;
+import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.OldGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.CompleteVertex;
 
@@ -22,7 +22,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  */
 public class BreadthFirstSearchTest {
 	private static final int VERTICES_IN_TEST_GRAPH = 1000;
-	private DiGraph graph;
+	private OldDiGraph graph;
 	
 	@After
 	public void tearDown() {
@@ -114,7 +114,7 @@ public class BreadthFirstSearchTest {
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
 			vertices.put(i, new CompleteVertex(i));
 		}
-		graph = new DiGraph(vertices.values());
+		graph = new OldDiGraph(vertices.values());
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH / 2; i++) {
 			graph.addEdge(vertices.get(i), vertices.get(i + 1));
 		}
@@ -130,7 +130,7 @@ public class BreadthFirstSearchTest {
 		for (char i = 'r'; i <= 'y'; i++) {
 			vertices.put(i, new CompleteVertex(i));
 		}
-		graph = new Graph(vertices.values());
+		graph = new OldGraph(vertices.values());
 		graph.addEdge(vertices.get('r'), vertices.get('s'));
 		graph.addEdge(vertices.get('r'), vertices.get('v'));
 		graph.addEdge(vertices.get('s'), vertices.get('w'));
