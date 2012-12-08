@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
-import com.codemelon.graph.edge.interfaces.EdgeTypeData;
+import com.codemelon.graph.edge.EdgeConstants;
 import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.vertex.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ChildVertex;
@@ -18,18 +18,18 @@ import com.codemelon.graph.vertex.interfaces.VisitedVertex;
  * @author Marshall Farrier
  * @version Dec 7, 2012
  */
-public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex, ChildVertex,
+public class DfsVertex implements Vertex, ColoredVertex, ChildVertex,
 		VisitedVertex, EdgeTypeVertex {
-	private DiGraph<DfsVertex<T>> graph;
-	private IdentityHashMap<DfsVertex<T>, T> adjacencies;
-	private DfsVertex<T> parent;
+	private DiGraph<Vertex> graph;
+	private IdentityHashMap<Vertex, EdgeType> adjacencies;
+	private ChildVertex parent;
 	private Color color;
 	private int discoveryTime;
 	private int finishTime;
 	
 	public DfsVertex() {
 		graph = null;
-		adjacencies = new IdentityHashMap<DfsVertex<T>, T>();
+		adjacencies = new IdentityHashMap<Vertex, EdgeType>();
 		parent = null;
 		color = VertexConstants.INITIAL_COLOR;
 		discoveryTime = VertexConstants.INITIAL_DISCOVERY_TIME;
@@ -41,8 +41,10 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public void setEdgeType(EdgeTypeVertex to, EdgeType edgeType) {
-		// TODO Auto-generated method stub
-
+		if (!adjacencies.containsKey(to)) {
+			throw new IllegalArgumentException("Edge does not exist!");
+		}
+		adjacencies.put(to, edgeType);
 	}
 
 	/* (non-Javadoc)
@@ -50,8 +52,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public EdgeType getEdgeType(EdgeTypeVertex to) {
-		// TODO Auto-generated method stub
-		return null;
+		return adjacencies.get(to);
 	}
 
 	/* (non-Javadoc)
@@ -59,8 +60,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public void setDiscoveryTime(int discoveryTime) {
-		// TODO Auto-generated method stub
-
+		this.discoveryTime = discoveryTime;
 	}
 
 	/* (non-Javadoc)
@@ -68,8 +68,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public void setFinishTime(int finishTime) {
-		// TODO Auto-generated method stub
-
+		this.finishTime = finishTime;
 	}
 
 	/* (non-Javadoc)
@@ -77,8 +76,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public int getDiscoveryTime() {
-		// TODO Auto-generated method stub
-		return 0;
+		return discoveryTime;
 	}
 
 	/* (non-Javadoc)
@@ -86,16 +84,29 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public int getFinishTime() {
-		// TODO Auto-generated method stub
-		return 0;
+		return finishTime;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.codemelon.graph.vertex.interfaces.ChildVertex#setParent(com.codemelon.graph.vertex.interfaces.ChildVertex)
 	 */
+	/** 
+	 * @throws IllegalArgumentException if the calling vertex does not belong to a graph
+	 * @throws IllegalArgumentException if the parent to be set does not belong to the same graph
+	 */
 	@Override
 	public void setParent(ChildVertex parent) {
-		// TODO Auto-generated method stub
+		if (parent == null) {
+			this.parent = parent;
+			return;
+		}
+		if (graph == null) {
+			throw new IllegalArgumentException("Vertex must belong to a graph to have a parent!");
+		}
+		if (parent.getGraph() != graph) {
+			throw new IllegalArgumentException("Parent must belong to the same graph!");
+		}
+		this.parent = parent;
 
 	}
 
@@ -104,8 +115,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public ChildVertex getParent() {
-		// TODO Auto-generated method stub
-		return null;
+		return parent;
 	}
 
 	/* (non-Javadoc)
@@ -113,8 +123,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public void setColor(Color color) {
-		// TODO Auto-generated method stub
-
+		this.color = color;
 	}
 
 	/* (non-Javadoc)
@@ -122,8 +131,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public Color getColor() {
-		// TODO Auto-generated method stub
-		return null;
+		return color;
 	}
 
 	/* (non-Javadoc)
@@ -131,8 +139,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public void setGraph(DiGraph<Vertex> diGraph) {
-		// TODO Auto-generated method stub
-
+		this.graph = diGraph;
 	}
 
 	/* (non-Javadoc)
@@ -140,17 +147,24 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public DiGraph<Vertex> getGraph() {
-		// TODO Auto-generated method stub
-		return null;
+		return graph;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.codemelon.graph.vertex.interfaces.Vertex#addAdjacency(com.codemelon.graph.vertex.interfaces.Vertex)
 	 */
+	/** 
+	 * @throws IllegalArgumentException if the calling vertex does not belong to a graph
+	 * @throws IllegalArgumentException if the adjacency to be set does not belong to the same graph
+	 */
 	@Override
 	public boolean addAdjacency(Vertex to) {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.graph == null || this.graph != to.getGraph()) {
+			throw new IllegalArgumentException("Adjacency must belong to the same graph!");
+		}
+		if (adjacencies.containsKey(to)) { return false; }
+		adjacencies.put(to, EdgeConstants.DEFAULT_EDGE_TYPE);
+		return true;
 	}
 
 	/* (non-Javadoc)
@@ -158,7 +172,10 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public boolean removeAdjacency(Vertex to) {
-		// TODO Auto-generated method stub
+		if (adjacencies.containsKey(to)) {
+			adjacencies.remove(to);
+			return true;
+		}
 		return false;
 	}
 
@@ -167,8 +184,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public void clearAdjacencies() {
-		// TODO Auto-generated method stub
-
+		adjacencies.clear();
 	}
 
 	/* (non-Javadoc)
@@ -176,8 +192,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public boolean containsAdjacency(Vertex to) {
-		// TODO Auto-generated method stub
-		return false;
+		return adjacencies.containsKey(to);
 	}
 
 	/* (non-Javadoc)
@@ -185,8 +200,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public int adjacencyCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return adjacencies.size();
 	}
 
 	/* (non-Javadoc)
@@ -194,8 +208,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public Set<Vertex> getAdjacencies() {
-		// TODO Auto-generated method stub
-		return null;
+		return adjacencies.keySet();
 	}
 
 	/* (non-Javadoc)
@@ -203,8 +216,7 @@ public class DfsVertex<T extends EdgeTypeData> implements Vertex, ColoredVertex,
 	 */
 	@Override
 	public boolean hasAdjacencies() {
-		// TODO Auto-generated method stub
-		return false;
+		return !adjacencies.isEmpty();
 	}
 
 }
