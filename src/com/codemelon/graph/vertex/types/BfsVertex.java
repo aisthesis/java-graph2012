@@ -45,7 +45,14 @@ public class BfsVertex implements Vertex, ColoredVertex, DistanceVertex,
 	 */
 	@Override
 	public void setParent(ChildVertex parent) {
-		if (graph == null || parent.getGraph() != graph) {
+		if (parent == null) {
+			this.parent = parent;
+			return;
+		}
+		if (graph == null) {
+			throw new IllegalArgumentException("Vertex must belong to a graph to have a parent!");
+		}
+		if (parent.getGraph() != graph) {
 			throw new IllegalArgumentException("Parent must belong to the same graph!");
 		}
 		this.parent = parent;
