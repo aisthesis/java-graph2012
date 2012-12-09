@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.codemelon.graph.search;
 
 import static org.junit.Assert.*;
@@ -10,8 +7,8 @@ import java.util.HashMap;
 import org.junit.After;
 import org.junit.Test;
 
-import com.codemelon.graph.OldDiGraph;
-import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.graph.DiGraph;
+import com.codemelon.graph.vertex.types.DfsVertex;
 
 /**
  * @author Marshall Farrier
@@ -19,7 +16,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  *
  */
 public class TopologicalSortTest {
-	private OldDiGraph graph;
+	private DiGraph<DfsVertex> graph;
 	
 	@After
 	public void tearDown() {
@@ -31,7 +28,7 @@ public class TopologicalSortTest {
 	 */
 	@Test
 	public void testSmallCLRSGraph() {
-		HashMap<String, CompleteVertex> vertices = setUpSmallCLRSGraph();
+		HashMap<String, DfsVertex> vertices = setUpSmallCLRSGraph();
 		TopologicalSort topSort = new TopologicalSort(graph);
 		assertTrue("Proper precedences", topSort.showsAsInOrder(vertices.get("undershorts"), 
 				vertices.get("pants")));
@@ -53,18 +50,18 @@ public class TopologicalSortTest {
 	/**
 	 * Graph from CLRS, p. 613
 	 */
-	private HashMap<String, CompleteVertex> setUpSmallCLRSGraph() {
-		HashMap<String, CompleteVertex> vertices = new HashMap<String, CompleteVertex>();
-		vertices.put("undershorts", new CompleteVertex());
-		vertices.put("pants", new CompleteVertex());
-		vertices.put("belt", new CompleteVertex());
-		vertices.put("shirt", new CompleteVertex());
-		vertices.put("tie", new CompleteVertex());
-		vertices.put("jacket", new CompleteVertex());
-		vertices.put("socks", new CompleteVertex());
-		vertices.put("shoes", new CompleteVertex());
-		vertices.put("watch", new CompleteVertex());
-		graph = new OldDiGraph(vertices.values());
+	private HashMap<String, DfsVertex> setUpSmallCLRSGraph() {
+		HashMap<String, DfsVertex> vertices = new HashMap<String, DfsVertex>();
+		vertices.put("undershorts", new DfsVertex());
+		vertices.put("pants", new DfsVertex());
+		vertices.put("belt", new DfsVertex());
+		vertices.put("shirt", new DfsVertex());
+		vertices.put("tie", new DfsVertex());
+		vertices.put("jacket", new DfsVertex());
+		vertices.put("socks", new DfsVertex());
+		vertices.put("shoes", new DfsVertex());
+		vertices.put("watch", new DfsVertex());
+		graph = new DiGraph<DfsVertex>(vertices.values());
 		graph.addEdge(vertices.get("undershorts"), vertices.get("pants"));
 		graph.addEdge(vertices.get("undershorts"), vertices.get("shoes"));
 		graph.addEdge(vertices.get("pants"), vertices.get("belt"));
