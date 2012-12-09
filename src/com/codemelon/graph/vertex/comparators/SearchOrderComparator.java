@@ -9,12 +9,12 @@ import com.codemelon.graph.vertex.interfaces.OrderedSearchVertex;
  * @author Marshall Farrier
  * @version Nov 27, 2012
  */
-public class SearchOrderComparator<T extends OrderedSearchVertex> implements Comparator<T> {
+public class SearchOrderComparator implements Comparator<OrderedSearchVertex> {
 	
 	public SearchOrderComparator() {}
 	
 	@Override
-	public int compare(T v1, T v2) {
+	public int compare(OrderedSearchVertex v1, OrderedSearchVertex v2) {
 		return v1.getSearchOrder() - v2.getSearchOrder();
 	}
 }
