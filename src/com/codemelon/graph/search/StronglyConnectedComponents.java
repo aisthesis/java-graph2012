@@ -7,16 +7,24 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.util.Transposer;
 import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.comparators.ReverseSearchOrderComparator;
+import com.codemelon.graph.vertex.interfaces.VertexFactory;
+import com.codemelon.graph.vertex.types.DfsVertex;
 
 /**
+ * Identify the strongly connected components in a graph using an int value
+ * to mark the component to which each vertex belongs.
+ * Cf. <a href="http://mitpress.mit.edu/algorithms/">CLRS</a>, p. 617
  * @author Marshall Farrier
- * @version Nov 29, 2012
- * Cf. CLRS, p. 617
+ * @version Dec 9, 2012
  */
 public class StronglyConnectedComponents {
+	private DiGraph<? extends DfsVertex> graph;
+	private VertexFactory<? extends DfsVertex> vertexFactory;
+	
 	private OldDiGraph oldGraph;
 	
 	/**
@@ -24,8 +32,10 @@ public class StronglyConnectedComponents {
 	 * No changes to the graph are made when the graph is passed into the constructor.
 	 * @param graph graph for which strongly connected components are to be determined.
 	 */
-	public StronglyConnectedComponents(OldDiGraph graph) {
-		this.oldGraph = graph;
+	public StronglyConnectedComponents(DiGraph<? extends DfsVertex> graph,
+			VertexFactory<? extends DfsVertex> vertexFactory) {
+		this.graph = graph;
+		this.vertexFactory = vertexFactory;
 	}
 	
 	/**
