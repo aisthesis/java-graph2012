@@ -17,7 +17,7 @@ import com.codemelon.graph.vertex.comparators.ReverseSearchOrderComparator;
  * Cf. CLRS, p. 617
  */
 public class StronglyConnectedComponents {
-	private OldDiGraph graph;
+	private OldDiGraph oldGraph;
 	
 	/**
 	 * Prepare to mark the graph for strongly connected components.
@@ -25,7 +25,7 @@ public class StronglyConnectedComponents {
 	 * @param graph graph for which strongly connected components are to be determined.
 	 */
 	public StronglyConnectedComponents(OldDiGraph graph) {
-		this.graph = graph;
+		this.oldGraph = graph;
 	}
 	
 	/**
@@ -40,8 +40,8 @@ public class StronglyConnectedComponents {
 	 */
 	public Transposer run() {
 		//new DepthFirstSearch(graph).search();
-		Transposer transposer = new Transposer(graph);
-		OldDiGraph transposeGraph = transposer.getTransposeGraph();
+		Transposer transposer = new Transposer(oldGraph);
+		OldDiGraph transposeGraph = transposer.getOldTransposeGraph();
 		// set searchOrder field in transpose graph to finish time in depth-first search
 		Iterator<CompleteVertex> it = transposeGraph.vertexIterator();
 		CompleteVertex v;
@@ -51,11 +51,11 @@ public class StronglyConnectedComponents {
 		}
 		//new InOrderDepthFirstSearch(transposeGraph, new ReverseSearchOrderComparator()).search();
 		// Finally, set the appropriate tree numbers in the original graph
-		it = graph.vertexIterator();
-		HashMap<CompleteVertex, CompleteVertex> vertexMap = transposer.getVertexMap();
+		it = oldGraph.vertexIterator();
+		//HashMap<CompleteVertex, CompleteVertex> vertexMap = transposer.getVertexMap();
 		while (it.hasNext()) {
 			v = it.next();
-			v.treeNumber = vertexMap.get(v).treeNumber;
+//			v.treeNumber = vertexMap.get(v).treeNumber;
 		}
 		return transposer;
 	}

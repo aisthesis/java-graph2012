@@ -4,11 +4,16 @@
 package com.codemelon.graph.util;
 
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.interfaces.Vertex;
+import com.codemelon.graph.vertex.util.VertexFactory;
 
 /**
  * @author Marshall Farrier
@@ -16,10 +21,16 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * 
  * Utility class for transposing a graph.
  */
-public class Transposer {
-	private OldDiGraph graph;
-	private OldDiGraph transposeGraph;
-	private HashMap<CompleteVertex, CompleteVertex> vertexMap;
+public class Transposer<T extends Vertex> {
+	private DiGraph<T> graph;
+	private DiGraph<T> transposeGraph;
+	private IdentityHashMap<T, T> vertexMap;
+	private VertexFactory<T> vertexFactory;
+	
+	
+	private OldDiGraph oldGraph;
+	private OldDiGraph oldTransposeGraph;
+	private HashMap<CompleteVertex, CompleteVertex> oldVertexMap;
 
 	/**
 	 * Creates a transpose graph, which can be retrieved as needed through the
@@ -30,9 +41,15 @@ public class Transposer {
 	 * null for each vertex in the transpose graph. Edge data, however,
 	 * is <em>not</em> copied into the transpose graph.
 	 */
-	public Transposer(OldDiGraph graph) {
+	public Transposer(DiGraph<T> graph, VertexFactory<T> vertexFactory) {
 		this.graph = graph;
-		transposeGraph = new OldDiGraph(graph.vertexCount());
+		transposeGraph = new DiGraph<T>(graph.vertexCount());
+		this.vertexFactory = vertexFactory;
+		transpose();
+	}
+	public Transposer(OldDiGraph graph) {
+		this.oldGraph = graph;
+		oldTransposeGraph = new OldDiGraph(graph.vertexCount());
 		transpose();
 	}
 	/**
@@ -43,33 +60,36 @@ public class Transposer {
 	 * @return a HashMap from vertices in the original graph to vertices in the
 	 * transpose graph, or null, if transpose() has not yet been called.
 	 */
-	public HashMap<CompleteVertex, CompleteVertex> getVertexMap() {
+	public Map<T, T> getVertexMap() {
 		return vertexMap;
 	}
 	/**
 	 * Returns the transpose of the original graph
 	 * @return transpose of the original graph
 	 */
-	public OldDiGraph getTransposeGraph() {
+	public DiGraph<T> getTransposeGraph() {
 		return transposeGraph;
+	}
+	public OldDiGraph getOldTransposeGraph() {
+		return oldTransposeGraph;
 	}
 	
 	private void transpose() {
-		vertexMap = new HashMap<CompleteVertex, CompleteVertex>(graph.vertexCount());
+		vertexMap = new IdentityHashMap<T, T>(graph.vertexCount());
 		// insert vertices into map and result graph
-		Iterator<CompleteVertex> vertexIterator = graph.vertexIterator();
-		CompleteVertex v;
-		while (vertexIterator.hasNext()) {
-			v = vertexIterator.next();
-			vertexMap.put(v, new CompleteVertex(v));
+		Iterator<T> it = graph.vertexIterator();
+		T v;
+		while (it.hasNext()) {
+			v = it.next();
+			vertexMap.put(v, vertexFactory.createInstance());
 			transposeGraph.addVertex(vertexMap.get(v));
 		}
-		Set<CompleteVertex> adjacentVertices;
-		vertexIterator = graph.vertexIterator();
-		while (vertexIterator.hasNext()) {
-			v = vertexIterator.next();
+		Set<? extends Vertex> adjacentVertices;
+		it = graph.vertexIterator();
+		while (it.hasNext()) {
+			v = it.next();
 			adjacentVertices = v.getAdjacencies();			
-			for (CompleteVertex to : adjacentVertices) {
+			for (Vertex to : adjacentVertices) {
 				transposeGraph.addEdge(vertexMap.get(to), vertexMap.get(v));
 			}		
 		}
