@@ -37,7 +37,7 @@ public class DiGraph<T extends Vertex> {
 		this.vertices = new HashSet<T>(vertices);
 		for (T v : vertices) {
 			v.clearAdjacencies();
-			v.setGraph((DiGraph<Vertex>) this);
+			v.setGraph(this);
 		}		
 	}
 	/**
@@ -49,7 +49,7 @@ public class DiGraph<T extends Vertex> {
 		if (vertices.add(vertex)) {
 			// vertex was not already present
 			vertex.clearAdjacencies();
-			vertex.setGraph((DiGraph<Vertex>) this);
+			vertex.setGraph(this);
 			return true;
 		}
 		return false;		

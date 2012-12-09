@@ -7,11 +7,13 @@ import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.graph.Graph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.CompleteVertex;
-import com.codemelon.graph.vertex.VertexConstants;
+import com.codemelon.graph.vertex.common.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ChildVertex;
 import com.codemelon.graph.vertex.interfaces.ColoredVertex;
 import com.codemelon.graph.vertex.interfaces.DistanceVertex;
+import com.codemelon.graph.vertex.interfaces.VisitedVertex;
 import com.codemelon.graph.vertex.types.BfsVertex;
+import com.codemelon.graph.vertex.types.DfsVertex;
 
 /**
  * @author Marshall Farrier
@@ -20,68 +22,71 @@ import com.codemelon.graph.vertex.types.BfsVertex;
  * Static methods for resetting the vertices of a graph.
  */
 public class VertexResetter {
-	public static void resetColors(DiGraph<ColoredVertex> graph, Color color) {
-		Iterator<ColoredVertex> it = graph.vertexIterator();
+	public static void resetColors(DiGraph<? extends ColoredVertex> graph, Color color) {
+		Iterator<? extends ColoredVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
 			it.next().setColor(color);
 		}
 	}
-	public static void resetColors(DiGraph<ColoredVertex> graph) {
-		resetColors(graph, VertexConstants.INITIAL_COLOR);
+	public static void resetColors(DiGraph<? extends ColoredVertex> graph) {
+		resetColors(graph, Color.WHITE);
 	}
-	public static void resetColors(Graph<BfsVertex> graph, Color color) {
-		Iterator<BfsVertex> it = graph.vertexIterator();
-		while (it.hasNext()) {
-			it.next().setColor(color);
-		}
-	}
-	public static void resetColors(Graph<BfsVertex> graph) {
-		resetColors(graph, VertexConstants.INITIAL_COLOR);
-	}
-	public static void resetParents(DiGraph<ChildVertex> graph) {
-		Iterator<ChildVertex> it = graph.vertexIterator();
+	public static void resetParents(DiGraph<? extends ChildVertex> graph) {
+		Iterator<? extends ChildVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
 			it.next().setParent(null);
 		}
 	}
-	public static void resetParents(Graph<BfsVertex> graph) {
-		Iterator<BfsVertex> it = graph.vertexIterator();
-		while (it.hasNext()) {
-			it.next().setParent(null);
-		}
-	}
-	public static void resetDistances(DiGraph<DistanceVertex> graph, int distance) {
-		Iterator<DistanceVertex> it = graph.vertexIterator();
+	public static void resetDistances(DiGraph<? extends DistanceVertex> graph, int distance) {
+		Iterator<? extends DistanceVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
 			it.next().setDistance(distance);
 		}
 	}
-	public static void resetDistances(DiGraph<DistanceVertex> graph) {
+	public static void resetDistances(DiGraph<? extends DistanceVertex> graph) {
 		resetDistances(graph, VertexConstants.INITIAL_DISTANCE);
 	}
-	public static void resetDistances(Graph<BfsVertex> graph, int distance) {
-		Iterator<BfsVertex> it = graph.vertexIterator();
+	public static void resetDiscoveryTimes(DiGraph<? extends VisitedVertex> graph, int discoveryTime) {
+		Iterator<? extends VisitedVertex> it = graph.vertexIterator();
 		while (it.hasNext()) {
-			it.next().setDistance(distance);
-		}
+			it.next().setDiscoveryTime(discoveryTime);
+		}		
 	}
-	public static void resetDistances(Graph<BfsVertex> graph) {
-		resetDistances(graph, VertexConstants.INITIAL_DISTANCE);
+	public static void resetDiscoveryTimes(DiGraph<? extends VisitedVertex> graph) {
+		resetDiscoveryTimes(graph, VertexConstants.INITIAL_DISCOVERY_TIME);
 	}
-	
-	private OldDiGraph graph;
-	
-	public VertexResetter(OldDiGraph graph) {
-		this.graph = graph;
+	public static void resetFinishTimes(DiGraph<? extends VisitedVertex> graph, int finishTime) {
+		Iterator<? extends VisitedVertex> it = graph.vertexIterator();
+		while (it.hasNext()) {
+			it.next().setFinishTime(finishTime);
+		}		
+	}
+	public static void resetFinishTimes(DiGraph<? extends VisitedVertex> graph) {
+		resetFinishTimes(graph, VertexConstants.INITIAL_FINISH_TIME);
 	}
 	/**
 	 * Resets the properties needed for breadth-first search
 	 * to their correct initial values
 	 */
-	public void bfsReset() {
-		resetColors();
-		resetParents();
-		resetDistances();
+	public static void resetForBfs(Graph<? extends BfsVertex> graph) {
+		resetColors(graph);
+		resetParents(graph);
+		resetDistances(graph);
+	}
+	public static void resetForDfs(DiGraph<? extends DfsVertex> graph) {
+		resetColors(graph);
+		resetParents(graph);
+		resetDiscoveryTimes(graph);
+		resetFinishTimes(graph);
+	}
+	
+	public static <T extends ColoredVertex> void blah(DiGraph<T> graph) {
+		
+	}
+	private OldDiGraph graph;
+	
+	public VertexResetter(OldDiGraph graph) {
+		this.graph = graph;
 	}
 	
 	public void dfsReset() {

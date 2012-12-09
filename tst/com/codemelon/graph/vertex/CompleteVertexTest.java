@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.common.Color;
+import com.codemelon.graph.vertex.common.VertexConstants;
 
 /**
  * @author Marshall Farrier

@@ -39,7 +39,7 @@ public class StronglyConnectedComponents {
 	 * use for the transpose graph.
 	 */
 	public Transposer run() {
-		new DepthFirstSearch(graph).search();
+		//new DepthFirstSearch(graph).search();
 		Transposer transposer = new Transposer(graph);
 		OldDiGraph transposeGraph = transposer.getTransposeGraph();
 		// set searchOrder field in transpose graph to finish time in depth-first search

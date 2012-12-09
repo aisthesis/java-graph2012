@@ -3,11 +3,12 @@ package com.codemelon.graph.search;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.util.VertexResetter;
-import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.types.DfsVertex;
+import com.codemelon.graph.vertex.interfaces.Vertex;
 /**
  * Implementation of depth-first search following 
  * <a href="http://mitpress.mit.edu/algorithms/">CLRS</a>, pp. 603ff.
@@ -16,7 +17,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * cf. CLRS, pp. 604ff.
  */
 public class DepthFirstSearch {
-	private OldDiGraph graph;
+	private DiGraph<? extends DfsVertex> graph;
 	private int t;	// time in CLRS
 	private boolean isAcyclic;
 	
@@ -25,7 +26,7 @@ public class DepthFirstSearch {
 	 * No changes are made to the graph when it is passed into the constructor.
 	 * @param graph graph on which the search will be run
 	 */
-	public DepthFirstSearch(OldDiGraph graph) {
+	public DepthFirstSearch(DiGraph<? extends DfsVertex> graph) {
 		this.graph = graph;
 		isAcyclic = true;
 	}
@@ -45,39 +46,42 @@ public class DepthFirstSearch {
 	 * @return true iff the graph is acyclic.
 	 */
 	public boolean search() {
-		new VertexResetter(graph).dfsReset();
+		VertexResetter.resetForDfs(graph);
 		t = 0;
-		Iterator<CompleteVertex> it = graph.vertexIterator();
-		CompleteVertex u;
+		Iterator<? extends DfsVertex> it = graph.vertexIterator();
+		DfsVertex u;
 		while (it.hasNext()) {
 			u = it.next();
-			if (u.color == Color.WHITE) {
+			if (u.getColor() == Color.WHITE) {
 				visit(u);
 			}
 		}
 		return isAcyclic;
 	}
-	private void visit(CompleteVertex u) {
-		u.discoveryTime = ++t;
-		u.color = Color.GRAY;
-		Set<CompleteVertex> adjacentVertices = u.getAdjacencies();
-		for (CompleteVertex v : adjacentVertices) {
-			switch (v.color) {
+	private void visit(DfsVertex u) {
+		u.setDiscoveryTime(++t);
+		u.setColor(Color.GRAY);
+		Set<Vertex> adjacentVertices = u.getAdjacencies();
+		for (Vertex v : adjacentVertices) {
+			switch(((DfsVertex) v).getColor()) {
 			case WHITE:
-				v.parent = u;
-				u.setEdgeType(v, EdgeType.TREE);
-				visit(v);
+				((DfsVertex) v).setParent(u);
+				u.setEdgeType(((DfsVertex) v), EdgeType.TREE);
+				visit(((DfsVertex) v));
 				break;
 			case GRAY:
-				u.setEdgeType(v, EdgeType.BACK);
+				u.setEdgeType(((DfsVertex) v), EdgeType.BACK);
 				isAcyclic = false;
 				break;
 			case BLACK:
-				if (u.discoveryTime < v.discoveryTime) { u.setEdgeType(v, EdgeType.FORWARD); }
-				else { u.setEdgeType(v, EdgeType.CROSS); }
-			}		
+				if (u.getDiscoveryTime() < ((DfsVertex) v).getDiscoveryTime()) {
+					u.setEdgeType((DfsVertex) v, EdgeType.FORWARD);
+				}
+				else {
+					u.setEdgeType((DfsVertex) v, EdgeType.CROSS);					
+				}
+			}
 		}
-		u.color = Color.BLACK;
-		u.finishTime = ++t;
+		u.setColor(Color.BLACK);
 	}
 }

@@ -8,7 +8,7 @@ import com.codemelon.graph.OldGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.CompleteVertex;
-import com.codemelon.graph.vertex.VertexConstants;
+import com.codemelon.graph.vertex.common.VertexConstants;
 import com.codemelon.graph.vertex.comparators.WeightComparator;
 
 /**

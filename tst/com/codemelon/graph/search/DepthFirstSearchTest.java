@@ -14,7 +14,9 @@ import org.junit.Test;
 import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.types.DfsVertex;
 
 /**
  * @author Marshall Farrier
@@ -22,8 +24,11 @@ import com.codemelon.graph.vertex.CompleteVertex;
  *
  */
 public class DepthFirstSearchTest {
-	private OldDiGraph graph;
+	private DiGraph<DfsVertex> graph;
 	private static final int CIRCULAR_GRAPH_SIZE = 1000;
+	
+
+	private OldDiGraph oldGraph;
 
 	@After
 	public void tearDown() {
@@ -36,7 +41,7 @@ public class DepthFirstSearchTest {
 	@Test
 	public void testSmallCLRSGraph() {
 		HashMap<Character, CompleteVertex> vertices = setUpSmallCLRSGraph();
-		assertFalse("Graph is not acyclic", new DepthFirstSearch(graph).search());
+		assertFalse("Graph is not acyclic", new DepthFirstSearch(oldGraph).search());
 		// all vertices are black
 		for (char i = 'u'; i <= 'z'; i++) {
 			assertEquals("Vertex is black", Color.BLACK, vertices.get(i).color);
@@ -47,7 +52,7 @@ public class DepthFirstSearchTest {
 	@Test
 	public void testBiggerCircularGraph() {
 		ArrayList<CompleteVertex> vertices = setUpBiggerCircularGraph();
-		assertFalse("Graph is not acyclic", new DepthFirstSearch(graph).search());		
+		assertFalse("Graph is not acyclic", new DepthFirstSearch(oldGraph).search());		
 		//vertex first discovered will be vertex last finished in this case
 		int indexOfFirstDiscovery = -1;
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {
@@ -75,15 +80,15 @@ public class DepthFirstSearchTest {
 		for (char i = 'u'; i <= 'z'; i++) {
 			vertices.put(i, new CompleteVertex(i));
 		}
-		graph = new OldDiGraph(vertices.values());
-		graph.addEdge(vertices.get('u'), vertices.get('v'));
-		graph.addEdge(vertices.get('u'), vertices.get('x'));
-		graph.addEdge(vertices.get('v'), vertices.get('y'));
-		graph.addEdge(vertices.get('w'), vertices.get('y'));
-		graph.addEdge(vertices.get('w'), vertices.get('z'));
-		graph.addEdge(vertices.get('x'), vertices.get('v'));
-		graph.addEdge(vertices.get('y'), vertices.get('x'));
-		graph.addEdge(vertices.get('z'), vertices.get('z'));
+		oldGraph = new OldDiGraph(vertices.values());
+		oldGraph.addEdge(vertices.get('u'), vertices.get('v'));
+		oldGraph.addEdge(vertices.get('u'), vertices.get('x'));
+		oldGraph.addEdge(vertices.get('v'), vertices.get('y'));
+		oldGraph.addEdge(vertices.get('w'), vertices.get('y'));
+		oldGraph.addEdge(vertices.get('w'), vertices.get('z'));
+		oldGraph.addEdge(vertices.get('x'), vertices.get('v'));
+		oldGraph.addEdge(vertices.get('y'), vertices.get('x'));
+		oldGraph.addEdge(vertices.get('z'), vertices.get('z'));
 		return vertices;
 	}
 	
@@ -93,12 +98,12 @@ public class DepthFirstSearchTest {
 			// vertex label will be the same as index in the array
 			vertices.add(new CompleteVertex(i));
 		}
-		graph = new OldDiGraph(vertices);
+		oldGraph = new OldDiGraph(vertices);
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE - 1; i++) {
-			graph.addEdge(vertices.get(i), vertices.get(i + 1));
+			oldGraph.addEdge(vertices.get(i), vertices.get(i + 1));
 		}
 		// now close the circle
-		graph.addEdge(vertices.get(CIRCULAR_GRAPH_SIZE - 1), vertices.get(0));
+		oldGraph.addEdge(vertices.get(CIRCULAR_GRAPH_SIZE - 1), vertices.get(0));
 		return vertices;
 	}
 }
