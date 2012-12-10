@@ -6,8 +6,8 @@ import java.util.Set;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.graph.DiGraph;
-import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.types.DfsVertex;
+import com.codemelon.graph.vertex.util.VertexResetter;
 import com.codemelon.graph.vertex.interfaces.Vertex;
 /**
  * Implementation of depth-first search following 

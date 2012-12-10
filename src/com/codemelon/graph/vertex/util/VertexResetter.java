@@ -1,4 +1,4 @@
-package com.codemelon.graph.util;
+package com.codemelon.graph.vertex.util;
 
 import java.util.Iterator;
 

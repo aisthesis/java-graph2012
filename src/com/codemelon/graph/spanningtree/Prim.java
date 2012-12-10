@@ -6,10 +6,10 @@ import java.util.Set;
 
 import com.codemelon.graph.OldGraph;
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.common.VertexConstants;
 import com.codemelon.graph.vertex.comparators.WeightComparator;
+import com.codemelon.graph.vertex.util.VertexResetter;
 
 /**
  * Implementation of Prim's algorithm for growing a minimum spanning

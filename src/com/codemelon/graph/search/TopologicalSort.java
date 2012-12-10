@@ -7,9 +7,9 @@ import java.util.Set;
 
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.graph.DiGraph;
-import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.interfaces.ColoredVertex;
 import com.codemelon.graph.vertex.interfaces.Vertex;
+import com.codemelon.graph.vertex.util.VertexResetter;
 
 /**
  * Assuming that there is no cycle in the graph, this algorithm creates
