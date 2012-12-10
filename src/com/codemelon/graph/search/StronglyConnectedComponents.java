@@ -1,39 +1,39 @@
-/**
- * 
- */
 package com.codemelon.graph.search;
 
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
-import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.util.Transposer;
-import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.comparators.ReverseSearchOrderComparator;
+import com.codemelon.graph.vertex.interfaces.ComponentVertex;
 import com.codemelon.graph.vertex.interfaces.VertexFactory;
 import com.codemelon.graph.vertex.types.DfsVertex;
+import com.codemelon.graph.vertex.types.OrderedDfsVertex;
 
 /**
  * Identify the strongly connected components in a graph using an int value
  * to mark the component to which each vertex belongs.
- * Cf. <a href="http://mitpress.mit.edu/algorithms/">CLRS</a>, p. 617
+ * Cf. <a href="http://mitpress.mit.edu/algorithms/">CLRS</a>, p. 617.
+ * The run() method of StronglyConnectedComponents creates a Transposer object
+ * in which the target graph has vertices of type U, which must be a subclass
+ * of OrderedDfsVertex. The vertices of the input graph must be subclasses
+ * of DfsVertex and must support component labeling but need not themselves
+ * support ordered depth-first search.
  * @author Marshall Farrier
  * @version Dec 9, 2012
  */
-public class StronglyConnectedComponents {
-	private DiGraph<? extends DfsVertex> graph;
-	private VertexFactory<? extends DfsVertex> vertexFactory;
-	
-	private OldDiGraph oldGraph;
+public class StronglyConnectedComponents<T extends DfsVertex & ComponentVertex, 
+		U extends OrderedDfsVertex> {
+	private DiGraph<T> graph;
+	private VertexFactory<U> vertexFactory;
 	
 	/**
 	 * Prepare to mark the graph for strongly connected components.
 	 * No changes to the graph are made when the graph is passed into the constructor.
 	 * @param graph graph for which strongly connected components are to be determined.
 	 */
-	public StronglyConnectedComponents(DiGraph<? extends DfsVertex> graph,
-			VertexFactory<? extends DfsVertex> vertexFactory) {
+	public StronglyConnectedComponents(DiGraph<T> graph, VertexFactory<U> vertexFactory) {
 		this.graph = graph;
 		this.vertexFactory = vertexFactory;
 	}
@@ -48,24 +48,24 @@ public class StronglyConnectedComponents {
 	 * This object may be discarded or maintained depending on whether or not the client has further
 	 * use for the transpose graph.
 	 */
-	public Transposer run() {
-		//new DepthFirstSearch(graph).search();
-		Transposer transposer = new Transposer(oldGraph);
-		OldDiGraph transposeGraph = transposer.getOldTransposeGraph();
+	public Transposer<T, U> run() {
+		new DepthFirstSearch(graph).search();
+		Transposer<T, U> transposer = new Transposer<T, U>(graph, vertexFactory);
+		DiGraph<U> transposeGraph = transposer.getTransposeGraph();
+		Map<T, U> vertexMap = transposer.getVertexMap();
 		// set searchOrder field in transpose graph to finish time in depth-first search
-		Iterator<CompleteVertex> it = transposeGraph.vertexIterator();
-		CompleteVertex v;
+		Iterator<T> it = graph.vertexIterator();
+		T v;
 		while (it.hasNext()) {
 			v = it.next();
-			v.searchOrder = v.finishTime;
+			vertexMap.get(v).setSearchOrder(v.getFinishTime());
 		}
-		//new InOrderDepthFirstSearch(transposeGraph, new ReverseSearchOrderComparator()).search();
+		new OrderedDepthFirstSearch(transposeGraph, new ReverseSearchOrderComparator()).search();
 		// Finally, set the appropriate tree numbers in the original graph
-		it = oldGraph.vertexIterator();
-		//HashMap<CompleteVertex, CompleteVertex> vertexMap = transposer.getVertexMap();
+		it = graph.vertexIterator();
 		while (it.hasNext()) {
 			v = it.next();
-//			v.treeNumber = vertexMap.get(v).treeNumber;
+			v.setComponent(vertexMap.get(v).getComponent());
 		}
 		return transposer;
 	}

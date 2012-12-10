@@ -13,7 +13,6 @@ import org.junit.Test;
 import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.vertex.interfaces.VertexFactory;
 import com.codemelon.graph.vertex.types.OrderedDfsVertex;
-import com.codemelon.graph.vertex.types.OrderedDfsVertexFactory;
 /**
  * @author Marshall Farrier
  * @version Nov 25, 2012
@@ -34,7 +33,7 @@ public class TransposerTest {
 			vertices.add(new OrderedDfsVertex());
 		}
 		graph = new DiGraph<OrderedDfsVertex>(vertices);
-		vertexFactory = OrderedDfsVertexFactory.INSTANCE;
+		vertexFactory = OrderedDfsVertex.Factory.INSTANCE;
 		vertexMap = null;
 	}
 
@@ -51,7 +50,8 @@ public class TransposerTest {
 	public void testTranspose() {
 		graph.addEdge(vertices.get(0), vertices.get(2));
 		graph.addEdge(vertices.get(3), vertices.get(2));
-		Transposer<OrderedDfsVertex> transposer = new Transposer<OrderedDfsVertex>(graph, vertexFactory);
+		Transposer<OrderedDfsVertex, OrderedDfsVertex> transposer = 
+				new Transposer<OrderedDfsVertex, OrderedDfsVertex>(graph, vertexFactory);
 		DiGraph<OrderedDfsVertex> transposedGraph = transposer.getTransposeGraph();
 		vertexMap = transposer.getVertexMap();
 		assertEquals("Correct number of edges in transposed graph", 

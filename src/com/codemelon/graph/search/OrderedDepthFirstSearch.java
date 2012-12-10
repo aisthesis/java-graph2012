@@ -11,6 +11,7 @@ import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.comparators.SearchOrderComparator;
 import com.codemelon.graph.vertex.types.OrderedDfsVertex;
+import com.codemelon.graph.vertex.interfaces.ComponentVertex;
 import com.codemelon.graph.vertex.interfaces.OrderedSearchVertex;
 
 /**
@@ -76,7 +77,7 @@ public class OrderedDepthFirstSearch {
 		VertexResetter.resetForDfs(graph);
 		Collections.sort(vertices, comp);
 		t = DepthFirstSearch.FIRST_DISCOVERY_TIME - 1;
-		treeNumber = 0;
+		treeNumber = ComponentVertex.FIRST_COMPONENT_NUMBER - 1;
 		for (OrderedDfsVertex u : vertices) {
 			if (u.getColor() == Color.WHITE) {
 				treeNumber++;
