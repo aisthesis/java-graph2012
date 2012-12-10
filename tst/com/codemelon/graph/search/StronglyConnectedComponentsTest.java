@@ -7,14 +7,15 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.util.Transposer;
-import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.types.OrderedDfsVertex;
 
 /**
  * @author Marshall Farrier
@@ -22,7 +23,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  *
  */
 public class StronglyConnectedComponentsTest {
-	private OldDiGraph graph;
+	private DiGraph<OrderedDfsVertex> graph;
 
 	/**
 	 * @throws java.lang.Exception
@@ -43,30 +44,32 @@ public class StronglyConnectedComponentsTest {
 	 */
 	@Test
 	public void testRun() {
-		HashMap<Character, CompleteVertex> vertices = setUpCLRSGraph();
-		Transposer transposer = new StronglyConnectedComponents(graph).run();
+		HashMap<Character, OrderedDfsVertex> vertices = setUpCLRSGraph();
+		Transposer<OrderedDfsVertex, OrderedDfsVertex> transposer = 
+				new StronglyConnectedComponents<OrderedDfsVertex, 
+				OrderedDfsVertex>(graph, OrderedDfsVertex.Factory.INSTANCE).run();
 		// component abe
-		assertEquals("a and b belong to same tree", vertices.get('a').treeNumber, 
-				vertices.get('b').treeNumber);
-		assertEquals("a and e belong to same tree", vertices.get('a').treeNumber, 
-				vertices.get('e').treeNumber);
+		assertEquals("a and b belong to same tree", vertices.get('a').getComponent(), 
+				vertices.get('b').getComponent());
+		assertEquals("a and e belong to same tree", vertices.get('a').getComponent(), 
+				vertices.get('e').getComponent());
 		// component cd
-		assertEquals("c and d belong to same tree", vertices.get('c').treeNumber, 
-				vertices.get('d').treeNumber);
+		assertEquals("c and d belong to same tree", vertices.get('c').getComponent(), 
+				vertices.get('d').getComponent());
 		// component fg
-		assertEquals("f and g belong to same tree", vertices.get('f').treeNumber, 
-				vertices.get('g').treeNumber);
+		assertEquals("f and g belong to same tree", vertices.get('f').getComponent(), 
+				vertices.get('g').getComponent());
 		// distinguish different components
-		assertThat(vertices.get('a').treeNumber, is(not(vertices.get('c').treeNumber)));
-		assertThat(vertices.get('a').treeNumber, is(not(vertices.get('f').treeNumber)));
-		assertThat(vertices.get('a').treeNumber, is(not(vertices.get('h').treeNumber)));
-		assertThat(vertices.get('c').treeNumber, is(not(vertices.get('f').treeNumber)));
-		assertThat(vertices.get('c').treeNumber, is(not(vertices.get('h').treeNumber)));
-		assertThat(vertices.get('f').treeNumber, is(not(vertices.get('h').treeNumber)));
+		assertThat(vertices.get('a').getComponent(), is(not(vertices.get('c').getComponent())));
+		assertThat(vertices.get('a').getComponent(), is(not(vertices.get('f').getComponent())));
+		assertThat(vertices.get('a').getComponent(), is(not(vertices.get('h').getComponent())));
+		assertThat(vertices.get('c').getComponent(), is(not(vertices.get('f').getComponent())));
+		assertThat(vertices.get('c').getComponent(), is(not(vertices.get('h').getComponent())));
+		assertThat(vertices.get('f').getComponent(), is(not(vertices.get('h').getComponent())));
 		
 		// transposer is correct
-		OldDiGraph transposeGraph = transposer.getOldTransposeGraph();
-		HashMap<CompleteVertex, CompleteVertex> mapToTransposeVertices = transposer.getVertexMap();
+		DiGraph<OrderedDfsVertex> transposeGraph = transposer.getTransposeGraph();
+		Map<OrderedDfsVertex, OrderedDfsVertex> mapToTransposeVertices = transposer.getVertexMap();
 		assertTrue("Correct edges in transpose graph", transposeGraph
 				.containsEdge(mapToTransposeVertices.get(vertices.get('b')), 
 				mapToTransposeVertices.get(vertices.get('a'))));
@@ -113,12 +116,12 @@ public class StronglyConnectedComponentsTest {
 	/**
 	 * Graph from CLRS, p. 616
 	 */
-	private HashMap<Character, CompleteVertex> setUpCLRSGraph() {
-		HashMap<Character, CompleteVertex> vertices = new HashMap<Character, CompleteVertex>();
+	private HashMap<Character, OrderedDfsVertex> setUpCLRSGraph() {
+		HashMap<Character, OrderedDfsVertex> vertices = new HashMap<Character, OrderedDfsVertex>();
 		for (char i = 'a'; i <= 'h'; i++) {
-			vertices.put(i, new CompleteVertex(i));
+			vertices.put(i, new OrderedDfsVertex());
 		}
-		graph = new OldDiGraph(vertices.values());
+		graph = new DiGraph<OrderedDfsVertex>(vertices.values());
 		graph.addEdge(vertices.get('a'), vertices.get('b'));
 		graph.addEdge(vertices.get('b'), vertices.get('f'));
 		graph.addEdge(vertices.get('b'), vertices.get('e'));
