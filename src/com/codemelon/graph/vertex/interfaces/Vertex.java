@@ -2,7 +2,7 @@ package com.codemelon.graph.vertex.interfaces;
 
 import java.util.Set;
 
-import com.codemelon.graph.graph.DiGraph;
+import com.codemelon.graph.graph.types.DiGraph;
 
 /**
  * Basic specification which any Vertex class must implement

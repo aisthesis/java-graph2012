@@ -3,8 +3,8 @@ package com.codemelon.graph.vertex.util;
 import java.util.Iterator;
 
 import com.codemelon.graph.OldDiGraph;
-import com.codemelon.graph.graph.DiGraph;
-import com.codemelon.graph.graph.Graph;
+import com.codemelon.graph.graph.types.DiGraph;
+import com.codemelon.graph.graph.types.Graph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.common.VertexConstants;

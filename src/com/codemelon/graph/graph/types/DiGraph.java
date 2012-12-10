@@ -1,4 +1,4 @@
-package com.codemelon.graph.graph;
+package com.codemelon.graph.graph.types;
 
 import java.util.Collection;
 import java.util.HashSet;

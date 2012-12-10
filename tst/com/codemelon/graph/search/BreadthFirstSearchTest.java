@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.graph.Graph;
+import com.codemelon.graph.graph.types.Graph;
 import com.codemelon.graph.vertex.types.BfsVertex;
 
 /**
