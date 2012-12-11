@@ -4,7 +4,7 @@ import java.util.Collection;
 
 
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.graph.GraphConstants;
+import com.codemelon.graph.graph.common.GraphConstants;
 import com.codemelon.graph.vertex.interfaces.ColoredEdgeVertex;
 import com.codemelon.graph.vertex.interfaces.WeightedEdgeVertex;
 
