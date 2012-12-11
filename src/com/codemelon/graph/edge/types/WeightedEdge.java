@@ -1,4 +1,4 @@
-package com.codemelon.graph.edge;
+package com.codemelon.graph.edge.types;
 
 import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.vertex.CompleteVertex;
@@ -46,7 +46,7 @@ public class WeightedEdge {
 	/**
 	 * Returns one end of the given edge. Note that the edge is undirected,
 	 * so the distinction between head and tail or from and to is arbitrary.
-	 * Once the edge has been initialized, it will alway show the same from()
+	 * Once the edge has been initialized, it will always show the same from()
 	 * and to() vertices, but it is equivalent to an edge object having opposite
 	 * from() and to() vertices.
 	 * @return the "from" vertex specified in the constructor
