@@ -24,6 +24,15 @@ public class EdgeDataVertex<T, U extends EdgeDataFactory<T>> implements Vertex {
 		adjacencies = new IdentityHashMap<Vertex, T>();
 		graph = null;
 	}
+	
+	/**
+	 * Get data for a particular edge.
+	 * @param to head of the edge for which to retrieve data
+	 * @return the data for the given edge
+	 */
+	public T getEdgeData(Vertex to) {
+		return adjacencies.get(to);
+	}
 
 	/* (non-Javadoc)
 	 * @see com.codemelon.graph.vertex.interfaces.Vertex#setGraph(com.codemelon.graph.graph.types.DiGraph)
