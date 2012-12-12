@@ -50,7 +50,7 @@ public class BreadthFirstSearch {
 		source.setDistance(0);
 		queue.add(source);
 		BfsVertex u;
-		Set<Vertex> adjacentVertices;
+		Set<? extends Vertex> adjacentVertices;
 		while (!queue.isEmpty()) {
 			u = queue.removeFirst();
 			adjacentVertices = u.getAdjacencies();

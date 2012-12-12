@@ -65,7 +65,7 @@ public class OldGraph extends OldDiGraph{
 			from = vertexIterator.next();
 			adjacencySet = from.getAdjacencies();
 			for (CompleteVertex to : adjacencySet) {
-				result.add(new WeightedEdge(from, to));
+				//result.add(new WeightedEdge(from, to));
 			}
 		}
 		return result;

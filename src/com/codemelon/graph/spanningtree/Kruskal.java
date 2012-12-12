@@ -60,6 +60,7 @@ public class Kruskal {
 	 * set to EdgeConstants.DEFAULT_COLOR
 	 */
 	public void markEdges() {
+		/*
 		initializeForMarking();
 		for (WeightedEdge edge : edges) {
 			if (vertexDisjointSet.findSet(edge.from()) 
@@ -67,7 +68,8 @@ public class Kruskal {
 				graph.setEdgeColor(edge.from(), edge.to(), MARKER_COLOR);
 				vertexDisjointSet.union(edge.from(), edge.to());				
 			}
-		}		
+		}
+		*/		
 	}
 	/**
 	 * Creates and returns a minimum spanning tree. Running this method does not modify
@@ -82,6 +84,7 @@ public class Kruskal {
 	public OldGraph generateTree() {
 		initializeForGenerateTree();
 		for (WeightedEdge edge : edges) {
+			/*
 			if (vertexDisjointSet.findSet(edge.from()) 
 					!= vertexDisjointSet.findSet(edge.to())) {
 				spanningTree.addEdge(vertexMap.get(edge.from()), vertexMap.get(edge.to()));
@@ -89,6 +92,7 @@ public class Kruskal {
 						edge.weight());
 				vertexDisjointSet.union(edge.from(), edge.to());				
 			}
+			*/
 		}		
 		return spanningTree;
 	}
