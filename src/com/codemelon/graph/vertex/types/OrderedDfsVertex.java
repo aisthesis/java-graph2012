@@ -1,5 +1,6 @@
 package com.codemelon.graph.vertex.types;
 
+import com.codemelon.graph.edge.types.DfsEdgeData;
 import com.codemelon.graph.vertex.common.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ComponentVertex;
 import com.codemelon.graph.vertex.interfaces.OrderedSearchVertex;
@@ -14,8 +15,8 @@ public class OrderedDfsVertex extends DfsVertex implements OrderedSearchVertex,
 	private int searchOrder;
 	private int component;
 	
-	public OrderedDfsVertex() {
-		super();
+	public OrderedDfsVertex(DfsEdgeData.Factory factoryInstance) {
+		super(factoryInstance);
 		searchOrder = VertexConstants.DEFAULT_SEARCH_ORDER_VALUE;
 	}
 
@@ -58,7 +59,7 @@ public class OrderedDfsVertex extends DfsVertex implements OrderedSearchVertex,
 		 */
 		@Override
 		public OrderedDfsVertex newVertex() {
-			return new OrderedDfsVertex();
+			return new OrderedDfsVertex(DfsEdgeData.Factory.INSTANCE);
 		}		
 	}
 }
