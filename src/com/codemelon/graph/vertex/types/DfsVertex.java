@@ -21,10 +21,8 @@ import com.codemelon.graph.vertex.interfaces.VisitedVertex;
  * @my.edited Dec 12, 2012
  */
 public class DfsVertex<T extends EdgeTypeData & EdgeColorData, U extends EdgeDataFactory<T>>
-		extends EdgeDataVertex<T, U> implements Vertex, ColoredVertex, ChildVertex,
+		extends EdgeDataVertex<T, U> implements ColoredVertex, ChildVertex,
 		VisitedVertex, EdgeTypeVertex {
-	//private DiGraph<? extends Vertex> graph;
-	//private IdentityHashMap<Vertex, EdgeType> adjacencies;
 	private ChildVertex parent;
 	private Color color;
 	private int discoveryTime;
