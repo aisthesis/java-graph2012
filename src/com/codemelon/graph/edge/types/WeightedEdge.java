@@ -1,7 +1,6 @@
 package com.codemelon.graph.edge.types;
 
 import com.codemelon.graph.graph.types.DiGraph;
-import com.codemelon.graph.vertex.interfaces.ColoredEdgeVertex;
 import com.codemelon.graph.vertex.interfaces.Vertex;
 import com.codemelon.graph.vertex.interfaces.WeightedEdgeVertex;
 
@@ -16,10 +15,10 @@ import com.codemelon.graph.vertex.interfaces.WeightedEdgeVertex;
  * @my.created Dec 2, 2012
  * @my.edited Dec 11, 2012
  */
-public class WeightedEdge<T extends WeightedEdgeVertex & ColoredEdgeVertex> {
+public class WeightedEdge {
 	private DiGraph<? extends Vertex> graph;
-	private T from;
-	private T to;
+	private WeightedEdgeVertex from;
+	private WeightedEdgeVertex to;
 	private double weight;
 	/**
 	 * Construct an immutable weighted edge. The weight of the edge is set when the edge object
@@ -28,7 +27,7 @@ public class WeightedEdge<T extends WeightedEdgeVertex & ColoredEdgeVertex> {
 	 * @param from tail vertex
 	 * @param to head vertex
 	 */
-	public WeightedEdge(T from, T to) {
+	public WeightedEdge(WeightedEdgeVertex from, WeightedEdgeVertex to) {
 		if (from.getGraph() == null || to.getGraph() == null) {
 			throw new IllegalArgumentException("Edge must belong to a graph!");
 		}
@@ -51,7 +50,7 @@ public class WeightedEdge<T extends WeightedEdgeVertex & ColoredEdgeVertex> {
 	 * from() and to() vertices.
 	 * @return the "from" vertex specified in the constructor
 	 */
-	public T from() { return from; }
+	public WeightedEdgeVertex from() { return from; }
 	/**
 	 * Returns one end of the given edge. Note that the edge is undirected,
 	 * so the distinction between head and tail or from and to is arbitrary.
@@ -60,7 +59,7 @@ public class WeightedEdge<T extends WeightedEdgeVertex & ColoredEdgeVertex> {
 	 * from() and to() vertices.
 	 * @return the "from" vertex specified in the constructor
 	 */
-	public T to() { return to; }
+	public WeightedEdgeVertex to() { return to; }
 	/**
 	 * Returns the edge's weight.
 	 * @return the edge's weight
@@ -84,8 +83,8 @@ public class WeightedEdge<T extends WeightedEdgeVertex & ColoredEdgeVertex> {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		return (from == ((WeightedEdge<?>) o).from && to == ((WeightedEdge<?>) o).to) 
-				|| (from == ((WeightedEdge<?>) o).to && to == ((WeightedEdge<?>) o).from);
+		return (from == ((WeightedEdge) o).from && to == ((WeightedEdge) o).to) 
+				|| (from == ((WeightedEdge) o).to && to == ((WeightedEdge) o).from);
 	}
 	/**
 	 * Overridden so that adding weighted edges to a HashSet will automatically eliminate
