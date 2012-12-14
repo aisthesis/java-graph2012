@@ -24,10 +24,6 @@ public class WeightedEdgeTest {
 	private static final int VERTICES_IN_TEST_GRAPH = 1000;
 	HashMap<Integer, SpanningTreeVertex> vertices;
 	private WeightedEdgeGraph<SpanningTreeVertex> graph;
-	
-	//HashMap<Integer, CompleteVertex> oldVertices;
-	//private OldGraph oldGraph;
-
 	/**
 	 * Set up an undirected graph with various vertices and edge from vertex 0 to vertex 1
 	 * and from vertex 2 to vertex 3.
@@ -135,5 +131,4 @@ public class WeightedEdgeTest {
 		assertEquals("equals if same vertices but opposite direction", e1, e2);
 		assertFalse("Not equal if different edge", e1.equals(e3));
 	}
-
 }
