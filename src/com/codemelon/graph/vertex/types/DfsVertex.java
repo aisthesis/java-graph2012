@@ -15,12 +15,8 @@ import com.codemelon.graph.vertex.interfaces.Vertex;
 import com.codemelon.graph.vertex.interfaces.VisitedVertex;
 
 /**
- * Needs to be refactored to extend EdgeDataVertex:
- * DfsVertex<T extends EdgeTypeData, U extends EdgeDataFactory<T>> extends EdgeDataVertex<T, U>
- * implements ColoredVertex, ChildVertex, VisitedVertex
  * @author Marshall Farrier
- * @my.created Dec 7, 2012
- * @my.edited Dec 12, 2012
+ * @version Dec 7, 2012
  */
 public class DfsVertex implements Vertex, ColoredVertex, ChildVertex,
 		VisitedVertex, EdgeTypeVertex {
