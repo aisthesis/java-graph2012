@@ -2,11 +2,14 @@ package com.codemelon.graph.vertex.types;
 
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
-import com.codemelon.graph.edge.types.DfsEdgeData;
+import com.codemelon.graph.edge.interfaces.EdgeColorData;
+import com.codemelon.graph.edge.interfaces.EdgeDataFactory;
+import com.codemelon.graph.edge.interfaces.EdgeTypeData;
 import com.codemelon.graph.vertex.common.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ChildVertex;
 import com.codemelon.graph.vertex.interfaces.ColoredVertex;
 import com.codemelon.graph.vertex.interfaces.EdgeTypeVertex;
+import com.codemelon.graph.vertex.interfaces.Vertex;
 import com.codemelon.graph.vertex.interfaces.VisitedVertex;
 
 /**
@@ -17,15 +20,15 @@ import com.codemelon.graph.vertex.interfaces.VisitedVertex;
  * @my.created Dec 7, 2012
  * @my.edited Dec 12, 2012
  */
-public class DfsVertex extends EdgeDataVertex<DfsEdgeData, DfsEdgeData.Factory> 
-		implements ColoredVertex, ChildVertex,
+public class DfsVertex<T extends EdgeTypeData & EdgeColorData, U extends EdgeDataFactory<T>>
+		extends EdgeDataVertex<T, U> implements ColoredVertex, ChildVertex,
 		VisitedVertex, EdgeTypeVertex {
 	private ChildVertex parent;
 	private Color color;
 	private int discoveryTime;
 	private int finishTime;
 	
-	public DfsVertex(DfsEdgeData.Factory edgeDataFactory) {
+	public DfsVertex(U edgeDataFactory) {
 		super(edgeDataFactory);
 		parent = null;
 		color = Color.WHITE;
@@ -49,7 +52,7 @@ public class DfsVertex extends EdgeDataVertex<DfsEdgeData, DfsEdgeData.Factory>
 	 */
 	@Override
 	public EdgeType getEdgeType(EdgeTypeVertex to) {
-		return this.getEdgeData(to).getEdgeType();
+		return this.getEdgeType(to);
 	}
 
 	/* (non-Javadoc)

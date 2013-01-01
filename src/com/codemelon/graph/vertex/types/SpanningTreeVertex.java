@@ -12,6 +12,12 @@ import com.codemelon.graph.vertex.interfaces.ColoredEdgeVertex;
  * The type parameter T is a container for edge data. T must support
  * color and weight.
  * 
+ * Note: We really should factor out EdgeDataVertex<T, U extends EdgeDataFactory<T>>
+ * which could then be superclass to DfsVertex as well as this class. This kind
+ * of vertex would implement adjacencies as a HashMap whereas SimpleVertex (no parameter)
+ * could be extended for BFS or other operations requiring no edge data.
+ * BfsVertex should actually be changed to an interface so that BFS can be run
+ * either on SimpleVertex or on vertices supporting edge data.
  * @author Marshall Farrier
  * @my.created Dec 11, 2012
  * @my.edited Dec 11, 2012

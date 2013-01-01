@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
-import com.codemelon.graph.edge.types.DfsEdgeData;
 import com.codemelon.graph.graph.types.DiGraph;
 import com.codemelon.graph.vertex.types.DfsVertex;
 
@@ -69,11 +68,10 @@ public class DepthFirstSearchTest {
 				vertices.get(indexOfLastDiscovery).getEdgeType(vertices.get(indexOfFirstDiscovery)));
 	}
 	private ArrayList<DfsVertex> setUpBiggerCircularGraph() {
-		ArrayList<DfsVertex> vertices = 
-				new ArrayList<DfsVertex>(CIRCULAR_GRAPH_SIZE);
+		ArrayList<DfsVertex> vertices = new ArrayList<DfsVertex>(CIRCULAR_GRAPH_SIZE);
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {
 			// vertex label will be the same as index in the array
-			vertices.add(new DfsVertex(DfsEdgeData.Factory.INSTANCE));
+			vertices.add(new DfsVertex());
 		}
 		graph = new DiGraph<DfsVertex>(vertices);
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE - 1; i++) {
@@ -90,7 +88,7 @@ public class DepthFirstSearchTest {
 	private HashMap<Character, DfsVertex> setUpSmallCLRSGraph() {
 		HashMap<Character, DfsVertex> vertices = new HashMap<Character, DfsVertex>();
 		for (char i = 'u'; i <= 'z'; i++) {
-			vertices.put(i, new DfsVertex(DfsEdgeData.Factory.INSTANCE));
+			vertices.put(i, new DfsVertex());
 		}
 		graph = new DiGraph<DfsVertex>(vertices.values());
 		graph.addEdge(vertices.get('u'), vertices.get('v'));
