@@ -119,7 +119,7 @@ public class StronglyConnectedComponentsTest {
 	private HashMap<Character, OrderedDfsVertex> setUpCLRSGraph() {
 		HashMap<Character, OrderedDfsVertex> vertices = new HashMap<Character, OrderedDfsVertex>();
 		for (char i = 'a'; i <= 'h'; i++) {
-			vertices.put(i, new OrderedDfsVertex());
+			//vertices.put(i, new OrderedDfsVertex());
 		}
 		graph = new DiGraph<OrderedDfsVertex>(vertices.values());
 		graph.addEdge(vertices.get('a'), vertices.get('b'));

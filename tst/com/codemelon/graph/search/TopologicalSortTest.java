@@ -52,6 +52,7 @@ public class TopologicalSortTest {
 	 */
 	private HashMap<String, DfsVertex> setUpSmallCLRSGraph() {
 		HashMap<String, DfsVertex> vertices = new HashMap<String, DfsVertex>();
+		/*
 		vertices.put("undershorts", new DfsVertex());
 		vertices.put("pants", new DfsVertex());
 		vertices.put("belt", new DfsVertex());
@@ -61,6 +62,7 @@ public class TopologicalSortTest {
 		vertices.put("socks", new DfsVertex());
 		vertices.put("shoes", new DfsVertex());
 		vertices.put("watch", new DfsVertex());
+		*/
 		graph = new DiGraph<DfsVertex>(vertices.values());
 		graph.addEdge(vertices.get("undershorts"), vertices.get("pants"));
 		graph.addEdge(vertices.get("undershorts"), vertices.get("shoes"));
