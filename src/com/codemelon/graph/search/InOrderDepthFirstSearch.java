@@ -1,3 +1,11 @@
+/**
+ * This class guarantees that the vertices will always
+ * be searched in a specific order. To do so, however,
+ * we have to sort the list of all vertices in the graph once,
+ * then each adjacency list that is explored. Due to this overhead,
+ * simple DepthFirstSearch is preferable when the order for
+ * visiting vertices is immaterial to the search.
+ */
 package com.codemelon.graph.search;
 
 import java.util.ArrayList;
@@ -6,32 +14,25 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.util.VertexResetter;
+import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.comparators.SearchOrderComparator;
-import com.codemelon.graph.vertex.types.OrderedDfsVertex;
-import com.codemelon.graph.vertex.interfaces.OrderedSearchVertex;
 
 /**
- * This class guarantees that the vertices will always
- * be searched in a specific order. To do so, however,
- * we have to sort the list of all vertices in the graph once,
- * then each adjacency list that is explored. Due to this overhead,
- * simple DepthFirstSearch is preferable when the order for
- * visiting vertices is immaterial to the search.
  * @author Marshall Farrier
- * @version Dec 8, 2012
+ * @version Nov 27, 2012
  *
  */
 public class InOrderDepthFirstSearch {
-	private DiGraph<? extends OrderedDfsVertex> graph;
+	private OldDiGraph graph;
 	private int t;	// time in CLRS
 	private int treeNumber; // used in StronglyConnectedComponents
-	private List<OrderedDfsVertex> vertices;
-	private Comparator<OrderedSearchVertex> comp;
+	private List<CompleteVertex> vertices;
+	private Comparator<CompleteVertex> comp;
 	
-	private static final OrderedDfsVertex[] EMPTY_VERTEX_ARRAY = new OrderedDfsVertex[0];
+	private static final CompleteVertex[] EMPTY_VERTEX_ARRAY = new CompleteVertex[0];
 	/**
 	 * Prepares the graph for a depth-first search where vertices
 	 * are visited in the order specified by the Comparator passed
@@ -42,10 +43,9 @@ public class InOrderDepthFirstSearch {
 	 * @param comp Comparator determining the order in which vertices
 	 * will be visited.
 	 */
-	public InOrderDepthFirstSearch(DiGraph<? extends OrderedDfsVertex> graph, 
-			Comparator<OrderedSearchVertex> comp) {
+	public InOrderDepthFirstSearch(OldDiGraph graph, Comparator<CompleteVertex> comp) {
 		this.graph = graph;
-		vertices = new ArrayList<OrderedDfsVertex>(graph.getVertices());
+		vertices = new ArrayList<CompleteVertex>(graph.getVertices());
 		this.comp = comp;
 	}
 	/**
@@ -54,8 +54,8 @@ public class InOrderDepthFirstSearch {
 	 * Vertex.
 	 * @param graph graph to search
 	 */
-	public InOrderDepthFirstSearch(DiGraph<? extends OrderedDfsVertex> graph) {
-		this(graph, new SearchOrderComparator<OrderedSearchVertex>());
+	public InOrderDepthFirstSearch(OldDiGraph graph) {
+		this(graph, new SearchOrderComparator());
 	}
 	
 	/**
@@ -68,35 +68,35 @@ public class InOrderDepthFirstSearch {
 	 * to the order in which they were first discovered and finished.</li>
 	 * </ol>
 	 * In contrast to the corresponding method in simple DepthFirstSearch,
-	 * this search method does not modify the edgeType of the graph's vertices--i.e.,
+	 * this search method does modify the edgeType of the graph's vertices--i.e.,
 	 * it does not categorize the edges in the graph. Nor does it return a value
 	 * specifying whether or not the graph is cyclic.
 	 */
 	public void search() {
-		VertexResetter.resetForDfs(graph);
+		new VertexResetter(graph).dfsReset();
 		Collections.sort(vertices, comp);
-		t = DepthFirstSearch.FIRST_DISCOVERY_TIME - 1;
+		t = 0;
 		treeNumber = 0;
-		for (OrderedDfsVertex u : vertices) {
-			if (u.getColor() == Color.WHITE) {
+		for (CompleteVertex u : vertices) {
+			if (u.color == Color.WHITE) {
 				treeNumber++;
 				visit(u);
 			}		
 		}
 	}
-	private void visit(OrderedDfsVertex u) {
-		u.setDiscoveryTime(++t);
-		u.setComponent(treeNumber);
-		u.setColor(Color.GRAY);
-		OrderedDfsVertex[] adjacentVertices = u.getAdjacencies().toArray(EMPTY_VERTEX_ARRAY);
+	private void visit(CompleteVertex u) {
+		u.discoveryTime = ++t;
+		u.treeNumber = treeNumber;
+		u.color = Color.GRAY;
+		CompleteVertex[] adjacentVertices = u.getAdjacencies().toArray(EMPTY_VERTEX_ARRAY);
 		Arrays.sort(adjacentVertices, comp);
-		for (OrderedDfsVertex v : adjacentVertices) {
-			if (v.getColor() == Color.WHITE) {
-				v.setParent(u);
+		for (CompleteVertex v : adjacentVertices) {
+			if (v.color == Color.WHITE) {
+				v.parent = u;
 				visit(v);
 			}		
 		}
-		u.setColor(Color.BLACK);
-		u.setFinishTime(++t);
+		u.color = Color.BLACK;
+		u.finishTime = ++t;
 	}
 }
