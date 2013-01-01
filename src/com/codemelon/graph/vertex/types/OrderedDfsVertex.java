@@ -59,6 +59,7 @@ public class OrderedDfsVertex extends DfsVertex implements OrderedSearchVertex,
 		@Override
 		public OrderedDfsVertex newVertex() {
 			return new OrderedDfsVertex();
-		}		
+		}
+		
 	}
 }

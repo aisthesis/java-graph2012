@@ -1,9 +1,7 @@
 package com.codemelon.graph.edge.types;
 
-import com.codemelon.graph.graph.types.DiGraph;
-import com.codemelon.graph.vertex.interfaces.ColoredEdgeVertex;
-import com.codemelon.graph.vertex.interfaces.Vertex;
-import com.codemelon.graph.vertex.interfaces.WeightedEdgeVertex;
+import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * Immutable, undirected edges that maintain a floating point weight.
@@ -16,10 +14,10 @@ import com.codemelon.graph.vertex.interfaces.WeightedEdgeVertex;
  * @my.created Dec 2, 2012
  * @my.edited Dec 11, 2012
  */
-public class WeightedEdge<T extends WeightedEdgeVertex & ColoredEdgeVertex> {
-	private DiGraph<? extends Vertex> graph;
-	private T from;
-	private T to;
+public class WeightedEdge {
+	private OldDiGraph graph;
+	private CompleteVertex from;
+	private CompleteVertex to;
 	private double weight;
 	/**
 	 * Construct an immutable weighted edge. The weight of the edge is set when the edge object
@@ -27,8 +25,11 @@ public class WeightedEdge<T extends WeightedEdgeVertex & ColoredEdgeVertex> {
 	 * in the graph, the corresponding weighted edge will not be changed.
 	 * @param from tail vertex
 	 * @param to head vertex
+	 * @throws IllegalArgumentException if from or to does not belong to a graph
+	 * @throws IllegalArgumentException if from or to do not belong to the same graph
+	 * @throws IllegalArgumentException if the graph does not contain the given edge
 	 */
-	public WeightedEdge(T from, T to) {
+	public WeightedEdge(CompleteVertex from, CompleteVertex to) {
 		if (from.getGraph() == null || to.getGraph() == null) {
 			throw new IllegalArgumentException("Edge must belong to a graph!");
 		}
@@ -51,7 +52,7 @@ public class WeightedEdge<T extends WeightedEdgeVertex & ColoredEdgeVertex> {
 	 * from() and to() vertices.
 	 * @return the "from" vertex specified in the constructor
 	 */
-	public T from() { return from; }
+	public CompleteVertex from() { return from; }
 	/**
 	 * Returns one end of the given edge. Note that the edge is undirected,
 	 * so the distinction between head and tail or from and to is arbitrary.
@@ -60,19 +61,12 @@ public class WeightedEdge<T extends WeightedEdgeVertex & ColoredEdgeVertex> {
 	 * from() and to() vertices.
 	 * @return the "from" vertex specified in the constructor
 	 */
-	public T to() { return to; }
+	public CompleteVertex to() { return to; }
 	/**
 	 * Returns the edge's weight.
 	 * @return the edge's weight
 	 */
 	public double weight() { return weight; }
-	/**
-	 * Get the graph to which the edge belongs
-	 * @return the graph to which the edge belongs
-	 */
-	public DiGraph<? extends Vertex> getGraph() {
-		return graph;
-	}
 	/**
 	 * Since weighted edges are undirected, they are equal not only if they
 	 * have the same tail and head but also if they have opposite tails and heads.
@@ -84,8 +78,8 @@ public class WeightedEdge<T extends WeightedEdgeVertex & ColoredEdgeVertex> {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		return (from == ((WeightedEdge<?>) o).from && to == ((WeightedEdge<?>) o).to) 
-				|| (from == ((WeightedEdge<?>) o).to && to == ((WeightedEdge<?>) o).from);
+		return (from == ((WeightedEdge) o).from && to == ((WeightedEdge) o).to) 
+				|| (from == ((WeightedEdge) o).to && to == ((WeightedEdge) o).from);
 	}
 	/**
 	 * Overridden so that adding weighted edges to a HashSet will automatically eliminate

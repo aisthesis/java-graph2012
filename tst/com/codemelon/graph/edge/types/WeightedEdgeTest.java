@@ -22,8 +22,8 @@ import com.codemelon.graph.vertex.CompleteVertex;
 public class WeightedEdgeTest {
 	private static final double CUSTOM_WEIGHT = 2.71828;
 	private static final int VERTICES_IN_TEST_GRAPH = 1000;
-	HashMap<Integer, CompleteVertex> oldVertices;
-	private OldGraph oldGraph;
+	HashMap<Integer, CompleteVertex> vertices;
+	private OldGraph graph;
 
 	/**
 	 * Set up an undirected graph with various vertices and edge from vertex 0 to vertex 1
@@ -32,14 +32,14 @@ public class WeightedEdgeTest {
 	 */
 	@Before
 	public void setUp() {
-		oldVertices = new HashMap<Integer, CompleteVertex>(VERTICES_IN_TEST_GRAPH);
+		vertices = new HashMap<Integer, CompleteVertex>(VERTICES_IN_TEST_GRAPH);
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
-			oldVertices.put(i, new CompleteVertex(i));
+			vertices.put(i, new CompleteVertex(i));
 		}
-		oldGraph = new OldGraph(oldVertices.values());
-		oldGraph.addEdge(oldVertices.get(0), oldVertices.get(1));
-		oldGraph.setEdgeWeight(oldVertices.get(0), oldVertices.get(1), CUSTOM_WEIGHT);
-		oldGraph.addEdge(oldVertices.get(2), oldVertices.get(3));
+		graph = new OldGraph(vertices.values());
+		graph.addEdge(vertices.get(0), vertices.get(1));
+		graph.setEdgeWeight(vertices.get(0), vertices.get(1), CUSTOM_WEIGHT);
+		graph.addEdge(vertices.get(2), vertices.get(3));
 	}
 
 	/**
@@ -47,8 +47,8 @@ public class WeightedEdgeTest {
 	 */
 	@After
 	public void tearDown() {
-		oldVertices = null;
-		oldGraph = null;
+		vertices = null;
+		graph = null;
 	}
 	
 	@Rule
@@ -78,8 +78,8 @@ public class WeightedEdgeTest {
 		OldGraph g2 = new OldGraph(1);
 		g2.addVertex(u);
 		assertEquals("u belongs to g2", g2, u.getGraph());
-		assertEquals("0 vertex belongs to graph", oldGraph, oldVertices.get(0).getGraph());
-		WeightedEdge e = new WeightedEdge(u, oldVertices.get(0));
+		assertEquals("0 vertex belongs to graph", graph, vertices.get(0).getGraph());
+		WeightedEdge e = new WeightedEdge(u, vertices.get(0));
 		e.from();
 	}
 	/**
@@ -89,7 +89,7 @@ public class WeightedEdgeTest {
 	public void testWeightedEdgeNoSuchEdge() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage(JUnitMatchers.containsString("edge does not exist"));
-		WeightedEdge e = new WeightedEdge(oldVertices.get(2), oldVertices.get(0));
+		WeightedEdge e = new WeightedEdge(vertices.get(2), vertices.get(0));
 		e.from();
 	}
 	/**
@@ -97,8 +97,8 @@ public class WeightedEdgeTest {
 	 */
 	@Test
 	public void testFrom() {
-		WeightedEdge e = new WeightedEdge(oldVertices.get(1), oldVertices.get(0));
-		assertEquals("correct tail", oldVertices.get(1), e.from());
+		WeightedEdge e = new WeightedEdge(vertices.get(1), vertices.get(0));
+		assertEquals("correct tail", vertices.get(1), e.from());
 	}
 
 	/**
@@ -106,8 +106,8 @@ public class WeightedEdgeTest {
 	 */
 	@Test
 	public void testTo() {
-		WeightedEdge e = new WeightedEdge(oldVertices.get(0), oldVertices.get(1));
-		assertEquals("correct head", oldVertices.get(1), e.to());
+		WeightedEdge e = new WeightedEdge(vertices.get(0), vertices.get(1));
+		assertEquals("correct head", vertices.get(1), e.to());
 	}
 
 	/**
@@ -115,9 +115,9 @@ public class WeightedEdgeTest {
 	 */
 	@Test
 	public void testWeight() {
-		WeightedEdge e = new WeightedEdge(oldVertices.get(1), oldVertices.get(0));
-		assertTrue("correct weight", oldGraph.areEqualWeights(e.weight(), 
-				oldVertices.get(0).getEdgeWeight(oldVertices.get(1))));
+		WeightedEdge e = new WeightedEdge(vertices.get(1), vertices.get(0));
+		assertTrue("correct weight", graph.areEqualWeights(e.weight(), 
+				vertices.get(0).getEdgeWeight(vertices.get(1))));
 	}
 
 	/**
@@ -125,9 +125,9 @@ public class WeightedEdgeTest {
 	 */
 	@Test
 	public void testEqualsObject() {
-		WeightedEdge e1 = new WeightedEdge(oldVertices.get(1), oldVertices.get(0));
-		WeightedEdge e2 = new WeightedEdge(oldVertices.get(0), oldVertices.get(1));
-		WeightedEdge e3 = new WeightedEdge(oldVertices.get(2), oldVertices.get(3));
+		WeightedEdge e1 = new WeightedEdge(vertices.get(1), vertices.get(0));
+		WeightedEdge e2 = new WeightedEdge(vertices.get(0), vertices.get(1));
+		WeightedEdge e3 = new WeightedEdge(vertices.get(2), vertices.get(3));
 		assertEquals("equals if same edge", e1, e1);
 		assertEquals("equals if same vertices but opposite direction", e1, e2);
 		assertFalse("Not equal if different edge", e1.equals(e3));
