@@ -5,9 +5,9 @@ import java.util.Set;
 
 import com.codemelon.graph.graph.Graph;
 import com.codemelon.graph.common.Color;
+import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.interfaces.Vertex;
 import com.codemelon.graph.vertex.types.BfsVertex;
-import com.codemelon.graph.vertex.util.VertexResetter;
 
 /**
  * Implementation of breadth-first search following 
