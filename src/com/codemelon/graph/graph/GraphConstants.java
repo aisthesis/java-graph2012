@@ -1,4 +1,4 @@
-package com.codemelon.graph.graph.common;
+package com.codemelon.graph.graph;
 
 /**
  * @author Marshall Farrier
