@@ -3,7 +3,7 @@ package com.codemelon.graph.vertex.types;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.codemelon.graph.graph.types.DiGraph;
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.common.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ChildVertex;

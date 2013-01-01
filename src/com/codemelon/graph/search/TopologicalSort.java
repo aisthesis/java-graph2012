@@ -6,7 +6,7 @@ import java.util.ListIterator;
 import java.util.Set;
 
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.graph.types.DiGraph;
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.vertex.interfaces.ColoredVertex;
 import com.codemelon.graph.vertex.interfaces.Vertex;
 import com.codemelon.graph.vertex.util.VertexResetter;

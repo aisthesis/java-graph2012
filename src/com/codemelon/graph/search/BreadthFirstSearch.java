@@ -3,7 +3,7 @@ package com.codemelon.graph.search;
 import java.util.LinkedList;
 import java.util.Set;
 
-import com.codemelon.graph.graph.types.Graph;
+import com.codemelon.graph.graph.Graph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.interfaces.Vertex;
 import com.codemelon.graph.vertex.types.BfsVertex;

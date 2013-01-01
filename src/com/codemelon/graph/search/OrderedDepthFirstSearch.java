@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.graph.types.DiGraph;
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.vertex.comparators.SearchOrderComparator;
 import com.codemelon.graph.vertex.types.OrderedDfsVertex;
 import com.codemelon.graph.vertex.util.VertexResetter;

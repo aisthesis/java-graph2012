@@ -3,7 +3,7 @@ package com.codemelon.graph.search;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.codemelon.graph.graph.types.DiGraph;
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.util.Transposer;
 import com.codemelon.graph.vertex.comparators.ReverseSearchOrderComparator;
 import com.codemelon.graph.vertex.interfaces.ComponentVertex;

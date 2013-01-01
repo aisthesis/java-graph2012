@@ -13,7 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.codemelon.graph.graph.types.DiGraph;
+import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.util.Transposer;
 import com.codemelon.graph.vertex.types.OrderedDfsVertex;
 
