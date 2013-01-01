@@ -1,9 +1,11 @@
 package com.codemelon.graph.vertex.types;
 
 import com.codemelon.graph.common.Color;
+import com.codemelon.graph.edge.interfaces.EdgeColorData;
+import com.codemelon.graph.edge.interfaces.EdgeDataFactory;
+import com.codemelon.graph.edge.interfaces.EdgeWeightData;
 import com.codemelon.graph.vertex.interfaces.WeightedEdgeVertex;
 import com.codemelon.graph.vertex.interfaces.ColoredEdgeVertex;
-import com.codemelon.graph.edge.types.SpanningTreeEdgeData;
 
 /**
  * Vertex supporting the features used in spanning tree algorithms.
@@ -14,15 +16,15 @@ import com.codemelon.graph.edge.types.SpanningTreeEdgeData;
  * @my.created Dec 11, 2012
  * @my.edited Dec 11, 2012
  */
-public class SpanningTreeVertex extends EdgeDataVertex<SpanningTreeEdgeData, SpanningTreeEdgeData.Factory>
-		implements WeightedEdgeVertex, ColoredEdgeVertex {
+public class SpanningTreeVertex<T extends EdgeColorData & EdgeWeightData, U extends EdgeDataFactory<T>> 
+		extends EdgeDataVertex<T, U> implements WeightedEdgeVertex, ColoredEdgeVertex {
 	/**
 	 * Construct a spanning tree vertex from an edge data factory. The vertex initially belongs to 
 	 * no graph and has an empty adjacency list.
 	 * @param edgeDataFactory
 	 */
-	public SpanningTreeVertex() {
-		super(SpanningTreeEdgeData.Factory.INSTANCE);
+	public SpanningTreeVertex(U edgeDataFactory) {
+		super(edgeDataFactory);
 	}
 
 	/* (non-Javadoc)
@@ -38,7 +40,7 @@ public class SpanningTreeVertex extends EdgeDataVertex<SpanningTreeEdgeData, Spa
 	 */
 	@Override
 	public Color getEdgeColor(ColoredEdgeVertex to) {
-		return this.getEdgeData(to).getColor();
+		return this.getEdgeColor(to);
 	}
 
 	/* (non-Javadoc)
@@ -46,7 +48,7 @@ public class SpanningTreeVertex extends EdgeDataVertex<SpanningTreeEdgeData, Spa
 	 */
 	@Override
 	public double getEdgeWeight(WeightedEdgeVertex to) {
-		return this.getEdgeData(to).getWeight();
+		return this.getEdgeWeight(to);
 	}
 
 	/* (non-Javadoc)
