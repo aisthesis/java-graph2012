@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.codemelon.graph.search;
 
 
@@ -19,7 +22,7 @@ import com.codemelon.graph.vertex.types.OrderedDfsVertex;
  * @version Nov 29, 2012
  *
  */
-public class OrderedDepthFirstSearchTest {
+public class InOrderDepthFirstSearchTest {
 	private DiGraph<OrderedDfsVertex> graph;
 	private static final int CIRCULAR_GRAPH_SIZE = 1000;
 
@@ -29,12 +32,12 @@ public class OrderedDepthFirstSearchTest {
 	}
 	/**
 	 * Graph from CLRS, p. 605
-	 * Test method for {@link com.codemelon.graph.util.OrderedDepthFirstSearch.InOrderDepthFirstSearch#search()}.
+	 * Test method for {@link com.codemelon.graph.util.search.InOrderDepthFirstSearch#search()}.
 	 */
 	@Test
 	public void testSmallCLRSGraph() {
 		HashMap<Character, OrderedDfsVertex> vertices = setUpSmallCLRSGraph();
-		new OrderedDepthFirstSearch(graph).search();
+		new InOrderDepthFirstSearch(graph).search();
 		// all vertices are black
 		for (char i = 'u'; i <= 'z'; i++) {
 			assertEquals("Vertex is black", Color.BLACK, vertices.get(i).getColor());
@@ -57,7 +60,7 @@ public class OrderedDepthFirstSearchTest {
 	@Test
 	public void testBiggerCircularGraph() {
 		ArrayList<OrderedDfsVertex> vertices = setUpBiggerCircularGraph();
-		new OrderedDepthFirstSearch(graph).search();	
+		new InOrderDepthFirstSearch(graph).search();	
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {
 			assertEquals("Color is black", Color.BLACK, vertices.get(i).getColor());
 			assertEquals("Correct discovery time", i, vertices.get(i).getDiscoveryTime());

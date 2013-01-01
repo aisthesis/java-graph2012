@@ -24,7 +24,7 @@ import com.codemelon.graph.vertex.interfaces.OrderedSearchVertex;
  * @version Dec 8, 2012
  *
  */
-public class OrderedDepthFirstSearch {
+public class InOrderDepthFirstSearch {
 	private DiGraph<? extends OrderedDfsVertex> graph;
 	private int t;	// time in CLRS
 	private int treeNumber; // used in StronglyConnectedComponents
@@ -42,7 +42,7 @@ public class OrderedDepthFirstSearch {
 	 * @param comp Comparator determining the order in which vertices
 	 * will be visited.
 	 */
-	public OrderedDepthFirstSearch(DiGraph<? extends OrderedDfsVertex> graph, 
+	public InOrderDepthFirstSearch(DiGraph<? extends OrderedDfsVertex> graph, 
 			Comparator<OrderedSearchVertex> comp) {
 		this.graph = graph;
 		vertices = new ArrayList<OrderedDfsVertex>(graph.getVertices());
@@ -54,7 +54,7 @@ public class OrderedDepthFirstSearch {
 	 * Vertex.
 	 * @param graph graph to search
 	 */
-	public OrderedDepthFirstSearch(DiGraph<? extends OrderedDfsVertex> graph) {
+	public InOrderDepthFirstSearch(DiGraph<? extends OrderedDfsVertex> graph) {
 		this(graph, new SearchOrderComparator());
 	}
 	

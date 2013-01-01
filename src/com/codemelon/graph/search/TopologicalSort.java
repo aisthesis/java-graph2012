@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.codemelon.graph.search;
 
 import java.util.Iterator;
@@ -5,37 +8,27 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Set;
 
+import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.graph.DiGraph;
 import com.codemelon.graph.util.VertexResetter;
-import com.codemelon.graph.vertex.interfaces.ColoredVertex;
-import com.codemelon.graph.vertex.interfaces.Vertex;
+import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
- * Assuming that there is no cycle in the graph, this algorithm creates
- * a linked list representing an ordering that respects the edges in the graph.
- * That is, for any 2 distinct vertices u and v, if the graph contains the edge
- * (u, v), then u < v in the given ordering.
- * If the graph contains a cycle, then no such ordering exists.
- * Cf. <a href="http://mitpress.mit.edu/algorithms/">CLRS</a>, pp. 612ff. 
  * @author Marshall Farrier
- * @version Dec 8, 2012
+ * @version Nov 27, 2012
+ *
  */
 public class TopologicalSort {
-	private DiGraph<? extends ColoredVertex> graph;
-	private LinkedList<ColoredVertex> orderedVertices;
+	private OldDiGraph graph;
+	private LinkedList<CompleteVertex> sortedVertices;
 	
-	/**
-	 * This constructor modifies the colors of the vertices in the graph.
-	 * @param graph graph whose vertices are to be topologically sorted
-	 */
-	public TopologicalSort(DiGraph<? extends ColoredVertex> graph) {
+	public TopologicalSort(OldDiGraph graph) {
 		this.graph = graph;
 		sort();
 	}
 	
-	public LinkedList<ColoredVertex> getSortedVertices() {
-		return orderedVertices;
+	public LinkedList<CompleteVertex> getSortedVertices() {
+		return sortedVertices;
 	}
 	/**
 	 * Returns true if earlier precedes later in the topologically sorted list.
@@ -45,10 +38,10 @@ public class TopologicalSort {
 	 * @param later vertex tested for being later
 	 * @return true if earlier precedes later
 	 */
-	public boolean showsAsInOrder(ColoredVertex earlier, ColoredVertex later) {
-		ListIterator<ColoredVertex> it = orderedVertices.listIterator();
+	public boolean showsAsInOrder(CompleteVertex earlier, CompleteVertex later) {
+		ListIterator<CompleteVertex> it = sortedVertices.listIterator();
 		boolean earlierHasBeenFound = false;
-		ColoredVertex tmp;
+		CompleteVertex tmp;
 		while (it.hasNext()) {
 			tmp = it.next();
 			if (tmp == later) {
@@ -63,29 +56,29 @@ public class TopologicalSort {
 	}
 
 	/**
-	 * <a href="http://mitpress.mit.edu/algorithms/">CLRS</a>, p. 613
+	 * CLRS, p. 613
 	 */
 	private void sort() {
-		orderedVertices = new LinkedList<ColoredVertex>();
-		VertexResetter.resetColors(graph);
-		Iterator<? extends ColoredVertex> it = graph.vertexIterator();
-		ColoredVertex u;
+		sortedVertices = new LinkedList<CompleteVertex>();
+		new VertexResetter(graph).resetColors();
+		Iterator<CompleteVertex> it = graph.vertexIterator();
+		CompleteVertex u;
 		while (it.hasNext()) {
 			u = it.next();
-			if (u.getColor() == Color.WHITE) {
+			if (u.color == Color.WHITE) {
 				visit(u);
 			}
 		}
 	}
-	private void visit(ColoredVertex u) {
-		u.setColor(Color.GRAY);
-		Set<? extends Vertex> adjacentVertices = u.getAdjacencies();
-		for (Vertex v : adjacentVertices) {
-			if (((ColoredVertex) v).getColor() == Color.WHITE) {
-				visit((ColoredVertex) v);
-			}
+	private void visit(CompleteVertex u) {
+		u.color = Color.GRAY;
+		Set<CompleteVertex> adjacentVertices = u.getAdjacencies();
+		for (CompleteVertex v : adjacentVertices) {
+			if (v.color == Color.WHITE) {
+				visit(v);
+			}		
 		}
-		u.setColor(Color.BLACK);
-		orderedVertices.addFirst(u);
+		u.color = Color.BLACK;
+		sortedVertices.addFirst(u);	
 	}
 }
