@@ -1,12 +1,13 @@
 java-graph2012
 =============================================
 Git repository for an open-source Java graph library
-started 11/23/2012
-This library currently includes relatively lightweight
-classes that avoid the overhead involved in insuring
-thread-safety.
-I plan to include thread-safe classes later while keeping
-things as simple as possible to begin with.
-Note: As of 12/5/2012 it seems to be better to deal with the complications
-of various Vertex interfaces, as we have too much vertex data that
-is necessary for 1 algorithm but unnecessary for others.
+started 11/23/2012.
+The purpose of this version is simplicity. It avoids
+the complications of parameterization and of concurrency.
+Since these classes are not parameterized, they have to support
+the necessary fields for all implemented algorithms. So, for
+example, weighted edges are supported in order to implement
+Kruskal's algorithm even though depth-first search makes
+no use of weighted edges. The simplicity of the classes
+comes with the price that each object includes a good deal
+of unused data.
