@@ -17,10 +17,6 @@ import com.codemelon.graph.vertex.interfaces.Vertex;
  * cf. CLRS, pp. 604ff.
  */
 public class DepthFirstSearch {
-	/**
-	 * The discovery time shown for the vertex first visited in the search
-	 */
-	public static final int FIRST_DISCOVERY_TIME = 0;
 	private DiGraph<? extends DfsVertex> graph;
 	private int t;	// time in CLRS
 	private boolean isAcyclic;
@@ -41,8 +37,7 @@ public class DepthFirstSearch {
 	 * <ol>
 	 * <li>All vertices will be colored black after this method call.</li>
 	 * <li>All vertices will have discoveryTime and finishTime set according
-	 * to the order in which they were first discovered and finished. The first
-	 * discovery time will be 0.</li>
+	 * to the order in which they were first discovered and finished.</li>
 	 * <li>Vertices will have parent fields set as determined by the search.</li>
 	 * <li>Edges will be classified as TREE, BACK, FORWARD or CROSS</li>
 	 * </ol>
@@ -52,7 +47,7 @@ public class DepthFirstSearch {
 	 */
 	public boolean search() {
 		VertexResetter.resetForDfs(graph);
-		t = FIRST_DISCOVERY_TIME - 1;	// so that first discovery time will be 0
+		t = 0;
 		Iterator<? extends DfsVertex> it = graph.vertexIterator();
 		DfsVertex u;
 		while (it.hasNext()) {
@@ -88,6 +83,5 @@ public class DepthFirstSearch {
 			}
 		}
 		u.setColor(Color.BLACK);
-		u.setFinishTime(++t);
 	}
 }
