@@ -71,7 +71,7 @@ public class OrderedDepthFirstSearchTest {
 	public HashMap<Character, OrderedDfsVertex> setUpSmallCLRSGraph() {
 		HashMap<Character, OrderedDfsVertex> vertices = new HashMap<Character, OrderedDfsVertex>();
 		for (char i = 'u'; i <= 'z'; i++) {
-			//vertices.put(i, new OrderedDfsVertex());
+			vertices.put(i, new OrderedDfsVertex());
 			vertices.get(i).setSearchOrder(i);
 		}
 		graph = new DiGraph<OrderedDfsVertex>(vertices.values());
@@ -90,7 +90,7 @@ public class OrderedDepthFirstSearchTest {
 		ArrayList<OrderedDfsVertex> vertices = new ArrayList<OrderedDfsVertex>(CIRCULAR_GRAPH_SIZE);
 		for (int i = 0; i < CIRCULAR_GRAPH_SIZE; i++) {
 			// vertex label will be the same as index in the array
-			//vertices.add(new OrderedDfsVertex());
+			vertices.add(new OrderedDfsVertex());
 			vertices.get(i).setSearchOrder(i);
 		}
 		graph = new DiGraph<OrderedDfsVertex>(vertices);

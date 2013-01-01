@@ -29,11 +29,11 @@ public class TransposerTest {
 	@Before
 	public void setUp() {
 		vertices = new ArrayList<OrderedDfsVertex>(VERTICES_IN_TEST_GRAPH);
-		vertexFactory = OrderedDfsVertex.Factory.INSTANCE;
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
-			vertices.add(vertexFactory.newVertex());
+			vertices.add(new OrderedDfsVertex());
 		}
 		graph = new DiGraph<OrderedDfsVertex>(vertices);
+		vertexFactory = OrderedDfsVertex.Factory.INSTANCE;
 		vertexMap = null;
 	}
 

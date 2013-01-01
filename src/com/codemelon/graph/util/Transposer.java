@@ -26,7 +26,7 @@ import com.codemelon.graph.vertex.interfaces.VertexFactory;
  * <li>to create an edge in the new graph whose tail corresponds to the head and whose
  * head corresponds to the tail of the respective edge in the input graph</li>
  * </ol>
- * No satellite data is preserved by the transpose operation. It must be set in subsequent
+ * No satellite data is preserved by the transpose operation. I must be set in subsequent
  * operations on the transpose graph.
  */
 public class Transposer<T extends Vertex, U extends Vertex> {
