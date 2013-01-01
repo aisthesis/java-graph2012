@@ -11,8 +11,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * and to() vertices, but it is equivalent to an edge object having opposite
  * from() and to() vertices.
  * @author Marshall Farrier
- * @my.created Dec 2, 2012
- * @my.edited Dec 11, 2012
+ * @version Dec 2, 2012
  */
 public class WeightedEdge {
 	private OldDiGraph graph;
@@ -30,16 +29,16 @@ public class WeightedEdge {
 	 * @throws IllegalArgumentException if the graph does not contain the given edge
 	 */
 	public WeightedEdge(CompleteVertex from, CompleteVertex to) {
-		if (from.getGraph() == null || to.getGraph() == null) {
+		graph = from.getGraph();
+		if (graph == null || to.getGraph() == null) {
 			throw new IllegalArgumentException("Edge must belong to a graph!");
 		}
-		if (from.getGraph() != to.getGraph()) {
+		if (graph != to.getGraph()) {
 			throw new IllegalArgumentException("Vertices must belong to the same graph!");
 		}
 		if (!from.containsAdjacency(to)) {
 			throw new IllegalArgumentException("Given edge does not exist!");
 		}
-		graph = from.getGraph();
 		this.from = from;
 		this.to = to;
 		this.weight = from.getEdgeWeight(to);
