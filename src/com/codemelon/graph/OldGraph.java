@@ -11,7 +11,7 @@ import java.util.Set;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.vertex.CompleteVertex;
-import com.codemelon.graph.edge.types.WeightedEdge;
+import com.codemelon.graph.edge.WeightedEdge;
 
 /**
  * @author Marshall Farrier

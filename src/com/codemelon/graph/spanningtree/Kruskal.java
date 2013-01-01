@@ -8,7 +8,7 @@ import java.util.Map;
 
 import com.codemelon.graph.OldGraph;
 import com.codemelon.graph.common.Color;
-import com.codemelon.graph.edge.types.WeightedEdge;
+import com.codemelon.graph.edge.WeightedEdge;
 import com.codemelon.graph.util.DisjointSet;
 import com.codemelon.graph.util.EdgeResetter;
 import com.codemelon.graph.vertex.CompleteVertex;

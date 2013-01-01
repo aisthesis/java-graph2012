@@ -12,7 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.codemelon.graph.edge.types.WeightedEdge;
+import com.codemelon.graph.edge.WeightedEdge;
 import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
