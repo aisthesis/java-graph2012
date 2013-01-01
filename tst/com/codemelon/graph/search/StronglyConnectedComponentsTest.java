@@ -65,7 +65,7 @@ public class StronglyConnectedComponentsTest {
 		assertThat(vertices.get('f').treeNumber, is(not(vertices.get('h').treeNumber)));
 		
 		// transposer is correct
-		OldDiGraph transposeGraph = transposer.getOldTransposeGraph();
+		OldDiGraph transposeGraph = transposer.getTransposeGraph();
 		HashMap<CompleteVertex, CompleteVertex> mapToTransposeVertices = transposer.getVertexMap();
 		assertTrue("Correct edges in transpose graph", transposeGraph
 				.containsEdge(mapToTransposeVertices.get(vertices.get('b')), 

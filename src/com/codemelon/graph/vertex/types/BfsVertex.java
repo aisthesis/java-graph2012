@@ -122,7 +122,7 @@ public class BfsVertex implements Vertex, ColoredVertex, DistanceVertex,
 	 * @throws IllegalArgumentException if the adjacency to be set does not belong to the same graph
 	 */
 	@Override
-	public <T extends Vertex> boolean addAdjacency(T to) {
+	public boolean addAdjacency(Vertex to) {
 		if (this.graph == null || this.graph != to.getGraph()) {
 			throw new IllegalArgumentException("Adjacency must belong to the same graph!");
 		}
