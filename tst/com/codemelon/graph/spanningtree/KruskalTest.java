@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.codemelon.graph.Graph;
 import com.codemelon.graph.edge.EdgeConstants;
-import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.Vertex;
 
 /**
  * @author Marshall Farrier
@@ -22,7 +22,7 @@ public class KruskalTest {
 	private static final double MAX_EPSILON_DIFF = 0.000000000000001;
 	private Graph graph;
 	private Kruskal kruskal;
-	private HashMap<Character, CompleteVertex> vertices;
+	private HashMap<Character, Vertex> vertices;
 
 	/**
 	 * Set up graph from CLRS, p. 632
@@ -81,7 +81,7 @@ public class KruskalTest {
 	@Test
 	public void testGenerateTree() {
 		Graph spanningTree = kruskal.generateTree();
-		Map<CompleteVertex, CompleteVertex> vertexMap = kruskal.getVertexMap();
+		Map<Vertex, Vertex> vertexMap = kruskal.getVertexMap();
 		assertTrue("Edge a-b in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('a')),
 				vertexMap.get(vertices.get('b'))));
 		assertTrue("a-b copy has correct weight", spanningTree.areEqualWeights(4.0, spanningTree
@@ -130,16 +130,16 @@ public class KruskalTest {
 	 */
 	@Test(expected=IllegalStateException.class)
 	public void testGetVertexMap() {
-		Map<CompleteVertex, CompleteVertex> vertexMap = kruskal.getVertexMap();
+		Map<Vertex, Vertex> vertexMap = kruskal.getVertexMap();
 		vertexMap.get(vertices.get('a'));
 	}
 	/**
 	 * Graph from CLRS, p. 596
 	 */
 	private void setUpCLRSGraph() {
-		vertices = new HashMap<Character, CompleteVertex>();
+		vertices = new HashMap<Character, Vertex>();
 		for (char i = 'a'; i <= 'i'; i++) {
-			vertices.put(i, new CompleteVertex(i));
+			vertices.put(i, new Vertex(i));
 		}
 		graph = new Graph(vertices.values());
 		graph.addEdge(vertices.get('a'), vertices.get('b'));

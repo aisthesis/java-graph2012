@@ -10,12 +10,12 @@ import java.util.Comparator;
  * @version Nov 27, 2012
  *
  */
-public class SearchOrderComparator implements Comparator<CompleteVertex> {
+public class SearchOrderComparator implements Comparator<Vertex> {
 	
 	public SearchOrderComparator() {}
 	
 	@Override
-	public int compare(CompleteVertex v1, CompleteVertex v2) {
+	public int compare(Vertex v1, Vertex v2) {
 		return v1.searchOrder - v2.searchOrder;
 	}
 }

@@ -21,7 +21,7 @@ import java.util.Set;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.edge.EdgeConstants;
-import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.Vertex;
 
 /**
  * Graph class supporting insertion and removal of both vertices and
@@ -41,7 +41,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  */
 public class DiGraph {
 	private static final int DEFAULT_INITIAL_CAPACITY = 16;
-	private Set<CompleteVertex> vertices;
+	private Set<Vertex> vertices;
 	private double weightEpsilon;
 	
 	/**
@@ -59,17 +59,17 @@ public class DiGraph {
 	 * @param initialCapacity
 	 */
 	public DiGraph(int initialCapacity) {
-		vertices = new HashSet<CompleteVertex>(initialCapacity);
+		vertices = new HashSet<Vertex>(initialCapacity);
 	}
 	/**
 	 * Initializes the Graph to contain the vertices in the collection
 	 * and clears the adjacency set of all vertices in the collection.
 	 * @param initialVertices collection of vertices to include in the Graph
 	 */
-	public DiGraph(Collection<CompleteVertex> initialVertices) {
-		vertices = new HashSet<CompleteVertex>(initialVertices);
+	public DiGraph(Collection<Vertex> initialVertices) {
+		vertices = new HashSet<Vertex>(initialVertices);
 		weightEpsilon = EdgeConstants.DEFAULT_WEIGHT_EPSILON;
-		for (CompleteVertex v : initialVertices) {
+		for (Vertex v : initialVertices) {
 			v.clearAdjacencies();
 			v.setGraph(this);
 		}
@@ -79,7 +79,7 @@ public class DiGraph {
 	 * @param v vertex to be inserted
 	 * @return true if the graph did not already contained the specified vertex
 	 */
-	public boolean addVertex(CompleteVertex v) {
+	public boolean addVertex(Vertex v) {
 		if (vertices.add(v)) {
 			// vertex was not already present
 			v.clearAdjacencies();
@@ -97,10 +97,10 @@ public class DiGraph {
 	 * @param v vertex to be removed from the graph
 	 * @return true if the vertex was found in the graph
 	 */
-	public boolean removeVertex(CompleteVertex v) {
+	public boolean removeVertex(Vertex v) {
 		if (vertices.remove(v)) {
 			v.clearAdjacencies();
-			for (CompleteVertex u : vertices) {
+			for (Vertex u : vertices) {
 				if (u.removeAdjacency(v)) {
 				}
 			}
@@ -116,7 +116,7 @@ public class DiGraph {
 	 * @param to target vertex
 	 * @return true if the edge was not previously present in the graph
 	 */
-	public boolean addEdge(CompleteVertex from, CompleteVertex to) {
+	public boolean addEdge(Vertex from, Vertex to) {
 		if (!vertices.contains(from) || !vertices.contains(to)) {
 			throw new IllegalArgumentException("Cannot add edge for vertex not present in graph!");
 		}
@@ -129,7 +129,7 @@ public class DiGraph {
 	 * @param to edge's target vertex
 	 * @return true if the edge was found
 	 */
-	public boolean removeEdge(CompleteVertex from, CompleteVertex to) {
+	public boolean removeEdge(Vertex from, Vertex to) {
 		if (!vertices.contains(from) || !vertices.contains(to)) {
 			throw new IllegalArgumentException("Cannot remove edge for vertex not present in graph!");
 		}
@@ -141,7 +141,7 @@ public class DiGraph {
 	 * @param to the head or target vertex of the edge for which we are testing
 	 * @return true if the edge from the given tail to the given head exists in the graph.
 	 */
-	public boolean containsEdge(CompleteVertex from, CompleteVertex to) {
+	public boolean containsEdge(Vertex from, Vertex to) {
 		if (!vertices.contains(from) || !vertices.contains(to)) {
 			throw new IllegalArgumentException("One or more vertices not present in graph!");
 		}
@@ -151,7 +151,7 @@ public class DiGraph {
 	 * Returns an iterator over the vertices in the graph
 	 * @return iterator over the graph's vertices
 	 */
-	public Iterator<CompleteVertex> vertexIterator() {
+	public Iterator<Vertex> vertexIterator() {
 		return vertices.iterator();
 	}
 	/**
@@ -159,14 +159,14 @@ public class DiGraph {
 	 * @param v the vertex whose presence in the graph is to be tested
 	 * @return true if the vertex is present in the graph
 	 */
-	public boolean containsVertex(CompleteVertex v) {
+	public boolean containsVertex(Vertex v) {
 		return vertices.contains(v);
 	}
 	/**
 	 * Returns a list of the vertices in the graph.
 	 * @return a list of the vertices in the graph
 	 */
-	public Set<CompleteVertex> getVertices() {
+	public Set<Vertex> getVertices() {
 		return vertices;
 	}
 	/**
@@ -182,7 +182,7 @@ public class DiGraph {
 	 */
 	public int edgeCount() { 
 		int result = 0;
-		for (CompleteVertex v : vertices) {
+		for (Vertex v : vertices) {
 			result += v.adjacencyCount();
 		}
 		return result; 
@@ -197,7 +197,7 @@ public class DiGraph {
 	 * @throws NullPointerException if there is no such edge in the graph (including the
 	 * case where the target vertex doesn't belong to the graph)
 	 */
-	public void setEdgeColor(CompleteVertex from, CompleteVertex to, Color color) {
+	public void setEdgeColor(Vertex from, Vertex to, Color color) {
 		if (!vertices.contains(from)) {
 			throw new IllegalArgumentException("No such vertex!");
 		}
@@ -212,7 +212,7 @@ public class DiGraph {
 	 * @throws NullPointerException if there is no such edge in the graph (including the
 	 * case where the target vertex doesn't belong to the graph)
 	 */
-	public Color getEdgeColor(CompleteVertex from, CompleteVertex to) {
+	public Color getEdgeColor(Vertex from, Vertex to) {
 		if (!vertices.contains(from)) {
 			throw new IllegalArgumentException("No such vertex!");
 		}
@@ -228,7 +228,7 @@ public class DiGraph {
 	 * @throws NullPointerException if there is no such edge in the graph (including the
 	 * case where the target vertex doesn't belong to the graph)
 	 */
-	public void setEdgeWeight(CompleteVertex from, CompleteVertex to, double weight) {
+	public void setEdgeWeight(Vertex from, Vertex to, double weight) {
 		if (!vertices.contains(from)) {
 			throw new IllegalArgumentException("No such vertex!");
 		}
@@ -243,7 +243,7 @@ public class DiGraph {
 	 * @throws NullPointerException if there is no such edge in the graph (including the
 	 * case where the target vertex doesn't belong to the graph)
 	 */
-	public double getEdgeWeight(CompleteVertex from, CompleteVertex to) {
+	public double getEdgeWeight(Vertex from, Vertex to) {
 		if (!vertices.contains(from)) {
 			throw new IllegalArgumentException("No such vertex!");
 		}
@@ -259,7 +259,7 @@ public class DiGraph {
 	 * @throws NullPointerException if there is no such edge in the graph (including the
 	 * case where the target vertex doesn't belong to the graph)
 	 */
-	public void setEdgeType(CompleteVertex from, CompleteVertex to, EdgeType edgeType) {
+	public void setEdgeType(Vertex from, Vertex to, EdgeType edgeType) {
 		if (!vertices.contains(from)) {
 			throw new IllegalArgumentException("No such vertex!");
 		}
@@ -274,7 +274,7 @@ public class DiGraph {
 	 * @throws NullPointerException if there is no such edge in the graph (including the
 	 * case where the target vertex doesn't belong to the graph)
 	 */
-	public EdgeType getEdgeType(CompleteVertex from, CompleteVertex to) {
+	public EdgeType getEdgeType(Vertex from, Vertex to) {
 		if (!vertices.contains(from)) {
 			throw new IllegalArgumentException("No such vertex!");
 		}

@@ -7,7 +7,7 @@ import java.util.Set;
 import com.codemelon.graph.Graph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
-import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.Vertex;
 import com.codemelon.graph.vertex.VertexConstants;
 import com.codemelon.graph.vertex.WeightComparator;
 
@@ -26,7 +26,7 @@ public class Prim {
 	public static final Color MARKER_COLOR = Color.BLACK;
 	
 	private Graph graph;
-	private PriorityQueue<CompleteVertex> queue;
+	private PriorityQueue<Vertex> queue;
 	
 	public Prim(Graph graph) {
 		this.graph = graph;
@@ -37,15 +37,15 @@ public class Prim {
 	 * set to EdgeConstants.DEFAULT_COLOR. Parents of all vertices in the graph are also modified
 	 * to show a path leading back to the specified root.
 	 */
-	public void markEdges(CompleteVertex root) {
+	public void markEdges(Vertex root) {
 		initializeForMarking(root);
-		CompleteVertex u;
-		Set<CompleteVertex> adj;
+		Vertex u;
+		Set<Vertex> adj;
 		while (!queue.isEmpty()) {
 			u = queue.poll();
 			u.color = MARKER_COLOR;
 			adj = u.getAdjacencies();
-			for (CompleteVertex v : adj) {
+			for (Vertex v : adj) {
 				// initial color means that v is still in the queue
 				if (v.color == VertexConstants.INITIAL_COLOR && 
 						graph.getEdgeWeight(u, v) < v.weight) {
@@ -58,12 +58,12 @@ public class Prim {
 		}
 	}
 	
-	private void initializeForMarking(CompleteVertex root) {
+	private void initializeForMarking(Vertex root) {
 		new VertexResetter(graph).primReset();
 		root.weight = 0.0;
-		queue = new PriorityQueue<CompleteVertex>(graph.vertexCount(), new WeightComparator());
-		Set<CompleteVertex> vertices = graph.getVertices();
-		for (CompleteVertex vertex : vertices) {
+		queue = new PriorityQueue<Vertex>(graph.vertexCount(), new WeightComparator());
+		Set<Vertex> vertices = graph.getVertices();
+		for (Vertex vertex : vertices) {
 			queue.add(vertex);
 		}
 	}

@@ -9,7 +9,7 @@ import java.util.Iterator;
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.util.Transposer;
 import com.codemelon.graph.vertex.ReverseSearchOrderComparator;
-import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.Vertex;
 
 /**
  * @author Marshall Farrier
@@ -43,8 +43,8 @@ public class StronglyConnectedComponents {
 		Transposer transposer = new Transposer(graph);
 		DiGraph transposeGraph = transposer.getTransposeGraph();
 		// set searchOrder field in transpose graph to finish time in depth-first search
-		Iterator<CompleteVertex> it = transposeGraph.vertexIterator();
-		CompleteVertex v;
+		Iterator<Vertex> it = transposeGraph.vertexIterator();
+		Vertex v;
 		while (it.hasNext()) {
 			v = it.next();
 			v.searchOrder = v.finishTime;
@@ -52,7 +52,7 @@ public class StronglyConnectedComponents {
 		new InOrderDepthFirstSearch(transposeGraph, new ReverseSearchOrderComparator()).search();
 		// Finally, set the appropriate tree numbers in the original graph
 		it = graph.vertexIterator();
-		HashMap<CompleteVertex, CompleteVertex> vertexMap = transposer.getVertexMap();
+		HashMap<Vertex, Vertex> vertexMap = transposer.getVertexMap();
 		while (it.hasNext()) {
 			v = it.next();
 			v.treeNumber = vertexMap.get(v).treeNumber;

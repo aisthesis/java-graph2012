@@ -11,7 +11,7 @@ import java.util.Set;
 import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
-import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.Vertex;
 
 /**
  * @author Marshall Farrier
@@ -20,14 +20,14 @@ import com.codemelon.graph.vertex.CompleteVertex;
  */
 public class TopologicalSort {
 	private DiGraph graph;
-	private LinkedList<CompleteVertex> sortedVertices;
+	private LinkedList<Vertex> sortedVertices;
 	
 	public TopologicalSort(DiGraph graph) {
 		this.graph = graph;
 		sort();
 	}
 	
-	public LinkedList<CompleteVertex> getSortedVertices() {
+	public LinkedList<Vertex> getSortedVertices() {
 		return sortedVertices;
 	}
 	/**
@@ -38,10 +38,10 @@ public class TopologicalSort {
 	 * @param later vertex tested for being later
 	 * @return true if earlier precedes later
 	 */
-	public boolean showsAsInOrder(CompleteVertex earlier, CompleteVertex later) {
-		ListIterator<CompleteVertex> it = sortedVertices.listIterator();
+	public boolean showsAsInOrder(Vertex earlier, Vertex later) {
+		ListIterator<Vertex> it = sortedVertices.listIterator();
 		boolean earlierHasBeenFound = false;
-		CompleteVertex tmp;
+		Vertex tmp;
 		while (it.hasNext()) {
 			tmp = it.next();
 			if (tmp == later) {
@@ -59,10 +59,10 @@ public class TopologicalSort {
 	 * CLRS, p. 613
 	 */
 	private void sort() {
-		sortedVertices = new LinkedList<CompleteVertex>();
+		sortedVertices = new LinkedList<Vertex>();
 		new VertexResetter(graph).resetColors();
-		Iterator<CompleteVertex> it = graph.vertexIterator();
-		CompleteVertex u;
+		Iterator<Vertex> it = graph.vertexIterator();
+		Vertex u;
 		while (it.hasNext()) {
 			u = it.next();
 			if (u.color == Color.WHITE) {
@@ -70,10 +70,10 @@ public class TopologicalSort {
 			}
 		}
 	}
-	private void visit(CompleteVertex u) {
+	private void visit(Vertex u) {
 		u.color = Color.GRAY;
-		Set<CompleteVertex> adjacentVertices = u.getAdjacencies();
-		for (CompleteVertex v : adjacentVertices) {
+		Set<Vertex> adjacentVertices = u.getAdjacencies();
+		for (Vertex v : adjacentVertices) {
 			if (v.color == Color.WHITE) {
 				visit(v);
 			}		

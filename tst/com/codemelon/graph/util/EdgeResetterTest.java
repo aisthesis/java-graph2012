@@ -12,7 +12,7 @@ import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.edge.EdgeConstants;
-import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.Vertex;
 
 /**
  * @author Marshall Farrier
@@ -29,7 +29,7 @@ public class EdgeResetterTest {
 	private static final double OFF_WEIGHT = 2.71828;
 	private static final double NEW_WEIGHT = 3.14159;
 	private DiGraph graph;
-	private ArrayList<CompleteVertex> vertices;
+	private ArrayList<Vertex> vertices;
 	private EdgeResetter edgeResetter;
 
 	/**
@@ -37,9 +37,9 @@ public class EdgeResetterTest {
 	 */
 	@Before
 	public void setUp() {
-		vertices = new ArrayList<CompleteVertex>(VERTICES_IN_TEST_GRAPH);
+		vertices = new ArrayList<Vertex>(VERTICES_IN_TEST_GRAPH);
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
-			vertices.add(new CompleteVertex(i));
+			vertices.add(new Vertex(i));
 		}
 		graph = new DiGraph(vertices);// connect all vertices
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {

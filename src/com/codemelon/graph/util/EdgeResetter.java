@@ -7,7 +7,7 @@ import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.edge.EdgeConstants;
-import com.codemelon.graph.vertex.CompleteVertex;
+import com.codemelon.graph.vertex.Vertex;
 
 /**
  * @author Marshall Farrier
@@ -21,13 +21,13 @@ public class EdgeResetter {
 		this.graph = graph;
 	}
 	public void resetColors(Color color) {
-		Iterator<CompleteVertex> it = graph.vertexIterator();
-		Set<CompleteVertex> adj;
-		CompleteVertex from;
+		Iterator<Vertex> it = graph.vertexIterator();
+		Set<Vertex> adj;
+		Vertex from;
 		while (it.hasNext()) {
 			from = it.next();
 			adj = from.getAdjacencies();
-			for (CompleteVertex to : adj) {
+			for (Vertex to : adj) {
 				from.setEdgeColor(to, color);
 			}
 		}
@@ -36,13 +36,13 @@ public class EdgeResetter {
 		resetColors(EdgeConstants.DEFAULT_COLOR);
 	}
 	public void resetEdgeTypes(EdgeType edgeType) {
-		Iterator<CompleteVertex> it = graph.vertexIterator();
-		Set<CompleteVertex> adj;
-		CompleteVertex from;
+		Iterator<Vertex> it = graph.vertexIterator();
+		Set<Vertex> adj;
+		Vertex from;
 		while (it.hasNext()) {
 			from = it.next();
 			adj = from.getAdjacencies();
-			for (CompleteVertex to : adj) {
+			for (Vertex to : adj) {
 				from.setEdgeType(to, edgeType);
 			}
 		}
@@ -51,13 +51,13 @@ public class EdgeResetter {
 		resetEdgeTypes(EdgeConstants.DEFAULT_EDGE_TYPE);
 	}
 	public void resetWeights(double weight) {
-		Iterator<CompleteVertex> it = graph.vertexIterator();
-		Set<CompleteVertex> adj;
-		CompleteVertex from;
+		Iterator<Vertex> it = graph.vertexIterator();
+		Set<Vertex> adj;
+		Vertex from;
 		while (it.hasNext()) {
 			from = it.next();
 			adj = from.getAdjacencies();
-			for (CompleteVertex to : adj) {
+			for (Vertex to : adj) {
 				from.setEdgeWeight(to, weight);
 			}
 		}
