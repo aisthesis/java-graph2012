@@ -1,4 +1,4 @@
-package com.codemelon.graph.vertex.common;
+package com.codemelon.graph.vertex;
 
 import com.codemelon.graph.common.Color;
 
@@ -10,8 +10,6 @@ import com.codemelon.graph.common.Color;
 public class VertexConstants {
 	public static final int DEFAULT_LABEL = -1;
 	public static final int DEFAULT_SEARCH_ORDER_VALUE = -1;
-	//TODO eliminate this as redundant (white is defined as initial color, so no
-	// need for an additional constant
 	public static final Color INITIAL_COLOR = Color.WHITE;
 	public static final int INITIAL_DISTANCE = -1;
 	public static final int INITIAL_DISCOVERY_TIME = -1;

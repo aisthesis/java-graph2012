@@ -7,7 +7,7 @@ import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.edge.EdgeConstants;
 import com.codemelon.graph.graph.DiGraph;
-import com.codemelon.graph.vertex.common.VertexConstants;
+import com.codemelon.graph.vertex.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ChildVertex;
 import com.codemelon.graph.vertex.interfaces.ColoredVertex;
 import com.codemelon.graph.vertex.interfaces.EdgeTypeVertex;
@@ -20,7 +20,7 @@ import com.codemelon.graph.vertex.interfaces.VisitedVertex;
  */
 public class DfsVertex implements Vertex, ColoredVertex, ChildVertex,
 		VisitedVertex, EdgeTypeVertex {
-	private DiGraph<? extends Vertex> graph;
+	private DiGraph<Vertex> graph;
 	private IdentityHashMap<Vertex, EdgeType> adjacencies;
 	private ChildVertex parent;
 	private Color color;
@@ -31,7 +31,7 @@ public class DfsVertex implements Vertex, ColoredVertex, ChildVertex,
 		graph = null;
 		adjacencies = new IdentityHashMap<Vertex, EdgeType>();
 		parent = null;
-		color = Color.WHITE;
+		color = VertexConstants.INITIAL_COLOR;
 		discoveryTime = VertexConstants.INITIAL_DISCOVERY_TIME;
 		finishTime = VertexConstants.INITIAL_FINISH_TIME;
 	}
@@ -138,7 +138,7 @@ public class DfsVertex implements Vertex, ColoredVertex, ChildVertex,
 	 * @see com.codemelon.graph.vertex.interfaces.Vertex#setGraph(com.codemelon.graph.graph.DiGraph)
 	 */
 	@Override
-	public void setGraph(DiGraph<? extends Vertex> diGraph) {
+	public void setGraph(DiGraph<Vertex> diGraph) {
 		this.graph = diGraph;
 	}
 
@@ -146,7 +146,7 @@ public class DfsVertex implements Vertex, ColoredVertex, ChildVertex,
 	 * @see com.codemelon.graph.vertex.interfaces.Vertex#getGraph()
 	 */
 	@Override
-	public DiGraph<? extends Vertex> getGraph() {
+	public DiGraph<Vertex> getGraph() {
 		return graph;
 	}
 

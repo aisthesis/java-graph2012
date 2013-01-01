@@ -14,17 +14,17 @@ public interface Vertex {
 	 * Set the graph to which the vertex belongs
 	 * @param diGraph graph with which the vertex is to be associated
 	 */
-	public void setGraph(DiGraph<? extends Vertex> diGraph);/**
+	public void setGraph(DiGraph<Vertex> diGraph);/**
 	 * Returns the graph to which the vertex belongs.
 	 * @return the graph to which the vertex belongs
 	 */
-	public DiGraph<? extends Vertex> getGraph();
+	public DiGraph<Vertex> getGraph();
 	/**
 	 * Adds the specified vertex to the set of adjacencies
 	 * @param to vertex to be added
 	 * @return true if the adjacency list did not already contain to
 	 */
-	public <T extends Vertex> boolean addAdjacency(T to);
+	public boolean addAdjacency(Vertex to);
 	/**
 	 * Removes the specified vertex from the adjacency set
 	 * @param to vertex to be removed
@@ -48,7 +48,7 @@ public interface Vertex {
 	 * Returns a set of all adjacent vertices
 	 * @return a set of all adjacent vertices
 	 */
-	public Set<? extends Vertex> getAdjacencies();/**
+	public Set<Vertex> getAdjacencies();/**
 	 * Returns true if the vertex is the tail of at least one edge
 	 * @return true if the vertex has at least one adjacency
 	 */

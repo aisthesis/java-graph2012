@@ -12,7 +12,7 @@ import org.junit.Test;
 import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.CompleteVertex;
-import com.codemelon.graph.vertex.common.VertexConstants;
+import com.codemelon.graph.vertex.VertexConstants;
 /**
  * @author Marshall Farrier
  * @version Nov 25, 2012

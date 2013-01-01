@@ -17,14 +17,14 @@ import com.codemelon.graph.vertex.types.BfsVertex;
  *
  */
 public class BreadthFirstSearch {
-	private Graph<? extends BfsVertex> graph;
+	private Graph<BfsVertex> graph;
 	private BfsVertex source;
 	
 	/**
 	 * Prepares the search on the given graph
 	 * @param graph graph that will be searched
 	 */
-	public BreadthFirstSearch(Graph<? extends BfsVertex> graph) {
+	public BreadthFirstSearch(Graph<BfsVertex> graph) {
 		this.graph = graph;
 		source = null;
 	}
@@ -44,7 +44,9 @@ public class BreadthFirstSearch {
 			throw new IllegalArgumentException("Invalid vertex!");
 		}
 		this.source = source;
-		VertexResetter.resetForBfs(graph);
+		VertexResetter.resetColors(graph);
+		VertexResetter.resetDistances(graph);
+		VertexResetter.resetParents(graph);
 		LinkedList<BfsVertex> queue = new LinkedList<BfsVertex>();
 		source.setColor(Color.GRAY);
 		source.setDistance(0);

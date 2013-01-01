@@ -6,7 +6,6 @@ import java.util.Set;
 import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.edge.CompleteEdgeData;
-import com.codemelon.graph.vertex.common.VertexConstants;
 import com.codemelon.graph.common.EdgeType;
 
 /**
