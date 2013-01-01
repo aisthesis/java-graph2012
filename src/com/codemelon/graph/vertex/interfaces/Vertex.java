@@ -20,28 +20,19 @@ public interface Vertex {
 	 */
 	public DiGraph<? extends Vertex> getGraph();
 	/**
-	 * Adds the specified vertex to the set of adjacencies. Note that this method
-	 * only adds a <em>directed</em> adjacency. If the vertex belongs to an
-	 * undirected graph, the graph will be put into an inconsistent state if an
-	 * adjacency (u, v) is added using this method without also adding the directed
-	 * adjacency (v, u)!
+	 * Adds the specified vertex to the set of adjacencies
 	 * @param to vertex to be added
 	 * @return true if the adjacency list did not already contain to
 	 */
 	public <T extends Vertex> boolean addAdjacency(T to);
 	/**
-	 * Removes the specified vertex from the adjacency set. Note that this method
-	 * only removes a <em>directed</em> adjacency. If the vertex belongs to an
-	 * undirected graph, the graph will be put into an inconsistent state if an
-	 * adjacency (u, v) is removed using this method without also removing the directed
-	 * adjacency (v, u)!
+	 * Removes the specified vertex from the adjacency set
 	 * @param to vertex to be removed
 	 * @return true if the vertex was found in the adjacency set
 	 */
 	public boolean removeAdjacency(Vertex to);/**
 	 * Removes all vertices from the adjacency set. The adjacency set will be
-	 * empty after this call returns. The cautionary statements regarding the use
-	 * of removeAdjacency() in an undirected graph also apply to this method.
+	 * empty after this call returns.
 	 */
 	public void clearAdjacencies();/**
 	 * Returns true if the adjacency set contains the specified vertex

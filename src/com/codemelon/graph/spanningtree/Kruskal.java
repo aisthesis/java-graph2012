@@ -45,7 +45,6 @@ public class Kruskal {
 	};
 	/**
 	 * Initialize the graph for which a minimum spanning tree is to be found.
-	 * The constructor does not modify the graph in any way.
 	 * @param graph graph for which we want to find a minimum spanning tree.
 	 */
 	public Kruskal(OldGraph graph) {
