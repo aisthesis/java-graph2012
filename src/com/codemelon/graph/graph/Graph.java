@@ -6,6 +6,6 @@ import com.codemelon.graph.vertex.interfaces.Vertex;
  * @author Marshall Farrier
  * @version Dec 6, 2012
  */
-public class Graph extends DiGraph {
+public class Graph<T extends Vertex> extends DiGraph<T> {
 
 }
