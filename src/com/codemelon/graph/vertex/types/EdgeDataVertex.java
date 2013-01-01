@@ -114,12 +114,4 @@ public class EdgeDataVertex<T, U extends EdgeDataFactory<T>> implements Vertex {
 	public boolean hasAdjacencies() {
 		return !adjacencies.isEmpty();
 	}
-	/**
-	 * Don't allow subclasses to override the equals method
-	 * @return true iff o points to exactly the same objects
-	 */
-	@Override
-	public final boolean equals(Object o) {
-		return (this == o);
-	}
 }

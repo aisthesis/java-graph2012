@@ -1,10 +1,12 @@
 package com.codemelon.graph.vertex.types;
 
+import java.util.IdentityHashMap;
+import java.util.Set;
+
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
-import com.codemelon.graph.edge.interfaces.EdgeColorData;
-import com.codemelon.graph.edge.interfaces.EdgeDataFactory;
-import com.codemelon.graph.edge.interfaces.EdgeTypeData;
+import com.codemelon.graph.edge.EdgeConstants;
+import com.codemelon.graph.graph.types.DiGraph;
 import com.codemelon.graph.vertex.common.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ChildVertex;
 import com.codemelon.graph.vertex.interfaces.ColoredVertex;
@@ -20,18 +22,18 @@ import com.codemelon.graph.vertex.interfaces.VisitedVertex;
  * @my.created Dec 7, 2012
  * @my.edited Dec 12, 2012
  */
-public class DfsVertex<T extends EdgeTypeData & EdgeColorData, U extends EdgeDataFactory<T>>
-		extends EdgeDataVertex<T, U> implements Vertex, ColoredVertex, ChildVertex,
+public class DfsVertex implements Vertex, ColoredVertex, ChildVertex,
 		VisitedVertex, EdgeTypeVertex {
-	//private DiGraph<? extends Vertex> graph;
-	//private IdentityHashMap<Vertex, EdgeType> adjacencies;
+	private DiGraph<? extends Vertex> graph;
+	private IdentityHashMap<Vertex, EdgeType> adjacencies;
 	private ChildVertex parent;
 	private Color color;
 	private int discoveryTime;
 	private int finishTime;
 	
-	public DfsVertex(U edgeDataFactory) {
-		super(edgeDataFactory);
+	public DfsVertex() {
+		graph = null;
+		adjacencies = new IdentityHashMap<Vertex, EdgeType>();
 		parent = null;
 		color = Color.WHITE;
 		discoveryTime = VertexConstants.INITIAL_DISCOVERY_TIME;
@@ -43,10 +45,10 @@ public class DfsVertex<T extends EdgeTypeData & EdgeColorData, U extends EdgeDat
 	 */
 	@Override
 	public void setEdgeType(EdgeTypeVertex to, EdgeType edgeType) {
-		if (!this.containsAdjacency(to)) {
+		if (!adjacencies.containsKey(to)) {
 			throw new IllegalArgumentException("Edge does not exist!");
 		}
-		this.getEdgeData(to).setEdgeType(edgeType);
+		adjacencies.put(to, edgeType);
 	}
 
 	/* (non-Javadoc)
@@ -54,7 +56,7 @@ public class DfsVertex<T extends EdgeTypeData & EdgeColorData, U extends EdgeDat
 	 */
 	@Override
 	public EdgeType getEdgeType(EdgeTypeVertex to) {
-		return this.getEdgeType(to);
+		return adjacencies.get(to);
 	}
 
 	/* (non-Javadoc)
@@ -92,16 +94,20 @@ public class DfsVertex<T extends EdgeTypeData & EdgeColorData, U extends EdgeDat
 	/* (non-Javadoc)
 	 * @see com.codemelon.graph.vertex.interfaces.ChildVertex#setParent(com.codemelon.graph.vertex.interfaces.ChildVertex)
 	 */
+	/** 
+	 * @throws IllegalArgumentException if the calling vertex does not belong to a graph
+	 * @throws IllegalArgumentException if the parent to be set does not belong to the same graph
+	 */
 	@Override
 	public void setParent(ChildVertex parent) {
 		if (parent == null) {
 			this.parent = parent;
 			return;
 		}
-		if (this.getGraph() == null) {
+		if (graph == null) {
 			throw new IllegalArgumentException("Vertex must belong to a graph to have a parent!");
 		}
-		if (parent.getGraph() != this.getGraph()) {
+		if (parent.getGraph() != graph) {
 			throw new IllegalArgumentException("Parent must belong to the same graph!");
 		}
 		this.parent = parent;
@@ -131,4 +137,90 @@ public class DfsVertex<T extends EdgeTypeData & EdgeColorData, U extends EdgeDat
 	public Color getColor() {
 		return color;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.codemelon.graph.vertex.interfaces.Vertex#setGraph(com.codemelon.graph.graph.DiGraph)
+	 */
+	@Override
+	public void setGraph(DiGraph<? extends Vertex> diGraph) {
+		this.graph = diGraph;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.codemelon.graph.vertex.interfaces.Vertex#getGraph()
+	 */
+	@Override
+	public DiGraph<? extends Vertex> getGraph() {
+		return graph;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.codemelon.graph.vertex.interfaces.Vertex#addAdjacency(com.codemelon.graph.vertex.interfaces.Vertex)
+	 */
+	/** 
+	 * @throws IllegalArgumentException if the calling vertex does not belong to a graph
+	 * @throws IllegalArgumentException if the adjacency to be set does not belong to the same graph
+	 */
+	@Override
+	public boolean addAdjacency(Vertex to) {
+		if (this.graph == null || this.graph != to.getGraph()) {
+			throw new IllegalArgumentException("Adjacency must belong to the same graph!");
+		}
+		if (adjacencies.containsKey(to)) { return false; }
+		adjacencies.put(to, EdgeConstants.DEFAULT_EDGE_TYPE);
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.codemelon.graph.vertex.interfaces.Vertex#removeAdjacency(com.codemelon.graph.vertex.interfaces.Vertex)
+	 */
+	@Override
+	public boolean removeAdjacency(Vertex to) {
+		if (adjacencies.containsKey(to)) {
+			adjacencies.remove(to);
+			return true;
+		}
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.codemelon.graph.vertex.interfaces.Vertex#clearAdjacencies()
+	 */
+	@Override
+	public void clearAdjacencies() {
+		adjacencies.clear();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.codemelon.graph.vertex.interfaces.Vertex#containsAdjacency(com.codemelon.graph.vertex.interfaces.Vertex)
+	 */
+	@Override
+	public boolean containsAdjacency(Vertex to) {
+		return adjacencies.containsKey(to);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.codemelon.graph.vertex.interfaces.Vertex#adjacencyCount()
+	 */
+	@Override
+	public int adjacencyCount() {
+		return adjacencies.size();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.codemelon.graph.vertex.interfaces.Vertex#getAdjacencies()
+	 */
+	@Override
+	public Set<Vertex> getAdjacencies() {
+		return adjacencies.keySet();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.codemelon.graph.vertex.interfaces.Vertex#hasAdjacencies()
+	 */
+	@Override
+	public boolean hasAdjacencies() {
+		return !adjacencies.isEmpty();
+	}
+
 }
