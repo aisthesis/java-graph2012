@@ -3,6 +3,7 @@ package com.codemelon.graph.vertex.types;
 import com.codemelon.graph.vertex.common.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ComponentVertex;
 import com.codemelon.graph.vertex.interfaces.OrderedSearchVertex;
+import com.codemelon.graph.vertex.interfaces.Vertex;
 
 /**
  * @author Marshall Farrier

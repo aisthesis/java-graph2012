@@ -49,7 +49,7 @@ public class StronglyConnectedComponents {
 			v = it.next();
 			v.searchOrder = v.finishTime;
 		}
-		//new InOrderDepthFirstSearch(transposeGraph, new ReverseSearchOrderComparator()).search();
+		new InOrderDepthFirstSearch(transposeGraph, new ReverseSearchOrderComparator()).search();
 		// Finally, set the appropriate tree numbers in the original graph
 		it = graph.vertexIterator();
 		HashMap<CompleteVertex, CompleteVertex> vertexMap = transposer.getVertexMap();

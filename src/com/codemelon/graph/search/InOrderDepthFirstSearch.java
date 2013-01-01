@@ -55,7 +55,7 @@ public class InOrderDepthFirstSearch {
 	 * @param graph graph to search
 	 */
 	public InOrderDepthFirstSearch(DiGraph<? extends OrderedDfsVertex> graph) {
-		this(graph, new SearchOrderComparator());
+		this(graph, new SearchOrderComparator<OrderedSearchVertex>());
 	}
 	
 	/**
