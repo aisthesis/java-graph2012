@@ -3,9 +3,11 @@ package com.codemelon.graph.search;
 import java.util.LinkedList;
 import java.util.Set;
 
+import com.codemelon.graph.OldDiGraph;
 import com.codemelon.graph.graph.Graph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
+import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.interfaces.Vertex;
 import com.codemelon.graph.vertex.types.BfsVertex;
 
@@ -20,6 +22,9 @@ public class BreadthFirstSearch {
 	private Graph<BfsVertex> graph;
 	private BfsVertex source;
 	
+	private OldDiGraph oldGraph;
+	private CompleteVertex oldSource;
+	
 	/**
 	 * Prepares the search on the given graph
 	 * @param graph graph that will be searched
@@ -27,6 +32,8 @@ public class BreadthFirstSearch {
 	public BreadthFirstSearch(Graph<BfsVertex> graph) {
 		this.graph = graph;
 		source = null;
+		this.oldGraph = null;
+		oldSource = null;
 	}
 	
 	/**
@@ -80,22 +87,21 @@ public class BreadthFirstSearch {
 	 * than the recursion used by CLRS (p. 601)
 	 * @param target the vertex to which the path is returned
 	 * @return the shortest path from the source vertex passed in a prior call of search()
-	 * to the target vertex. Returns null if the target is not reachable from the
-	 * source vertex.
+	 * to the target vertex
 	 * @throws IllegalStateException if search() has not yet been called
 	 */
-	public LinkedList<BfsVertex> path(BfsVertex target) {
-		if (source == null) {
+	public LinkedList<CompleteVertex> path(CompleteVertex target) {
+		if (oldSource == null) {
 			throw new IllegalStateException("Source vertex has not been specified by calling search()!");
 		}
-		if (target.getParent() == null && target != source) { return null; }
-		LinkedList<BfsVertex> result = new LinkedList<BfsVertex>();
-		BfsVertex tmp = target;
-		while (tmp != source) {
+		if (target.parent == null && target != oldSource) { return null; }
+		LinkedList<CompleteVertex> result = new LinkedList<CompleteVertex>();
+		CompleteVertex tmp = target;
+		while (tmp != oldSource) {
 			result.addFirst(tmp);
-			tmp = (BfsVertex) tmp.getParent();
+			tmp = tmp.parent;
 		}
-		result.addFirst(source);
+		result.addFirst(oldSource);
 		return result;
 	}
 }
