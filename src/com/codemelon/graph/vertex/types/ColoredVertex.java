@@ -1,4 +1,4 @@
-package com.codemelon.graph.vertex.interfaces;
+package com.codemelon.graph.vertex.types;
 
 import com.codemelon.graph.common.Color;
 

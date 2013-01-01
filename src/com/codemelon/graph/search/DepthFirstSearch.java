@@ -3,7 +3,7 @@ package com.codemelon.graph.search;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.util.VertexResetter;
@@ -16,7 +16,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * cf. CLRS, pp. 604ff.
  */
 public class DepthFirstSearch {
-	private OldDiGraph graph;
+	private DiGraph graph;
 	private int t;	// time in CLRS
 	private boolean isAcyclic;
 	
@@ -25,7 +25,7 @@ public class DepthFirstSearch {
 	 * No changes are made to the graph when it is passed into the constructor.
 	 * @param graph graph on which the search will be run
 	 */
-	public DepthFirstSearch(OldDiGraph graph) {
+	public DepthFirstSearch(DiGraph graph) {
 		this.graph = graph;
 		isAcyclic = true;
 	}

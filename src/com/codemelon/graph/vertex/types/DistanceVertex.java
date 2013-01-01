@@ -1,5 +1,4 @@
-package com.codemelon.graph.vertex.interfaces;
-
+package com.codemelon.graph.vertex.types;
 
 /**
  * Vertex that maintains a distance field

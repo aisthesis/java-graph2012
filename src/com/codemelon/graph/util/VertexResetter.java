@@ -2,7 +2,7 @@ package com.codemelon.graph.util;
 
 import java.util.Iterator;
 
-import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.VertexConstants;
@@ -15,9 +15,9 @@ import com.codemelon.graph.vertex.VertexConstants;
  * The constructor takes the graph to reset as argument.
  */
 public class VertexResetter {
-	private OldDiGraph graph;
+	private DiGraph graph;
 	
-	public VertexResetter(OldDiGraph graph) {
+	public VertexResetter(DiGraph graph) {
 		this.graph = graph;
 	}
 	/**

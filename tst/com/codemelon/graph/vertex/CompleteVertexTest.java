@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 
 /**
@@ -66,8 +66,8 @@ public class CompleteVertexTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testAddFromDifferentGraph() {
 		CompleteVertex u = new CompleteVertex();
-		OldDiGraph g1 = new OldDiGraph();
-		OldDiGraph g2 = new OldDiGraph();
+		DiGraph g1 = new DiGraph();
+		DiGraph g2 = new DiGraph();
 		g1.addVertex(u);
 		g2.addVertex(v);
 		u.addAdjacency(v);

@@ -17,10 +17,10 @@ import com.codemelon.graph.edge.WeightedEdge;
  * @author Marshall Farrier
  * @version 11-24-2012
  */
-public class OldGraph extends OldDiGraph{
-	public OldGraph() { super(); }
-	public OldGraph(int initialCapacity) { super(initialCapacity); }
-	public OldGraph(Collection<CompleteVertex> initialVertices) { super(initialVertices); }
+public class Graph extends DiGraph{
+	public Graph() { super(); }
+	public Graph(int initialCapacity) { super(initialCapacity); }
+	public Graph(Collection<CompleteVertex> initialVertices) { super(initialVertices); }
 	/**
 	 * Inserts the given Edge if not already present unless
 	 * from and to are the same.

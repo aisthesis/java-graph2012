@@ -20,11 +20,11 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * @version Nov 24, 2012
  *
  */
-public class OldGraphTest {
+public class GraphTest {
 	private static final int VERTICES_IN_TEST_GRAPH = 1000;
 	private static final int EDGES_IN_DENSE_GRAPH = VERTICES_IN_TEST_GRAPH 
 			* (VERTICES_IN_TEST_GRAPH - 1) / 2;
-	private OldGraph graph;
+	private Graph graph;
 	private ArrayList<CompleteVertex> vertices;
 
 	/**
@@ -36,7 +36,7 @@ public class OldGraphTest {
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
 			vertices.add(new CompleteVertex());
 		}
-		graph = new OldGraph(vertices);
+		graph = new Graph(vertices);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class OldGraphTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.OldGraph#addEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
+	 * Test method for {@link com.codemelon.graph.Graph#addEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testAddEdge() {
@@ -59,7 +59,7 @@ public class OldGraphTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.OldGraph#removeEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
+	 * Test method for {@link com.codemelon.graph.Graph#removeEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testRemoveEdge() {
@@ -71,7 +71,7 @@ public class OldGraphTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.OldGraph#edgeCount()}.
+	 * Test method for {@link com.codemelon.graph.Graph#edgeCount()}.
 	 */
 	@Test
 	public void testEdges() {
@@ -80,7 +80,7 @@ public class OldGraphTest {
 				EDGES_IN_DENSE_GRAPH, graph.edgeCount());
 	}
 	/**
-	 * Test method for {@link com.codemelon.graph.OldGraph#getWeightedEdges()}.
+	 * Test method for {@link com.codemelon.graph.Graph#getWeightedEdges()}.
 	 */
 	@Test
 	public void testGetWeightedEdges() {

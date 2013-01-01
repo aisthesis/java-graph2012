@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
@@ -17,8 +17,8 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * Utility class for transposing a graph.
  */
 public class Transposer {
-	private OldDiGraph graph;
-	private OldDiGraph transposeGraph;
+	private DiGraph graph;
+	private DiGraph transposeGraph;
 	private HashMap<CompleteVertex, CompleteVertex> vertexMap;
 
 	/**
@@ -30,9 +30,9 @@ public class Transposer {
 	 * null for each vertex in the transpose graph. Edge data, however,
 	 * is <em>not</em> copied into the transpose graph.
 	 */
-	public Transposer(OldDiGraph graph) {
+	public Transposer(DiGraph graph) {
 		this.graph = graph;
-		transposeGraph = new OldDiGraph(graph.vertexCount());
+		transposeGraph = new DiGraph(graph.vertexCount());
 		transpose();
 	}
 	/**
@@ -50,7 +50,7 @@ public class Transposer {
 	 * Returns the transpose of the original graph
 	 * @return transpose of the original graph
 	 */
-	public OldDiGraph getTransposeGraph() {
+	public DiGraph getTransposeGraph() {
 		return transposeGraph;
 	}
 	

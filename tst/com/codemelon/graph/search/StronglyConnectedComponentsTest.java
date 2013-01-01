@@ -12,7 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.util.Transposer;
 import com.codemelon.graph.vertex.CompleteVertex;
 
@@ -22,7 +22,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
  *
  */
 public class StronglyConnectedComponentsTest {
-	private OldDiGraph graph;
+	private DiGraph graph;
 
 	/**
 	 * @throws java.lang.Exception
@@ -65,7 +65,7 @@ public class StronglyConnectedComponentsTest {
 		assertThat(vertices.get('f').treeNumber, is(not(vertices.get('h').treeNumber)));
 		
 		// transposer is correct
-		OldDiGraph transposeGraph = transposer.getTransposeGraph();
+		DiGraph transposeGraph = transposer.getTransposeGraph();
 		HashMap<CompleteVertex, CompleteVertex> mapToTransposeVertices = transposer.getVertexMap();
 		assertTrue("Correct edges in transpose graph", transposeGraph
 				.containsEdge(mapToTransposeVertices.get(vertices.get('b')), 
@@ -118,7 +118,7 @@ public class StronglyConnectedComponentsTest {
 		for (char i = 'a'; i <= 'h'; i++) {
 			vertices.put(i, new CompleteVertex(i));
 		}
-		graph = new OldDiGraph(vertices.values());
+		graph = new DiGraph(vertices.values());
 		graph.addEdge(vertices.get('a'), vertices.get('b'));
 		graph.addEdge(vertices.get('b'), vertices.get('f'));
 		graph.addEdge(vertices.get('b'), vertices.get('e'));

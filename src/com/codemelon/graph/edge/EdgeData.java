@@ -13,7 +13,7 @@ import com.codemelon.graph.common.EdgeType;
  * @author Marshall Farrier
  * @version 11-24-2012
  */
-public class CompleteEdgeData {
+public class EdgeData {
 	private Color color;
 	private EdgeType edgeType;
 	private double weight;
@@ -21,39 +21,39 @@ public class CompleteEdgeData {
 	/**
 	 * Default constructor. Edge color is initially set to white, type to unknown, and weight to 1.0.
 	 */
-	public CompleteEdgeData() { this(EdgeConstants.DEFAULT_COLOR, EdgeConstants.DEFAULT_EDGE_TYPE, 
+	public EdgeData() { this(EdgeConstants.DEFAULT_COLOR, EdgeConstants.DEFAULT_EDGE_TYPE, 
 			EdgeConstants.DEFAULT_WEIGHT); }
 	/**
 	 * Sets initial edge color to the specified color, type to unknown and weight to 1.0
 	 * @param color color to which the edge is set
 	 */
-	public CompleteEdgeData(Color color) { this(color, EdgeConstants.DEFAULT_EDGE_TYPE, 
+	public EdgeData(Color color) { this(color, EdgeConstants.DEFAULT_EDGE_TYPE, 
 			EdgeConstants.DEFAULT_WEIGHT); }
 	/**
 	 * Sets initial edge type to the specified type, color white, and weight to 1.0
 	 * @param edgeType type to which edge is initialized
 	 */
-	public CompleteEdgeData(EdgeType edgeType) { this(EdgeConstants.DEFAULT_COLOR, edgeType, 
+	public EdgeData(EdgeType edgeType) { this(EdgeConstants.DEFAULT_COLOR, edgeType, 
 			EdgeConstants.DEFAULT_WEIGHT); }
 	/**
 	 * Sets initial edge type to the specified type, color white, and weight to 1.0
 	 * @param weight weight to which edge is initialized
 	 */
-	public CompleteEdgeData(double weight) { this(EdgeConstants.DEFAULT_COLOR, 
+	public EdgeData(double weight) { this(EdgeConstants.DEFAULT_COLOR, 
 			EdgeConstants.DEFAULT_EDGE_TYPE, weight); }
 	/**
 	 * Sets initial type to the specified type, color to the specified color and weight to 1.0
 	 * @param color color that the edge will initially have
 	 * @param edgeType initial edge type
 	 */
-	public CompleteEdgeData(Color color, EdgeType edgeType) { this(color, edgeType, EdgeConstants.DEFAULT_WEIGHT); }
+	public EdgeData(Color color, EdgeType edgeType) { this(color, edgeType, EdgeConstants.DEFAULT_WEIGHT); }
 	/**
 	 * Specify all edge parameters explicitly
 	 * @param color initial edge color
 	 * @param edgeType initial edge type
 	 * @param weight initial edge weight
 	 */
-	public CompleteEdgeData(Color color, EdgeType edgeType, double weight) {
+	public EdgeData(Color color, EdgeType edgeType, double weight) {
 		this.color = color;
 		this.edgeType = edgeType;
 		this.weight = weight;

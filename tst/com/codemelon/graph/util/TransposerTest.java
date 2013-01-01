@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.CompleteVertex;
 import com.codemelon.graph.vertex.VertexConstants;
@@ -27,7 +27,7 @@ public class TransposerTest {
 	private static final int SPECIAL_SEARCH_ORDER = 7;
 	private static final int SPECIAL_TREE_NUMBER = 8;
 	
-	private OldDiGraph graph;
+	private DiGraph graph;
 	private ArrayList<CompleteVertex> vertices;
 
 	@Before
@@ -36,7 +36,7 @@ public class TransposerTest {
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
 			vertices.add(new CompleteVertex(i));
 		}
-		graph = new OldDiGraph(vertices);
+		graph = new DiGraph(vertices);
 	}
 
 	@After
@@ -60,7 +60,7 @@ public class TransposerTest {
 		vertices.get(2).searchOrder = SPECIAL_SEARCH_ORDER;
 		vertices.get(2).treeNumber = SPECIAL_TREE_NUMBER;
 		Transposer transposer = new Transposer(graph);
-		OldDiGraph transposedGraph = transposer.getTransposeGraph();
+		DiGraph transposedGraph = transposer.getTransposeGraph();
 		assertEquals("Correct number of edges in transposed graph", 
 				2, transposedGraph.edgeCount());
 		Set<CompleteVertex> transposedVertices = transposedGraph.getVertices();

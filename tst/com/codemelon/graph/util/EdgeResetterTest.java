@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.common.EdgeType;
 import com.codemelon.graph.edge.EdgeConstants;
@@ -28,7 +28,7 @@ public class EdgeResetterTest {
 	private static final EdgeType NEW_TYPE = EdgeType.TREE;
 	private static final double OFF_WEIGHT = 2.71828;
 	private static final double NEW_WEIGHT = 3.14159;
-	private OldDiGraph graph;
+	private DiGraph graph;
 	private ArrayList<CompleteVertex> vertices;
 	private EdgeResetter edgeResetter;
 
@@ -41,7 +41,7 @@ public class EdgeResetterTest {
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
 			vertices.add(new CompleteVertex(i));
 		}
-		graph = new OldDiGraph(vertices);// connect all vertices
+		graph = new DiGraph(vertices);// connect all vertices
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
 			for (int j = 0; j < VERTICES_IN_TEST_GRAPH; j++) {
 				graph.addEdge(vertices.get(i), vertices.get(j));

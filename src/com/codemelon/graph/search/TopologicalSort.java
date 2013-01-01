@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Set;
 
-import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.CompleteVertex;
@@ -19,10 +19,10 @@ import com.codemelon.graph.vertex.CompleteVertex;
  *
  */
 public class TopologicalSort {
-	private OldDiGraph graph;
+	private DiGraph graph;
 	private LinkedList<CompleteVertex> sortedVertices;
 	
-	public TopologicalSort(OldDiGraph graph) {
+	public TopologicalSort(DiGraph graph) {
 		this.graph = graph;
 		sort();
 	}

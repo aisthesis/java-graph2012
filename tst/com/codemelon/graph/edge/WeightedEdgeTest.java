@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.junit.matchers.JUnitMatchers;
 import org.junit.rules.ExpectedException;
 
-import com.codemelon.graph.OldGraph;
+import com.codemelon.graph.Graph;
 import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
@@ -23,7 +23,7 @@ public class WeightedEdgeTest {
 	private static final double CUSTOM_WEIGHT = 2.71828;
 	private static final int VERTICES_IN_TEST_GRAPH = 1000;
 	HashMap<Integer, CompleteVertex> vertices;
-	private OldGraph graph;
+	private Graph graph;
 
 	/**
 	 * Set up an undirected graph with various vertices and edge from vertex 0 to vertex 1
@@ -36,7 +36,7 @@ public class WeightedEdgeTest {
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
 			vertices.put(i, new CompleteVertex(i));
 		}
-		graph = new OldGraph(vertices.values());
+		graph = new Graph(vertices.values());
 		graph.addEdge(vertices.get(0), vertices.get(1));
 		graph.setEdgeWeight(vertices.get(0), vertices.get(1), CUSTOM_WEIGHT);
 		graph.addEdge(vertices.get(2), vertices.get(3));
@@ -75,7 +75,7 @@ public class WeightedEdgeTest {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage(JUnitMatchers.containsString("must belong to the same graph"));
 		CompleteVertex u = new CompleteVertex();
-		OldGraph g2 = new OldGraph(1);
+		Graph g2 = new Graph(1);
 		g2.addVertex(u);
 		assertEquals("u belongs to g2", g2, u.getGraph());
 		assertEquals("0 vertex belongs to graph", graph, vertices.get(0).getGraph());

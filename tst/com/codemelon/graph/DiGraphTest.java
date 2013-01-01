@@ -18,9 +18,9 @@ import com.codemelon.graph.vertex.CompleteVertex;
  * @version Nov 24, 2012
  *
  */
-public class OldDiGraphTest {
+public class DiGraphTest {
 	private static final int VERTICES_IN_TEST_GRAPH = 1000;
-	private OldDiGraph graph;
+	private DiGraph graph;
 	private ArrayList<CompleteVertex> vertices;
 
 	/**
@@ -43,41 +43,41 @@ public class OldDiGraphTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.OldDiGraph#DiGraph()}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#DiGraph()}.
 	 */
 	@Test
 	public void testDiGraph() {
-		graph = new OldDiGraph();
+		graph = new DiGraph();
 		assertEquals("Graph is initialized with no vertices", 0, graph.vertexCount());
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.OldDiGraph#DiGraph(java.util.Collection)}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#DiGraph(java.util.Collection)}.
 	 */
 	@Test
 	public void testDiGraphCollectionOfVertex() {
-		graph = new OldDiGraph(vertices);
+		graph = new DiGraph(vertices);
 		assertEquals("Graph contains same number of vertices as collection used for initialization",
 				VERTICES_IN_TEST_GRAPH, graph.vertexCount());
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.OldDiGraph#addVertex(com.codemelon.graph.vertex.CompleteVertex)}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#addVertex(com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testAddVertex() {
-		graph = new OldDiGraph();
+		graph = new DiGraph();
 		CompleteVertex v = new CompleteVertex();
 		graph.addVertex(v);
 		assertEquals("Correct vertex count after adding a vertex to empty graph", 1, graph.vertexCount());
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.OldDiGraph#addEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#addEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testAddEdge() {
-		graph = new OldDiGraph(vertices);
+		graph = new DiGraph(vertices);
 		graph.addEdge(vertices.get(0), vertices.get(1));
 		assertEquals("Correct edge count after adding a single edge", 1L, graph.edgeCount());
 	}
@@ -87,7 +87,7 @@ public class OldDiGraphTest {
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testAddEdgeSourceVertexNotPresent() {
-		graph = new OldDiGraph(vertices);
+		graph = new DiGraph(vertices);
 		graph.addEdge(new CompleteVertex(), vertices.get(1));		
 	}
 	
@@ -96,16 +96,16 @@ public class OldDiGraphTest {
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testAddEdgeTargetVertexNotPresent() {
-		graph = new OldDiGraph(vertices);
+		graph = new DiGraph(vertices);
 		graph.addEdge(vertices.get(0), new CompleteVertex());		
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.OldDiGraph#removeEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#removeEdge(com.codemelon.graph.vertex.CompleteVertex, com.codemelon.graph.vertex.CompleteVertex)}.
 	 */
 	@Test
 	public void testRemoveEdge() {
-		graph = new OldDiGraph(vertices);
+		graph = new DiGraph(vertices);
 		graph.addEdge(vertices.get(0), vertices.get(1));
 		graph.addEdge(vertices.get(1), vertices.get(2));
 		assertTrue("Correct value returned when edge is present", 
@@ -118,21 +118,21 @@ public class OldDiGraphTest {
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.OldDiGraph#vertexCount()}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#vertexCount()}.
 	 */
 	@Test
 	public void testVertices() {
-		graph = new OldDiGraph(vertices);
+		graph = new DiGraph(vertices);
 		assertEquals("Graph contains same number of vertices as collection used for initialization",
 				VERTICES_IN_TEST_GRAPH, graph.vertexCount());
 	}
 
 	/**
-	 * Test method for {@link com.codemelon.graph.OldDiGraph#edgeCount()}.
+	 * Test method for {@link com.codemelon.graph.DiGraph#edgeCount()}.
 	 */
 	@Test
 	public void testEdges() {
-		graph = new OldDiGraph(vertices);
+		graph = new DiGraph(vertices);
 		// connect all vertices
 		for (int i = 0; i < VERTICES_IN_TEST_GRAPH; i++) {
 			for (int j = 0; j < VERTICES_IN_TEST_GRAPH; j++) {

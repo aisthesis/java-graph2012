@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.codemelon.graph.OldGraph;
+import com.codemelon.graph.Graph;
 import com.codemelon.graph.edge.EdgeConstants;
 import com.codemelon.graph.vertex.CompleteVertex;
 
@@ -20,7 +20,7 @@ import com.codemelon.graph.vertex.CompleteVertex;
 public class KruskalTest {
 	private static final double CUSTOM_EPSILON = 0.001;
 	private static final double MAX_EPSILON_DIFF = 0.000000000000001;
-	private OldGraph graph;
+	private Graph graph;
 	private Kruskal kruskal;
 	private HashMap<Character, CompleteVertex> vertices;
 
@@ -80,7 +80,7 @@ public class KruskalTest {
 	 */
 	@Test
 	public void testGenerateTree() {
-		OldGraph spanningTree = kruskal.generateTree();
+		Graph spanningTree = kruskal.generateTree();
 		Map<CompleteVertex, CompleteVertex> vertexMap = kruskal.getVertexMap();
 		assertTrue("Edge a-b in graph", spanningTree.containsEdge(vertexMap.get(vertices.get('a')),
 				vertexMap.get(vertices.get('b'))));
@@ -141,7 +141,7 @@ public class KruskalTest {
 		for (char i = 'a'; i <= 'i'; i++) {
 			vertices.put(i, new CompleteVertex(i));
 		}
-		graph = new OldGraph(vertices.values());
+		graph = new Graph(vertices.values());
 		graph.addEdge(vertices.get('a'), vertices.get('b'));
 		graph.setEdgeWeight(vertices.get('a'), vertices.get('b'), 4.0);
 		graph.addEdge(vertices.get('a'), vertices.get('h'));

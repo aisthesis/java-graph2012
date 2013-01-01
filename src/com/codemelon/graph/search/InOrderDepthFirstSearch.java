@@ -14,11 +14,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.codemelon.graph.OldDiGraph;
+import com.codemelon.graph.DiGraph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.util.VertexResetter;
 import com.codemelon.graph.vertex.CompleteVertex;
-import com.codemelon.graph.vertex.comparators.SearchOrderComparator;
+import com.codemelon.graph.vertex.SearchOrderComparator;
 
 /**
  * @author Marshall Farrier
@@ -26,7 +26,7 @@ import com.codemelon.graph.vertex.comparators.SearchOrderComparator;
  *
  */
 public class InOrderDepthFirstSearch {
-	private OldDiGraph graph;
+	private DiGraph graph;
 	private int t;	// time in CLRS
 	private int treeNumber; // used in StronglyConnectedComponents
 	private List<CompleteVertex> vertices;
@@ -43,7 +43,7 @@ public class InOrderDepthFirstSearch {
 	 * @param comp Comparator determining the order in which vertices
 	 * will be visited.
 	 */
-	public InOrderDepthFirstSearch(OldDiGraph graph, Comparator<CompleteVertex> comp) {
+	public InOrderDepthFirstSearch(DiGraph graph, Comparator<CompleteVertex> comp) {
 		this.graph = graph;
 		vertices = new ArrayList<CompleteVertex>(graph.getVertices());
 		this.comp = comp;
@@ -54,7 +54,7 @@ public class InOrderDepthFirstSearch {
 	 * Vertex.
 	 * @param graph graph to search
 	 */
-	public InOrderDepthFirstSearch(OldDiGraph graph) {
+	public InOrderDepthFirstSearch(DiGraph graph) {
 		this(graph, new SearchOrderComparator());
 	}
 	

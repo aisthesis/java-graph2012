@@ -1,5 +1,4 @@
-package com.codemelon.graph.vertex.interfaces;
-
+package com.codemelon.graph.vertex.types;
 
 /**
  * Vertex supporting a component field for distinguishing components

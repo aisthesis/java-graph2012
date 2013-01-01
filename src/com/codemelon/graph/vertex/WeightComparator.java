@@ -1,8 +1,6 @@
-package com.codemelon.graph.vertex.comparators;
+package com.codemelon.graph.vertex;
 
 import java.util.Comparator;
-
-import com.codemelon.graph.vertex.CompleteVertex;
 
 /**
  * @author Marshall Farrier
