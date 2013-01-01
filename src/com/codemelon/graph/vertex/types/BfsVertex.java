@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.codemelon.graph.graph.DiGraph;
+import com.codemelon.graph.graph.Graph;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.vertex.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ChildVertex;
@@ -18,7 +19,7 @@ import com.codemelon.graph.vertex.interfaces.Vertex;
  */
 public class BfsVertex implements Vertex, ColoredVertex, DistanceVertex,
 		ChildVertex {
-	private DiGraph<Vertex> graph;
+	private DiGraph graph;
 	private Set<Vertex> adjacencies;
 	private ChildVertex parent;
 	private int distance;
@@ -95,7 +96,7 @@ public class BfsVertex implements Vertex, ColoredVertex, DistanceVertex,
 	 * @see com.codemelon.graph.vertex.interfaces.Vertex#setGraph(com.codemelon.graph.DiGraph)
 	 */
 	@Override
-	public void setGraph(DiGraph<Vertex> graph) {
+	public void setGraph(DiGraph graph) {
 		this.graph = graph;
 	}
 
@@ -103,7 +104,7 @@ public class BfsVertex implements Vertex, ColoredVertex, DistanceVertex,
 	 * @see com.codemelon.graph.vertex.interfaces.Vertex#getGraph()
 	 */
 	@Override
-	public DiGraph<Vertex> getGraph() {
+	public DiGraph getGraph() {
 		return graph;
 	}
 

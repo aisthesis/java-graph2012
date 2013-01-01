@@ -12,13 +12,13 @@ import com.codemelon.graph.graph.DiGraph;
 public interface Vertex {
 	/**
 	 * Set the graph to which the vertex belongs
-	 * @param diGraph graph with which the vertex is to be associated
+	 * @param g graph with which the vertex is to be associated
 	 */
-	public void setGraph(DiGraph<Vertex> diGraph);/**
+	public void setGraph(DiGraph diGraph);/**
 	 * Returns the graph to which the vertex belongs.
 	 * @return the graph to which the vertex belongs
 	 */
-	public DiGraph<Vertex> getGraph();
+	public DiGraph getGraph();
 	/**
 	 * Adds the specified vertex to the set of adjacencies
 	 * @param to vertex to be added
