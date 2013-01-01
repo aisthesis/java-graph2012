@@ -2,7 +2,7 @@ package com.codemelon.graph.vertex.interfaces;
 
 
 /**
- * Vertex that to another vertex as child to parent
+ * Vertex that maintains a parent relationship to another vertex
  * @author Marshall Farrier
  * @version Dec 6, 2012
  */
