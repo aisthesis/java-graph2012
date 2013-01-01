@@ -16,39 +16,25 @@ import com.codemelon.graph.vertex.interfaces.VertexFactory;
  * @author Marshall Farrier
  * @version November 30, 2012
  * 
- * Utility class for transposing a graph. The type parameter T specifies the type
- * of the vertices in the original graph, and the type U specifies the type
- * of vertices in the transpose graph created by the transposer object. These
- * 2 types will often be the same but do not have to be.
- * The contract of the transposer is: 
- * <ol>
- * <li>to produce a vertex of type U corresponding to each vertex in the input graph, and</li>
- * <li>to create an edge in the new graph whose tail corresponds to the head and whose
- * head corresponds to the tail of the respective edge in the input graph</li>
- * </ol>
- * No satellite data is preserved by the transpose operation. I must be set in subsequent
- * operations on the transpose graph.
+ * Utility class for transposing a graph.
  */
-public class Transposer<T extends Vertex, U extends Vertex> {
+public class Transposer<T extends Vertex> {
 	private DiGraph<T> graph;
-	private DiGraph<U> transposeGraph;
-	private IdentityHashMap<T, U> vertexMap;
-	private VertexFactory<U> vertexFactory;
+	private DiGraph<T> transposeGraph;
+	private IdentityHashMap<T, T> vertexMap;
+	private VertexFactory<T> vertexFactory;
 
 	/**
 	 * Creates a transpose graph, which can be retrieved as needed through the
 	 * getTransposeGraph() method, and a HashMap from the vertices of the original
 	 * graph to the corresponding vertices of the transpose graph.
 	 * Vertex and edge data (color, distance, discoveryTime, etc.) are <em>not</em> copied
-	 * into the transpose graph. Satellite data can be set accordingly using the vertex
+	 * into the transpose graph but can be set accordingly using the vertex
 	 * mapping created during the transpose operation.
-	 * @param graph graph for which the transpose is to be created.
-	 * @param vertexFactory factory method used to create vertices in the transpose
-	 * graph
 	 */
-	public Transposer(DiGraph<T> graph, VertexFactory<U> vertexFactory) {
+	public Transposer(DiGraph<T> graph, VertexFactory<T> vertexFactory) {
 		this.graph = graph;
-		transposeGraph = new DiGraph<U>(graph.vertexCount());
+		transposeGraph = new DiGraph<T>(graph.vertexCount());
 		this.vertexFactory = vertexFactory;
 		transpose();
 	}
@@ -60,19 +46,19 @@ public class Transposer<T extends Vertex, U extends Vertex> {
 	 * @return a HashMap from vertices in the original graph to vertices in the
 	 * transpose graph, or null, if transpose() has not yet been called.
 	 */
-	public Map<T, U> getVertexMap() {
+	public Map<T, T> getVertexMap() {
 		return vertexMap;
 	}
 	/**
 	 * Returns the transpose of the original graph
 	 * @return transpose of the original graph
 	 */
-	public DiGraph<U> getTransposeGraph() {
+	public DiGraph<T> getTransposeGraph() {
 		return transposeGraph;
 	}
 	
 	private void transpose() {
-		vertexMap = new IdentityHashMap<T, U>(graph.vertexCount());
+		vertexMap = new IdentityHashMap<T, T>(graph.vertexCount());
 		// insert vertices into map and result graph
 		Iterator<T> it = graph.vertexIterator();
 		T v;

@@ -9,10 +9,6 @@ package com.codemelon.graph.vertex.interfaces;
  */
 public interface ComponentVertex extends Vertex {
 	/**
-	 * The starting number when numbering components.
-	 */
-	public static final int FIRST_COMPONENT_NUMBER = 0;
-	/**
 	 * Set the number of the component to which the vertex belongs
 	 * @param componentNumber value to which to set the component number
 	 */

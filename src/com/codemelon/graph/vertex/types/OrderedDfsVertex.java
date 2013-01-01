@@ -3,7 +3,6 @@ package com.codemelon.graph.vertex.types;
 import com.codemelon.graph.vertex.common.VertexConstants;
 import com.codemelon.graph.vertex.interfaces.ComponentVertex;
 import com.codemelon.graph.vertex.interfaces.OrderedSearchVertex;
-import com.codemelon.graph.vertex.interfaces.VertexFactory;
 
 /**
  * @author Marshall Farrier
@@ -49,17 +48,5 @@ public class OrderedDfsVertex extends DfsVertex implements OrderedSearchVertex,
 	@Override
 	public int getComponent() {
 		return component;
-	}
-	
-	public static enum Factory implements VertexFactory<OrderedDfsVertex> {
-		INSTANCE;
-		/* (non-Javadoc)
-		 * @see com.codemelon.graph.vertex.interfaces.VertexFactory#newVertex()
-		 */
-		@Override
-		public OrderedDfsVertex newVertex() {
-			return new OrderedDfsVertex();
-		}
-		
 	}
 }
