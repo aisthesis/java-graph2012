@@ -62,4 +62,7 @@ public class SpanningTreeEdgeData implements EdgeColorData, EdgeWeightData {
 	public Color getColor() {
 		return color;
 	}
+	public static SpanningTreeEdgeData newEdgeData() {
+		return new SpanningTreeEdgeData();
+	}
 }
