@@ -3,7 +3,6 @@ package com.codemelon.graph.edge.types;
 import com.codemelon.graph.common.Color;
 import com.codemelon.graph.edge.EdgeConstants;
 import com.codemelon.graph.edge.interfaces.EdgeColorData;
-import com.codemelon.graph.edge.interfaces.EdgeDataFactory;
 import com.codemelon.graph.edge.interfaces.EdgeWeightData;
 
 /**
@@ -62,15 +61,5 @@ public class SpanningTreeEdgeData implements EdgeColorData, EdgeWeightData {
 	@Override
 	public Color getColor() {
 		return color;
-	}
-	public static enum Factory implements EdgeDataFactory<SpanningTreeEdgeData> {
-		INSTANCE;
-		/* (non-Javadoc)
-		 * @see com.codemelon.graph.edge.interfaces.EdgeDataFactory#newEdgeData()
-		 */
-		@Override
-		public SpanningTreeEdgeData newEdgeData() {
-			return new SpanningTreeEdgeData();
-		}		
 	}
 }
